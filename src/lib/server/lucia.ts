@@ -1,0 +1,17 @@
+import { lucia } from "lucia";
+import { sveltekit } from "lucia/middleware";
+import { dev } from "$app/environment";
+import { pg } from "@lucia-auth/adapter-postgresql";
+import db from "./db";
+
+export const auth = lucia({
+	env: dev ? "DEV" : "PROD",
+	middleware: sveltekit(),
+    adapter: pg(db, {
+        user: "auth_user",
+        key: "user_key",
+        session: "user_session",
+      })
+});
+
+export type Auth = typeof auth;
