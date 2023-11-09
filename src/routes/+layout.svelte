@@ -6,7 +6,9 @@
 <div class="flex">
   <SideRail />
 
-  <main class="p-10">
+  <main
+    class="p-10 bg-gradient-to-br variant-gradient-primary-secondary w-full"
+  >
     <slot />
   </main>
 </div>

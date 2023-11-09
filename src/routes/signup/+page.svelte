@@ -5,7 +5,7 @@
 <h1 class="h1 mb-10">Sign up</h1>
 
 <form method="post" use:enhance>
-  <div class="flex flex-col gap-3">
+  <div class="flex flex-col gap-3 card p-4 variant-soft">
     <div>
       <label for="username" class="label">Username</label>
       <input
