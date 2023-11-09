@@ -1,4 +1,10 @@
 <script>
+  // import { onMount } from "svelte";
+  // onMount(async () => {
+  //   const result = await fetch("/create");
+  //   const data = await result.json();
+  //   console.log(data);
+  // });
 </script>
 
 <section>

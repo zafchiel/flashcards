@@ -1,12 +1,6 @@
 // See https://kit.svelte.dev/docs/types#app
 // for information about these interfaces
 // and what to do when importing types
-declare namespace App {
-	// interface Locals {}
-	// interface PageData {}
-	// interface Error {}
-	// interface Platform {}
-}
 
 // src/app.d.ts
 /// <reference types="lucia" />
@@ -16,6 +10,12 @@ declare global {
 		type DatabaseUserAttributes = {};
 		type DatabaseSessionAttributes = {};
 	}
+	namespace App {
+		interface Locals {
+			auth: import('Lucia').AuthRequest;
+		}
+	}
+
 }
 
 // THIS IS IMPORTANT!!!

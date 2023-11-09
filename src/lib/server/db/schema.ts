@@ -52,3 +52,8 @@ export const note = pgTable('note', {
         length: 255
     }).notNull()
 })
+
+export type User = typeof user.$inferSelect;
+export type Note = typeof note.$inferSelect;
+export type Key = typeof key.$inferSelect;
+export type Session = typeof session.$inferSelect;
