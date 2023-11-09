@@ -10,9 +10,6 @@
     >
   </svelte:fragment>
 
-  <AppRailAnchor href="/create" selected={$page.url.pathname === "/create"}
-    >Create</AppRailAnchor
-  >
   <AppRailAnchor href="/signup" selected={$page.url.pathname === "/signup"}
     >Sign-Up</AppRailAnchor
   >

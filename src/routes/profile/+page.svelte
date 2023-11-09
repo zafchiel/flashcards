@@ -7,5 +7,5 @@
 <h3 class="h3">Welcome</h3>
 <h1 class="h1 font-bold">{data.username}</h1>
 <form method="post" action="?/logout">
-  <input type="submit" value="Logout" />
+  <button class="btn variant-ghost-primary">Log-out</button>
 </form>
