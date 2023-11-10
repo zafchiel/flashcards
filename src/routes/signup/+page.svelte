@@ -1,5 +1,9 @@
 <script lang="ts">
   import { enhance } from "$app/forms";
+
+  export let form;
+
+  $: console.log(form);
 </script>
 
 <h1 class="h1 mb-10">Sign up</h1>

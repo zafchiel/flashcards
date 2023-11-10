@@ -56,8 +56,7 @@ export const actions = {
 			});
 		}
 		// redirect to
-		// make sure you don't throw inside a try/catch block!
-		throw redirect(302, "/");
+		throw redirect(302, "/profile");
 	}
 };
 

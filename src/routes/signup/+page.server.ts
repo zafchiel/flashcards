@@ -1,5 +1,6 @@
 import { auth } from "$lib/server/lucia";
 import { fail, redirect } from "@sveltejs/kit";
+import type { NeonDbError } from "@neondatabase/serverless";
 
 // import type { Actions } from "./$types";
 
@@ -45,16 +46,12 @@ export const actions = {
 			});
 			locals.auth.setSession(session); // set session cookie
 		} catch (e) {
-			// this part depends on the database you're using
-			// check for unique constraint error in user table
-			// if (
-			// 	e instanceof SomeDatabaseError &&
-			// 	e.message === USER_TABLE_UNIQUE_CONSTRAINT_ERROR
-			// ) {
-			// 	return fail(400, {
-			// 		message: "Username already taken"
-			// 	});
-			// }
+			if(e.constraint == 'auth_user_username_unique'){
+
+				return fail(400, {
+					message: "Username already taken"
+				});
+			}
 			return fail(500, {
 				message: "An unknown error occurred"
 			});
