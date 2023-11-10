@@ -8,7 +8,7 @@ declare global {
 	namespace Lucia {
 		type Auth = import("$lib/server/lucia").Auth;
 		type DatabaseUserAttributes = import("$lib/server/db/schema").User;
-		type DatabaseSessionAttributes = import("$lib/server/db/schema").Session;
+		type DatabaseSessionAttributes = {};
 	}
 	namespace App {
 		interface Locals {
