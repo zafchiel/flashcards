@@ -8,6 +8,7 @@ export const user = pgTable("auth_user", {
 	username: varchar("username", {
 		length: 255
 	}).unique().notNull(),
+	avatar: varchar("avatar", { length: 255 }).notNull()
 });
 
 export const session = pgTable("user_session", {
@@ -71,7 +72,6 @@ export const userFlashcardInteraction = pgTable('user_flashcard_interaction', {
 	flashcardId: varchar('current_flashcard_id', {length: 255}).notNull().references(() => flashcards.id),
 	interactionDate: timestamp('interaction_date').defaultNow(),
 	correct: boolean('correct')
-
 })
 
 export const tags = pgTable('tags', {
@@ -80,12 +80,16 @@ export const tags = pgTable('tags', {
 })
 
 export const deckTags = pgTable('deck_tags', {
-	deckId: varchar('deck_id', {length: 255}).notNull().references(() => decks.id),
-	tagId: varchar('id', {length: 15}).references(() => tags.id)
-}, (table) => ({
-	pk: primaryKey({columns: [table.deckId, table.tagId]})
-}))
+	id: varchar('id', {length: 255}).primaryKey(),
+	deckId: varchar('deck_id', {length: 255}).primaryKey().references(() => decks.id),
+	tagId: varchar('id', {length: 15}).primaryKey().references(() => tags.id)
+})
 
 export type User = typeof user.$inferSelect;
 export type Key = typeof key.$inferSelect;
 export type Session = typeof session.$inferSelect;
+export type Deck = typeof decks.$inferSelect;
+export type Flashcard = typeof flashcards.$inferSelect;
+export type UserFlashcardInteraction = typeof userFlashcardInteraction.$inferSelect;
+export type Tag = typeof tags.$inferSelect;
+export type DeckTags = typeof deckTags.$inferSelect;
