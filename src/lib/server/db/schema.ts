@@ -1,4 +1,4 @@
-import { pgTable, bigint, varchar, text, timestamp, boolean, PgChar, primaryKey } from "drizzle-orm/pg-core";
+import { pgTable, bigint, varchar, text, timestamp, boolean } from "drizzle-orm/pg-core";
 
 export const user = pgTable("auth_user", {
 	id: varchar("id", {
@@ -8,7 +8,7 @@ export const user = pgTable("auth_user", {
 	username: varchar("username", {
 		length: 255
 	}).unique().notNull(),
-	avatar: varchar("avatar", { length: 255 }).notNull()
+	avatar: varchar("avatar", { length: 255 }).notNull().default(`https://api.dicebear.com/7.x/thumbs/svg?seed=${Math.random()}&backgroundColor=0a5b83,1c799f,69d2e7,f1f4dc,f88c49,ffdfbf,ffd5dc,d1d4f9,c0aede,b6e3f4`)
 });
 
 export const session = pgTable("user_session", {

@@ -1,1 +1,13 @@
-{"version":"5","dialect":"pg","entries":[]}
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1699794120300,
+      "tag": "0000_typical_red_wolf",
+      "breakpoints": true
+    }
+  ]
+}
