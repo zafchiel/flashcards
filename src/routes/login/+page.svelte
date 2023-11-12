@@ -34,9 +34,10 @@
         </div>
 
         <button class="btn variant-filled">Login</button>
-        <p class="text-xs">
-          Don't have account? <a href="/signup" class="anchor"
-            >sign-up instead</a
+        <p class="text-sm">
+          Don't have account? <a
+            href="/signup"
+            class="anchor text-secondary-700">sign-up instead</a
           >
         </p>
       </div>

@@ -2,12 +2,13 @@ import { auth } from "$lib/server/lucia.js";
 import { fail, redirect } from "@sveltejs/kit";
 
 export const load = async ({ locals }) => {
-    const session = await locals.auth.validate();
-    if (!session) throw redirect(302, '/login');
+    const user = locals.user;
+    if (!user) throw redirect(302, '/login');
 
     return {
-        userId: session.user.userId,
-        username: session.user.username
+        userId: user.userId,
+        username: user.username,
+        avatar: user.avatar
     }
 }
 
