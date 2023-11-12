@@ -81,8 +81,8 @@ export const tags = pgTable('tags', {
 
 export const deckTags = pgTable('deck_tags', {
 	id: varchar('id', {length: 255}).primaryKey(),
-	deckId: varchar('deck_id', {length: 255}).primaryKey().references(() => decks.id),
-	tagId: varchar('id', {length: 15}).primaryKey().references(() => tags.id)
+	deckId: varchar('deck_id', {length: 255}).references(() => decks.id),
+	tagId: varchar('id', {length: 15}).references(() => tags.id)
 })
 
 export type User = typeof user.$inferSelect;

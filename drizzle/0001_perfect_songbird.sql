@@ -1,0 +1,1 @@
+ALTER TABLE "auth_user" ALTER COLUMN "avatar" SET DEFAULT 'https://api.dicebear.com/7.x/thumbs/svg?seed=0.014344341995091714&backgroundColor=0a5b83,1c799f,69d2e7,f1f4dc,f88c49,ffdfbf,ffd5dc,d1d4f9,c0aede,b6e3f4';
