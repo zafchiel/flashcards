@@ -1,6 +1,7 @@
 <script lang="ts">
   import { superForm } from "sveltekit-superforms/client";
   import type { PageData } from "./$types";
+  import Loader from "$lib/assets/loader.svelte";
 
   export let data: PageData;
 
@@ -52,7 +53,10 @@
         <button class="btn variant-filled"
           >Login
           {#if $delayed}
-            <span class="animate-spin ml-2">⏳</span>
+            <span class="animate-spin ml-2">
+              <!-- ⏳ -->
+              <Loader />
+            </span>
           {/if}
         </button>
         {#if $message}
