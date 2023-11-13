@@ -4,7 +4,9 @@
 
   export let data: PageData;
 
-  const { form, errors, constraints, enhance, message } = superForm(data.form);
+  const { form, errors, constraints, enhance, message, delayed } = superForm(
+    data.form
+  );
 
   const focusInput = (e: HTMLInputElement) => {
     e.focus();
@@ -47,7 +49,12 @@
           {/if}
         </div>
 
-        <button class="btn variant-filled">Login</button>
+        <button class="btn variant-filled"
+          >Login
+          {#if $delayed}
+            <span class="animate-spin ml-2">⏳</span>
+          {/if}
+        </button>
         {#if $message}
           <p class="text-primary-400">{$message}</p>
         {/if}
