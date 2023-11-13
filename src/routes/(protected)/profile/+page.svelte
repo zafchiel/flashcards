@@ -6,12 +6,7 @@
 
 <h3 class="h3">Welcome</h3>
 <div class="flex items-center">
-  <img
-    src={data.user?.avatar}
-    alt="User profile picture"
-    width="64"
-    height="64"
-  />
+  <img src={data.user?.avatar} alt="User profile" width="64" height="64" />
   <div
     class="font-bold border-t border-r border-b self-stretch rounded-r-sm p-3"
   >
