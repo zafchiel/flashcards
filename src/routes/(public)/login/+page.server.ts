@@ -2,30 +2,31 @@ import { auth } from "$lib/server/lucia";
 import { LuciaError } from "lucia";
 import { fail, redirect } from "@sveltejs/kit";
 
+import { z } from "zod";
+import { message, superValidate } from "sveltekit-superforms/server";
+
+const schema = z.object({
+	username: z.string().min(4).max(31),
+	password: z.string().min(6).max(255)
+})
+
+export const load = async ({ locals }) => {
+	const session = await locals.auth.validate();
+	if (session) throw redirect(302, "/");
+	const form = await superValidate(schema);
+	return {form};
+};
+
 export const actions = {
 	default: async ({ request, locals }) => {
-		const formData = await request.formData();
-		const username = formData.get("username");
-		const password = formData.get("password");
-		// basic check
-		if (
-			typeof username !== "string" ||
-			username.length < 1 ||
-			username.length > 31
-		) {
-			return fail(400, {
-				message: "Invalid username"
-			});
+		const form = await superValidate(request, schema);
+
+		if(!form.valid) {
+			return fail(400, {form})
 		}
-		if (
-			typeof password !== "string" ||
-			password.length < 1 ||
-			password.length > 255
-		) {
-			return fail(400, {
-				message: "Invalid password"
-			});
-		}
+
+		const {username, password} = form.data;
+		
 		try {
 			// find user by key
 			// and validate password
@@ -47,21 +48,12 @@ export const actions = {
 			) {
 				// user does not exist
 				// or invalid password
-				return fail(400, {
-					message: "Incorrect username or password"
-				});
+				return message(form, "Username of password is invalid!", { status: 403 });
 			}
-			return fail(500, {
-				message: "An unknown error occurred"
-			});
+			return message(form, "Something went wrong", { status: 500})
 		}
 		// redirect to
 		throw redirect(302, "/profile");
 	}
 };
 
-export const load = async ({ locals }) => {
-	const session = await locals.auth.validate();
-	if (session) throw redirect(302, "/");
-	return {};
-};
