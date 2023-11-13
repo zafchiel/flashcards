@@ -63,7 +63,7 @@ export const deckProgress = pgTable('deck_progress', {
 	id: serial('id').primaryKey(),
 	userId: varchar('user_id', {length: 15}).notNull().references(() => user.id),
 	deckId: integer('deck_id').notNull().references(() => decks.id),
-	currentFlashCardId: varchar('current_flashcard_id', {length: 255}).notNull().references(() => flashcards.id),
+	currentFlashCardId: integer('current_flashcard_id').notNull().references(() => flashcards.id),
 	completed: boolean('completed')
 })
 
