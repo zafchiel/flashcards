@@ -8,7 +8,7 @@
 
 <section class="flex flex-col justify-center items-center h-full">
   <div class="variant-soft card p-4">
-    <h1 class="h1 card-header mb-4">Sign in</h1>
+    <h1 class="h1 card-header mb-4">Sign-in</h1>
     <form method="post" use:enhance>
       <div class="flex flex-col gap-3 border-t pt-4">
         <div>
