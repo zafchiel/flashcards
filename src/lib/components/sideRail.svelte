@@ -27,8 +27,13 @@
   {/if}
 
   <svelte:fragment slot="trail">
-    <AppRailAnchor href="/profile" selected={$page.url.pathname === "/profile"}
-      >Profile</AppRailAnchor
-    >
+    <AppRailAnchor href="/profile" selected={$page.url.pathname === "/profile"}>
+      <div class="flex flex-col justify-center items-center">
+        {#if user?.avatar}
+          <img src={user.avatar} alt="User Avatar" class="w-10 h-10" />
+        {/if}
+        Profile
+      </div>
+    </AppRailAnchor>
   </svelte:fragment>
 </AppRail>
