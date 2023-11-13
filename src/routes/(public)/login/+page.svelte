@@ -24,13 +24,14 @@
           <input
             bind:value={$form.username}
             {...$constraints.username}
+            class:input-error={$errors.username}
             name="username"
             id="username"
             placeholder="username"
             class="input"
           />
           {#if $errors.username}
-            <span>{$errors.username}</span>
+            <p class="text-xs text-error-500">{$errors.username}</p>
           {/if}
         </div>
 
@@ -39,6 +40,7 @@
           <input
             bind:value={$form.password}
             {...$constraints.password}
+            class:input-error={$errors.password}
             type="password"
             name="password"
             id="password"
@@ -46,7 +48,7 @@
             class="input"
           />
           {#if $errors.password}
-            <span>{$errors.password}</span>
+            <p class="text-xs text-error-500">{$errors.password}</p>
           {/if}
         </div>
 
