@@ -8,9 +8,5 @@
 <div class="flex">
   <SideRail user={data.user} />
 
-  <main
-    class="p-10 bg-gradient-to-br variant-gradient-primary-secondary w-full relative"
-  >
-    <slot />
-  </main>
+  <slot />
 </div>
