@@ -6,7 +6,7 @@ import { z } from "zod";
 import { message, superValidate } from "sveltekit-superforms/server";
 
 const schema = z.object({
-	username: z.string().min(4).max(31).includes("@"),
+	username: z.string().min(4).max(31),
 	password: z.string().min(6).max(255)
 })
 
