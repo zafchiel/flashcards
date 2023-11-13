@@ -22,6 +22,7 @@
         <div>
           <label for="username" class="label">Username</label>
           <input
+            use:focusInput
             bind:value={$form.username}
             {...$constraints.username}
             class:input-error={$errors.username}
