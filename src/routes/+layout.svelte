@@ -1,4 +1,5 @@
 <script lang="ts">
+  import ProgressBar from "$lib/components/progressBar.svelte";
   import SideRail from "$lib/components/sideRail.svelte";
   import "../app.postcss";
 
@@ -7,6 +8,8 @@
 
 <div class="flex">
   <SideRail user={data.user} />
-
-  <slot />
+  <div class="relative w-full">
+    <ProgressBar />
+    <slot />
+  </div>
 </div>

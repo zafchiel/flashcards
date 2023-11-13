@@ -1,8 +1,9 @@
 <script lang="ts">
   import { AppRail, AppRailAnchor } from "@skeletonlabs/skeleton";
   import { page } from "$app/stores";
+  import type { User } from "lucia";
 
-  export let user: { username: string; avatar: string; userId: string } | null;
+  export let user: User | null;
 </script>
 
 <AppRail class="h-screen">
