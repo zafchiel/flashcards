@@ -35,7 +35,8 @@ export const actions = {
 				},
                 // @ts-ignore
 				attributes: {
-					username
+					username,
+					avatar: `https://api.dicebear.com/7.x/thumbs/svg?seed=${username}&backgroundColor=0a5b83,1c799f,69d2e7,f1f4dc,f88c49,ffdfbf,ffd5dc,d1d4f9,c0aede,b6e3f4`
 				}
 			});
 			const session = await auth.createSession({
