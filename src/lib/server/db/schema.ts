@@ -1,4 +1,4 @@
-import { pgTable, bigint, varchar, text, timestamp, boolean } from "drizzle-orm/pg-core";
+import { pgTable, bigint, varchar, text, timestamp, boolean, serial, integer } from "drizzle-orm/pg-core";
 
 export const user = pgTable("auth_user", {
 	id: varchar("id", {
@@ -43,7 +43,7 @@ export const key = pgTable("user_key", {
 });
 
 export const decks = pgTable('decks', {
-	id: varchar('id', {length: 255}).primaryKey(),
+	id: serial('id').primaryKey(),
 	userId: varchar('user_id', {length: 15}).notNull().references(() => user.id),
 	title: varchar('title', {length: 100}).notNull(),
 	description: text('description'),
@@ -53,37 +53,37 @@ export const decks = pgTable('decks', {
 })
 
 export const flashcards = pgTable('flashcards', {
-	id: varchar('id', {length: 255}).primaryKey(),
-	deckId: varchar('deck_id', {length: 255}).notNull().references(() => decks.id),
+	id: serial('id').primaryKey(),
+	deckId: integer('deck_id').notNull().references(() => decks.id),
 	question: text('question').notNull(),
 	answer: text('answer').notNull()
 })
 
 export const deckProgress = pgTable('deck_progress', {
-	id: varchar('id', {length: 255}).primaryKey(),
+	id: serial('id').primaryKey(),
 	userId: varchar('user_id', {length: 15}).notNull().references(() => user.id),
-	deckId: varchar('deck_id', {length: 255}).notNull().references(() => decks.id),
+	deckId: integer('deck_id').notNull().references(() => decks.id),
 	currentFlashCardId: varchar('current_flashcard_id', {length: 255}).notNull().references(() => flashcards.id),
 	completed: boolean('completed')
 })
 
 export const userFlashcardInteraction = pgTable('user_flashcard_interaction', {
-	id: varchar('id', {length: 255}).primaryKey(),
+	id: serial('id').primaryKey(),
 	userId: varchar('user_id', {length: 15}).notNull().references(() => user.id),
-	flashcardId: varchar('current_flashcard_id', {length: 255}).notNull().references(() => flashcards.id),
+	flashcardId: integer('current_flashcard_id').notNull().references(() => flashcards.id),
 	interactionDate: timestamp('interaction_date').defaultNow(),
 	correct: boolean('correct')
 })
 
 export const tags = pgTable('tags', {
-	id: varchar('id', {length: 15}).primaryKey(),
+	id: serial('id').primaryKey(),
 	tag_name: varchar('tag_name', {length: 50}).notNull()
 })
 
 export const deckTags = pgTable('deck_tags', {
-	id: varchar('id', {length: 255}).primaryKey(),
-	deckId: varchar('deck_id', {length: 255}).references(() => decks.id),
-	tagId: varchar('id', {length: 15}).references(() => tags.id)
+	id: serial('id').primaryKey(),
+	deckId: integer('deck_id').references(() => decks.id),
+	tagId: integer('id').references(() => tags.id)
 })
 
 export type User = typeof user.$inferSelect;
