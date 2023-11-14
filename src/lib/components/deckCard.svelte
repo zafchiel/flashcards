@@ -10,10 +10,8 @@
 >
   <div class="">
     <h2 class="h2 font-semibold">{deck.title}</h2>
-    <p class="text-sm text-opacity-70 text-surface-100">
-      {deck.createdAt
-        ? new Date(deck.createdAt).toLocaleString("en-GB")
-        : new Date().toLocaleString("en-GB")}
+    <p class="text-sm opacity-60">
+      {deck.createdAt?.toLocaleString("en-GB")}
     </p>
   </div>
   <div class="">
