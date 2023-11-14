@@ -7,6 +7,7 @@
   export let flashcards: Flashcard[];
 
   let currentFlashcardIndex = 0;
+  let showAnswer = false;
 
   const handleChangeCard = (direction: "next" | "prev") => {
     switch (direction) {
@@ -14,18 +15,24 @@
         if (currentFlashcardIndex === flashcards.length - 1) {
           currentFlashcardIndex = 0;
         } else currentFlashcardIndex++;
+        showAnswer = false;
         break;
       case "prev":
         if (currentFlashcardIndex === 0) {
           currentFlashcardIndex = flashcards.length - 1;
         } else currentFlashcardIndex--;
+        showAnswer = false;
         break;
     }
   };
 </script>
 
 <div class="mt-10">
-  <FlashcardCard flashcard={flashcards[currentFlashcardIndex]} />
+  <FlashcardCard
+    flashcard={flashcards[currentFlashcardIndex]}
+    {showAnswer}
+    on:switchView={() => (showAnswer = !showAnswer)}
+  />
 
   <div class="flex justify-between items-center p-3">
     <button

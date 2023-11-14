@@ -1,12 +1,15 @@
 <script lang="ts">
   import type { Flashcard } from "$lib/server/db/schema";
+  import { createEventDispatcher } from "svelte";
+
+  const dispatch = createEventDispatcher();
 
   export let flashcard: Flashcard;
 
-  let showAnswer = false;
+  export let showAnswer: Boolean;
 
   const handleSwitchView = () => {
-    showAnswer = !showAnswer;
+    dispatch("switchView");
   };
 </script>
 
