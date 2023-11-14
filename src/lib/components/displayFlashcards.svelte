@@ -24,23 +24,26 @@
   };
 </script>
 
-<div class="flex gap-2 md:gap-10 items-center justify-center mt-10">
-  <button
-    on:click={() => handleChangeCard("prev")}
-    class="btn-icon btn-icon-lg variant-filled"
-  >
-    <ArrowLeft />
-  </button>
-
+<div class="mt-10">
   <FlashcardCard flashcard={flashcards[currentFlashcardIndex]} />
 
-  <button
-    on:click={() => handleChangeCard("next")}
-    class="btn-icon btn-icon-lg variant-filled"
-  >
-    <ArrowRight />
-  </button>
-</div>
-<div class="text-center p-3">
-  <p>{currentFlashcardIndex + 1}/{flashcards.length}</p>
+  <div class="flex justify-between items-center p-3">
+    <button
+      on:click={() => handleChangeCard("prev")}
+      class="btn-icon btn-icon-lg variant-filled"
+    >
+      <ArrowLeft />
+    </button>
+
+    <div class="text-center p-3">
+      <p>{currentFlashcardIndex + 1}/{flashcards.length}</p>
+    </div>
+
+    <button
+      on:click={() => handleChangeCard("next")}
+      class="btn-icon btn-icon-lg variant-filled"
+    >
+      <ArrowRight />
+    </button>
+  </div>
 </div>

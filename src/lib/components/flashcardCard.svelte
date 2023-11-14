@@ -12,7 +12,7 @@
 
 <div
   on:click={handleSwitchView}
-  class="card card-hover p-6 grow max-w-xl text-xl md:text-3xl cursor-pointer text-center"
+  class="card card-hover flex justify-center items-center p-6 text-xl font-semibold md:text-3xl cursor-pointer min-h-[300px]"
 >
   {#if showAnswer}
     {flashcard.answer}
