@@ -2,15 +2,21 @@
   import type { Flashcard } from "$lib/server/db/schema";
 
   export let flashcard: Flashcard;
+
+  let showAnswer = false;
+
+  const handleSwitchView = () => {
+    showAnswer = !showAnswer;
+  };
 </script>
 
 <div
-  class="card card-hover flex flex-col gap-3 justify-center items-center p-4 my-10 grow"
+  on:click={handleSwitchView}
+  class="card card-hover p-6 grow max-w-xl text-xl md:text-3xl cursor-pointer text-center"
 >
-  <div>
-    {flashcard.question}
-  </div>
-  <div>
+  {#if showAnswer}
     {flashcard.answer}
-  </div>
+  {:else}
+    {flashcard.question}
+  {/if}
 </div>

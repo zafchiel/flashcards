@@ -24,7 +24,7 @@
   };
 </script>
 
-<div class="flex gap-2 md:gap-10 items-center justify-between">
+<div class="flex gap-2 md:gap-10 items-center justify-center mt-10">
   <button
     on:click={() => handleChangeCard("prev")}
     class="btn-icon btn-icon-lg variant-filled"
@@ -41,6 +41,6 @@
     <ArrowRight />
   </button>
 </div>
-<div class="text-center">
+<div class="text-center p-3">
   <p>{currentFlashcardIndex + 1}/{flashcards.length}</p>
 </div>
