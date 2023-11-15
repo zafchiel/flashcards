@@ -25,7 +25,23 @@
         break;
     }
   };
+
+  const handleKeyDown = (e: KeyboardEvent) => {
+    switch (e.code) {
+      case "ArrowLeft":
+        handleChangeCard("prev");
+        break;
+      case "ArrowRight":
+        handleChangeCard("next");
+        break;
+      case "Space":
+        showAnswer = !showAnswer;
+        break;
+    }
+  };
 </script>
+
+<svelte:window on:keydown={handleKeyDown} />
 
 <div class="mt-10">
   <FlashcardCard
