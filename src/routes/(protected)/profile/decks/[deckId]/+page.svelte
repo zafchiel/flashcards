@@ -64,4 +64,10 @@
   </div>
 </div>
 
+<div class="p-2">
+  {#each data.tags as tag (tag.id)}
+    <span class="chip variant-filled mr-2">{tag.tagName}</span>
+  {/each}
+</div>
+
 <DisplayFlashcards flashcards={data.flashcards} />

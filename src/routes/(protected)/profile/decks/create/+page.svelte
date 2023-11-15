@@ -2,6 +2,7 @@
   import { superForm } from "sveltekit-superforms/client";
   import type { PageData } from "./$types";
   import Loader from "$lib/assets/loader.svelte";
+  import { InputChip } from "@skeletonlabs/skeleton";
 
   export let data: PageData;
 
@@ -23,6 +24,8 @@
 
   addNewFlashcard();
   addNewFlashcard();
+
+  let list: string[] = [];
 </script>
 
 <h1 class="h1 mb-10">Create new deck</h1>
@@ -61,6 +64,15 @@
       {#if $errors.deckDescription}
         <p class="text-error-500 text-sm">{$errors.deckDescription}</p>
       {/if}
+    </div>
+
+    <div>
+      <label for="tags" class="label">Tags</label>
+      <InputChip
+        bind:value={$form.tags}
+        name="tags"
+        placeholder="Write any tag and click enter"
+      />
     </div>
 
     <h3 class="h3 p-3 text-primary-500 font-semibold">Flashcards</h3>

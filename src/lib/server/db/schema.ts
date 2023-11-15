@@ -75,15 +75,10 @@ export const userFlashcardInteraction = pgTable('user_flashcard_interaction', {
 	correct: boolean('correct')
 })
 
-export const tags = pgTable('tags', {
-	id: serial('id').primaryKey(),
-	tag_name: varchar('tag_name', {length: 50}).notNull()
-})
-
 export const deckTags = pgTable('deck_tags', {
 	id: serial('id').primaryKey(),
 	deckId: integer('deck_id').references(() => decks.id),
-	tagId: integer('tag_id').references(() => tags.id)
+	tagName: varchar('tag_name', {length: 50}).notNull()
 })
 
 export type User = typeof user.$inferSelect;
@@ -92,5 +87,4 @@ export type Session = typeof session.$inferSelect;
 export type Deck = typeof decks.$inferSelect;
 export type Flashcard = typeof flashcards.$inferSelect;
 export type UserFlashcardInteraction = typeof userFlashcardInteraction.$inferSelect;
-export type Tag = typeof tags.$inferSelect;
 export type DeckTags = typeof deckTags.$inferSelect;

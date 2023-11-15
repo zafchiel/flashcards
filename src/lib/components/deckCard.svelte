@@ -14,7 +14,9 @@
       {deck.createdAt?.toLocaleString("en-GB")}
     </p>
   </div>
-  <div class="">
-    <p>{deck.description}</p>
-  </div>
+  {#if deck.description}
+    <div>
+      <p>{deck.description}</p>
+    </div>
+  {/if}
 </a>
