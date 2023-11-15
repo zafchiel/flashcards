@@ -3,13 +3,16 @@
   import FlashcardCard from "./flashcardCard.svelte";
   import ArrowLeft from "$lib/assets/arrowLeft.svelte";
   import ArrowRight from "$lib/assets/arrowRight.svelte";
+  import { fly } from "svelte/transition";
 
   export let flashcards: Flashcard[];
 
   let currentFlashcardIndex = 0;
+  let previousIndex = 0;
   let showAnswer = false;
 
   const handleChangeCard = (direction: "next" | "prev") => {
+    previousIndex = currentFlashcardIndex;
     switch (direction) {
       case "next":
         if (currentFlashcardIndex === flashcards.length - 1) {
@@ -44,11 +47,19 @@
 <svelte:window on:keydown={handleKeyDown} />
 
 <div class="mt-10">
-  <FlashcardCard
-    flashcard={flashcards[currentFlashcardIndex]}
-    {showAnswer}
-    on:switchView={() => (showAnswer = !showAnswer)}
-  />
+  {#key currentFlashcardIndex}
+    <div
+      in:fly={{
+        x: previousIndex < currentFlashcardIndex ? 100 : -100,
+        duration: 500,
+      }}
+    >
+      <FlashcardCard
+        flashcard={flashcards[currentFlashcardIndex]}
+        {showAnswer}
+      />
+    </div>
+  {/key}
 
   <div class="flex justify-between items-center p-3">
     <button
