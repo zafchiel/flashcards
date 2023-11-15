@@ -1,14 +1,30 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
   import DisplayFlashcards from "$lib/components/displayFlashcards.svelte";
-  import { getModalStore, type ModalSettings } from "@skeletonlabs/skeleton";
+  import {
+    getModalStore,
+    getToastStore,
+    type ModalSettings,
+    type ToastSettings,
+  } from "@skeletonlabs/skeleton";
 
   const modalStore = getModalStore();
+  const toastStore = getToastStore();
   export let data;
+
+  const errorToast: ToastSettings = {
+    message: "Something went wrong",
+    timeout: 3000,
+    background: "variant-filled-error",
+  };
+  const successToast: ToastSettings = {
+    message: `Deck deleted successfully`,
+    timeout: 3000,
+    background: "variant-filled-success",
+  };
 
   const modal: ModalSettings = {
     type: "confirm",
-    // Data
     title: "Are you sure",
     body: `You will delete <span class="text-error-500 font-semibold uppercase">${data.deck.title}</span> deck, this action cannot be undone`,
     // TRUE if confirm pressed, FALSE if cancel pressed
@@ -20,8 +36,9 @@
         const response = await res.json();
         if (response.success) {
           modalStore.close();
+          toastStore.trigger(successToast);
           goto("/profile/decks");
-        }
+        } else toastStore.trigger(errorToast);
       }
     },
   };
