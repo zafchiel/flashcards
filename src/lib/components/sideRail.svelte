@@ -9,9 +9,9 @@
 
 <AppRail class="h-screen ">
   <svelte:fragment slot="lead">
-    <AppRailAnchor href="/" selected={$page.url.pathname === "/"}
-      >Home</AppRailAnchor
-    >
+    <AppRailAnchor href="/" selected={$page.url.pathname === "/"}>
+      <p class="font-bold text-lg">F/HUH</p>
+    </AppRailAnchor>
   </svelte:fragment>
 
   {#if user}
