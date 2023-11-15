@@ -1,10 +1,33 @@
 <script lang="ts">
+  import { goto } from "$app/navigation";
   import DisplayFlashcards from "$lib/components/displayFlashcards.svelte";
+  import { getModalStore, type ModalSettings } from "@skeletonlabs/skeleton";
 
+  const modalStore = getModalStore();
   export let data;
+
+  const modal: ModalSettings = {
+    type: "confirm",
+    // Data
+    title: "Are you sure",
+    body: `You will delete <span class="text-error-500 font-semibold uppercase">${data.deck.title}</span> deck, this action cannot be undone`,
+    // TRUE if confirm pressed, FALSE if cancel pressed
+    response: async (r: boolean) => {
+      if (r) {
+        const res = await fetch(`/api/decks?deckId=${data.deck.id}`, {
+          method: "DELETE",
+        });
+        const response = await res.json();
+        if (response.success) {
+          modalStore.close();
+          goto("/profile/decks");
+        }
+      }
+    },
+  };
 </script>
 
-<div class="flex flex-col md:flex-row justify-between items-center">
+<div class="flex flex-col md:flex-row flex-wrap justify-between items-center">
   <div>
     <h1 class="h1">
       {data.deck.title}
@@ -17,7 +40,10 @@
 
   <div class="flex gap-5">
     <button class="btn md:btn-lg variant-outline-secondary">Edit</button>
-    <button class="btn md:btn-lg variant-outline-error">Delete</button>
+    <button
+      on:click={() => modalStore.trigger(modal)}
+      class="btn md:btn-lg variant-outline-error">Delete</button
+    >
   </div>
 </div>
 

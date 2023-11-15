@@ -8,3 +8,9 @@ export const load = async ({params}) => {
     
     return {deck, flashcards}
 }
+
+export const actions = {
+    delete: async ({params, locals}) => {
+        console.log('delete')
+    }
+}
