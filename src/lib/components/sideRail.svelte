@@ -6,7 +6,7 @@
   export let user: User | null;
 </script>
 
-<AppRail class="h-screen">
+<AppRail class="h-screen ">
   <svelte:fragment slot="lead">
     <AppRailAnchor href="/" selected={$page.url.pathname === "/"}
       >Home</AppRailAnchor

@@ -8,7 +8,7 @@
 
 <div class="flex">
   <SideRail user={data.user} />
-  <div class="relative w-full">
+  <div class="relative w-full h-screen overflow-scroll">
     <ProgressBar />
     <slot />
   </div>

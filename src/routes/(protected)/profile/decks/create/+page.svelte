@@ -9,6 +9,16 @@
     data.form,
     { dataType: "json" }
   );
+
+  const addNewFlashcard = () => {
+    form.update(
+      ($form) => {
+        $form.flashcards.push({ question: "", answer: "" });
+        return $form;
+      },
+      { taint: false }
+    );
+  };
 </script>
 
 <h1 class="h1 mb-10">Create new deck</h1>
@@ -50,23 +60,62 @@
     <h3 class="h3 p-3 font-semibold">Flashcards</h3>
 
     {#each $form.flashcards as _, i}
-      <div>
-        Question
-        <input
-          type="text"
-          bind:value={$form.flashcards[i].question}
-          class="input"
-        />
-      </div>
+      <div
+        class="relative flex flex-wrap gap-3 justify-stretch items-center card p-5 mb-3 rounded-tl-none"
+      >
+        <div
+          class="index-badge w-7 h-7 pl-1 variant-soft-primary absolute top-0 left-0 z-10"
+        >
+          {i + 1}
+        </div>
+        <div class="grow min-w-[200px]">
+          <label for="question-{i}" class="label">Question</label>
+          <textarea
+            bind:value={$form.flashcards[i].question}
+            class="textarea"
+            name="question-{i}"
+            id="question-{i}"
+          />
+          {#if $errors.flashcards?.[i]?.question}
+            <p class="text-error-500 text-sm">
+              {$errors.flashcards[i].question}
+            </p>
+          {/if}
+        </div>
 
-      <div>
-        Answer
-        <input
-          type="text"
-          bind:value={$form.flashcards[i].answer}
-          class="input"
-        />
+        <div class="grow min-w-[200px]">
+          <label for="answer-{i}" class="label">Answer</label>
+          <textarea
+            bind:value={$form.flashcards[i].answer}
+            class="textarea"
+            name="answer-{i}"
+            id="answer-{i}"
+          />
+          {#if $errors.flashcards?.[i]?.answer}
+            <p class="text-error-500 text-sm">{$errors.flashcards[i].answer}</p>
+          {/if}
+        </div>
       </div>
     {/each}
+
+    <button class="btn variant-filled-primary"
+      >Create
+      {#if $delayed}
+        <span class="animate-spin ml-2">
+          <!-- ⏳ -->
+          <Loader />
+        </span>
+      {/if}
+    </button>
   </form>
+  <button on:click={addNewFlashcard} class="btn variant-outline-primary"
+    >Add Flashcard</button
+  >
 </section>
+
+<style>
+  .index-badge {
+    -webkit-clip-path: circle(100.2% at 0 0);
+    clip-path: circle(100.2% at 0 0);
+  }
+</style>
