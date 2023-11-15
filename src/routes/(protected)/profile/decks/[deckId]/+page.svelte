@@ -4,7 +4,7 @@
   export let data;
 </script>
 
-<div class="flex justify-between items-center">
+<div class="flex flex-col md:flex-row justify-between items-center">
   <div>
     <h1 class="h1">
       {data.deck.title}
@@ -15,9 +15,9 @@
     </div>
   </div>
 
-  <div>
-    <button class="btn btn-lg variant-outline-secondary">Edit</button>
-    <button class="btn btn-lg variant-outline-warning">Delete</button>
+  <div class="flex gap-5">
+    <button class="btn md:btn-lg variant-outline-secondary">Edit</button>
+    <button class="btn md:btn-lg variant-outline-error">Delete</button>
   </div>
 </div>
 

@@ -7,7 +7,7 @@
 
 <div class="flex justify-between items-center">
   <h1 class="h1 p-4">Decks Page</h1>
-  <a href="/profile/decks/create" class="btn bt btn-lg variant-outline-primary"
+  <a href="/profile/decks/create" class="btn md:btn-lg variant-outline-primary"
     >Create Deck</a
   >
 </div>

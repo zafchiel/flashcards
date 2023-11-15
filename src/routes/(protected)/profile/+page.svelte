@@ -3,7 +3,12 @@
   export let data;
 </script>
 
-<h3 class="h3">Welcome</h3>
+<div class="flex items-center justify-between mb-10">
+  <h1 class="h1">Profile page</h1>
+  <form method="post" action="?/logout" use:enhance>
+    <button class="btn md:btn-lg variant-filled-secondary">Log-out</button>
+  </form>
+</div>
 <div class="flex items-center">
   <img src={data.user?.avatar} alt="User profile" width="64" height="64" />
   <div
@@ -14,6 +19,3 @@
     </p>
   </div>
 </div>
-<form method="post" action="?/logout" use:enhance>
-  <button class="btn variant-filled-secondary">Log-out</button>
-</form>
