@@ -2,6 +2,7 @@
   import { AppRail, AppRailAnchor } from "@skeletonlabs/skeleton";
   import { page } from "$app/stores";
   import type { User } from "lucia";
+  import { LightSwitch } from "@skeletonlabs/skeleton";
 
   export let user: User | null;
 </script>
@@ -28,6 +29,9 @@
   {/if}
 
   <svelte:fragment slot="trail">
+    <div class="flex justify-center items-center p-3">
+      <LightSwitch />
+    </div>
     <AppRailAnchor href="/profile" selected={$page.url.pathname === "/profile"}>
       <div class="flex flex-col justify-center items-center">
         {#if user?.avatar}
