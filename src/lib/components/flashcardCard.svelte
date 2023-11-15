@@ -7,18 +7,15 @@
   export let flashcard: Flashcard;
   export let showAnswer: Boolean;
 
-  let flipped = false;
-
   const handleSwitchView = () => {
     dispatch("switchView");
-    flipped = !flipped;
   };
 </script>
 
 <div class="container">
   <button
     on:click={handleSwitchView}
-    class:flipped
+    class:showAnswer
     class="card card-hover w-full flex justify-center items-center p-6 text-xl font-semibold md:text-3xl cursor-pointer min-h-[300px]"
   >
     {#if showAnswer}
@@ -42,7 +39,7 @@
     transition: transform 0.6s;
     transform-style: preserve-3d;
   }
-  .card.flipped {
+  .card.showAnswer {
     transform: rotateX(0);
   }
   .back,
