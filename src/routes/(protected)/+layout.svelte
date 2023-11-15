@@ -1,3 +1,3 @@
-<main class="p-3 md:p-10 w-full min-h-screen">
+<main class="p-3 md:p-10">
   <slot />
 </main>

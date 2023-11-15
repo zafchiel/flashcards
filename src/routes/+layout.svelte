@@ -13,7 +13,7 @@
 
 <div class="flex">
   <SideRail user={data.user} />
-  <div class="relative w-full h-screen overflow-scroll">
+  <div class="relative w-full h-screen overflow-y-auto">
     <ProgressBar />
     <slot />
   </div>
