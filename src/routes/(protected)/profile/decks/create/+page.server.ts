@@ -14,13 +14,10 @@ const schema = z.object({
     })).min(2).max(100)
 })
 
-const  flashcards = [{ question: "", answer: "" },
-{ question: "", answer: "" },]
-
 export const load = async ({ locals }) => {
 	const session = await locals.auth.validate();
 	if (!session) throw redirect(302, "/");
-	const form = await superValidate({flashcards}, schema);
+	const form = await superValidate(schema);
 	return {form};
 };
 

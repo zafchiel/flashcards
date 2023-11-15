@@ -18,13 +18,19 @@
       },
       { taint: false }
     );
+    return false;
   };
+
+  addNewFlashcard();
+  addNewFlashcard();
 </script>
 
 <h1 class="h1 mb-10">Create new deck</h1>
 
 <section>
   <form method="post" use:enhance>
+    <h3 class="h3 p-3 text-primary-500 font-semibold">Deck details</h3>
+
     <div>
       <label for="deckTitle" class="label">Deck title</label>
       <input
@@ -57,7 +63,7 @@
       {/if}
     </div>
 
-    <h3 class="h3 p-3 font-semibold">Flashcards</h3>
+    <h3 class="h3 p-3 text-primary-500 font-semibold">Flashcards</h3>
 
     {#each $form.flashcards as _, i}
       <div
@@ -72,6 +78,7 @@
           <label for="question-{i}" class="label">Question</label>
           <textarea
             bind:value={$form.flashcards[i].question}
+            class:input-error={$errors.flashcards?.[i]?.question}
             class="textarea"
             name="question-{i}"
             id="question-{i}"
@@ -87,6 +94,7 @@
           <label for="answer-{i}" class="label">Answer</label>
           <textarea
             bind:value={$form.flashcards[i].answer}
+            class:input-error={$errors.flashcards?.[i]?.answer}
             class="textarea"
             name="answer-{i}"
             id="answer-{i}"
@@ -97,20 +105,23 @@
         </div>
       </div>
     {/each}
+    <div class="flex justify-between items-center">
+      <button
+        type="button"
+        on:click={addNewFlashcard}
+        class="btn variant-outline-primary">Add Flashcard</button
+      >
 
-    <button class="btn variant-filled-primary"
-      >Create
-      {#if $delayed}
-        <span class="animate-spin ml-2">
-          <!-- ⏳ -->
-          <Loader />
-        </span>
-      {/if}
-    </button>
+      <button class="btn variant-filled-primary"
+        >Create Deck
+        {#if $delayed}
+          <span class="animate-spin ml-2">
+            <Loader />
+          </span>
+        {/if}
+      </button>
+    </div>
   </form>
-  <button on:click={addNewFlashcard} class="btn variant-outline-primary"
-    >Add Flashcard</button
-  >
 </section>
 
 <style>
