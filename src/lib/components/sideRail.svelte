@@ -28,6 +28,10 @@
     >
   {/if}
 
+  <AppRailAnchor href="/discover" selected={$page.url.pathname === "/discover"}>
+    Discover
+  </AppRailAnchor>
+
   <svelte:fragment slot="trail">
     <div class="flex justify-center items-center p-3">
       <LightSwitch />
