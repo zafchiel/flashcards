@@ -12,10 +12,10 @@
   >
 </div>
 <section class="flex gap-3 flex-wrap">
-  {#if data.result.length === 0}
+  {#if data.decks.length === 0}
     <p>No decks found</p>
   {/if}
-  {#each data.result as deck (deck.id)}
+  {#each data.decks as deck (deck.id)}
     <DeckCard {deck} />
   {/each}
 </section>

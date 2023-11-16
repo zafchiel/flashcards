@@ -3,8 +3,22 @@
   import Trash from "$lib/assets/trash.svelte";
   import Edit from "$lib/assets/edit.svelte";
   import { getModalStore, type ModalSettings } from "@skeletonlabs/skeleton";
+  import DisplayTags from "./displayTags.svelte";
 
-  export let deck: Deck;
+  export let deck: {
+    id: number;
+    userId: string;
+    title: string;
+    description: string | null;
+    public: boolean | null;
+    createdAt: Date | null;
+    lastUpdate: Date | null;
+    tags: {
+      id: number;
+      deckId: number | null;
+      tagName: string;
+    }[];
+  };
 
   const modalStore = getModalStore();
 
@@ -38,6 +52,7 @@
     <p class="text-sm opacity-60">
       {deck.createdAt?.toLocaleString("en-GB")}
     </p>
+    <DisplayTags tags={deck.tags} />
     {#if deck.description}
       <div>
         <p>{deck.description}</p>

@@ -1,6 +1,7 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
   import DisplayFlashcards from "$lib/components/displayFlashcards.svelte";
+  import DisplayTags from "$lib/components/displayTags.svelte";
   import {
     getModalStore,
     getToastStore,
@@ -64,10 +65,6 @@
   </div>
 </div>
 
-<div class="p-2">
-  {#each data.tags as tag (tag.id)}
-    <span class="chip variant-filled mr-2">{tag.tagName}</span>
-  {/each}
-</div>
+<DisplayTags tags={data.tags} />
 
 <DisplayFlashcards flashcards={data.flashcards} />

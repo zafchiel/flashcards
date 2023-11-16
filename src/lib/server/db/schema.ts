@@ -1,3 +1,4 @@
+import { relations } from "drizzle-orm";
 import { pgTable, bigint, varchar, text, timestamp, boolean, serial, integer } from "drizzle-orm/pg-core";
 
 export const user = pgTable("auth_user", {
@@ -52,6 +53,10 @@ export const decks = pgTable('decks', {
 	lastUpdate: timestamp('last_update').defaultNow()
 })
 
+export const decksRelations = relations(decks, ({many}) => ({
+	tags: many(deckTags)
+}))
+
 export const flashcards = pgTable('flashcards', {
 	id: serial('id').primaryKey(),
 	deckId: integer('deck_id').notNull().references(() => decks.id),
@@ -80,6 +85,13 @@ export const deckTags = pgTable('deck_tags', {
 	deckId: integer('deck_id').references(() => decks.id),
 	tagName: varchar('tag_name', {length: 50}).notNull()
 })
+
+export const deckTagsRelations = relations(deckTags, ({one}) => ({
+	deck: one(decks, {
+		fields: [deckTags.deckId],
+		references: [decks.id]
+	})
+}))
 
 export type User = typeof user.$inferSelect;
 export type Key = typeof key.$inferSelect;
