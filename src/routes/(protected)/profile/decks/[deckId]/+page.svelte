@@ -46,7 +46,10 @@
   </div>
 
   <div class="flex gap-5">
-    <button class="btn md:btn-lg variant-outline-secondary">Edit</button>
+    <a
+      href={`/profile/decks/${data.deck.id}/edit`}
+      class="btn md:btn-lg variant-outline-secondary">Edit</a
+    >
     <button
       on:click={() => modalStore.trigger(modal)}
       class="btn md:btn-lg variant-outline-error">Delete</button
