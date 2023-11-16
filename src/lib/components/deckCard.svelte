@@ -4,6 +4,7 @@
   import Edit from "$lib/assets/edit.svelte";
   import { getModalStore, type ModalSettings } from "@skeletonlabs/skeleton";
   import DisplayTags from "./displayTags.svelte";
+  import { goto, invalidate, invalidateAll } from "$app/navigation";
 
   export let deck: {
     id: number;
@@ -35,6 +36,7 @@
         const response = await res.json();
         if (response.success) {
           modalStore.close();
+          invalidate("/api/decks");
           // toastStore.trigger(successToast);
         }
         // else toastStore.trigger(errorToast);

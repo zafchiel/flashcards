@@ -51,7 +51,6 @@ export const actions = {
     }
 
     const { deckTitle, deckDescription, flashcards, tags } = form.data;
-    console.log(tags);
 
     try {
       const { deckId: newDeckId } = await createDeck(
