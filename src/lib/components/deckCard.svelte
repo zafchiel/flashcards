@@ -1,10 +1,14 @@
 <script lang="ts">
-  import type { Deck } from "$lib/server/db/schema";
   import Trash from "$lib/assets/trash.svelte";
   import Edit from "$lib/assets/edit.svelte";
-  import { getModalStore, type ModalSettings } from "@skeletonlabs/skeleton";
+  import {
+    getModalStore,
+    getToastStore,
+    type ModalSettings,
+  } from "@skeletonlabs/skeleton";
   import DisplayTags from "./displayTags.svelte";
-  import { goto, invalidate, invalidateAll } from "$app/navigation";
+  import { invalidate } from "$app/navigation";
+  import { errorToast, successDeleteToast } from "$lib/toasts";
 
   export let deck: {
     id: number;
@@ -22,6 +26,7 @@
   };
 
   const modalStore = getModalStore();
+  const toastStore = getToastStore();
 
   const modal: ModalSettings = {
     type: "confirm",
@@ -37,9 +42,8 @@
         if (response.success) {
           modalStore.close();
           invalidate("/api/decks");
-          // toastStore.trigger(successToast);
-        }
-        // else toastStore.trigger(errorToast);
+          toastStore.trigger(successDeleteToast);
+        } else toastStore.trigger(errorToast);
       }
     },
   };

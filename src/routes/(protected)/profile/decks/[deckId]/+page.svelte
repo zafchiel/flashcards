@@ -2,27 +2,16 @@
   import { goto } from "$app/navigation";
   import DisplayFlashcards from "$lib/components/displayFlashcards.svelte";
   import DisplayTags from "$lib/components/displayTags.svelte";
+  import { errorToast, successDeleteToast } from "$lib/toasts/index.js";
   import {
     getModalStore,
     getToastStore,
     type ModalSettings,
-    type ToastSettings,
   } from "@skeletonlabs/skeleton";
 
   const modalStore = getModalStore();
   const toastStore = getToastStore();
   export let data;
-
-  const errorToast: ToastSettings = {
-    message: "Something went wrong",
-    timeout: 3000,
-    background: "variant-filled-error",
-  };
-  const successToast: ToastSettings = {
-    message: `Deck deleted successfully`,
-    timeout: 3000,
-    background: "variant-filled-success",
-  };
 
   const modal: ModalSettings = {
     type: "confirm",
@@ -37,7 +26,7 @@
         const response = await res.json();
         if (response.success) {
           modalStore.close();
-          toastStore.trigger(successToast);
+          toastStore.trigger(successDeleteToast);
           goto("/profile/decks");
         } else toastStore.trigger(errorToast);
       }
