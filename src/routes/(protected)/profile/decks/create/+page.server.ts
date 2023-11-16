@@ -60,7 +60,7 @@ export const actions = {
         deckDescription
       );
       await createFlashcard(newDeckId, flashcards);
-      if(tags) await createTags(tags, newDeckId);
+      if(tags && tags.length > 0) await createTags(tags, newDeckId);
 
       redirectId = newDeckId;
     } catch (error) {
