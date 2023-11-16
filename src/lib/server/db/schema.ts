@@ -12,6 +12,10 @@ export const user = pgTable("auth_user", {
 	avatar: varchar("avatar", { length: 255 })
 });
 
+export const userRelations = relations(user, ({many}) => ({
+	decks: many(decks)
+}))
+
 export const session = pgTable("user_session", {
 	id: varchar("id", {
 		length: 128
@@ -53,8 +57,13 @@ export const decks = pgTable('decks', {
 	lastUpdate: timestamp('last_update').defaultNow()
 })
 
-export const decksRelations = relations(decks, ({many}) => ({
-	tags: many(deckTags)
+export const decksRelations = relations(decks, ({many, one}) => ({
+	tags: many(deckTags),
+	flashcards: many(flashcards),
+	user: one(user, {
+		fields: [decks.userId],
+		references: [user.id]
+	})
 }))
 
 export const flashcards = pgTable('flashcards', {
@@ -63,6 +72,13 @@ export const flashcards = pgTable('flashcards', {
 	question: text('question').notNull(),
 	answer: text('answer').notNull()
 })
+
+export const flashcardsRelations = relations(flashcards, ({one}) => ({
+	deck: one(decks, {
+		fields: [flashcards.deckId],
+		references: [decks.id]
+	})
+}))
 
 export const deckProgress = pgTable('deck_progress', {
 	id: serial('id').primaryKey(),
