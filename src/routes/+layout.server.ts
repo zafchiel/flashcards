@@ -4,9 +4,5 @@ export const load = async ({ locals }) => {
     return {
       user: session.user,
     };
-  } else {
-    return {
-      user: null,
-    };
-  }
+  } 
 };
