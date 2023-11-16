@@ -3,6 +3,7 @@ import type { RequestHandler } from "./$types";
 import { deleteDeck } from "$lib/server/actions/deleteDeck";
 import { DatabaseError } from "@neondatabase/serverless";
 
+// Delete deck handler
 export const DELETE: RequestHandler = async ({ url, locals }) => {
   const session = await locals.auth.validate();
   if (!session) return json({ message: "Not logged in" }, { status: 401 });
