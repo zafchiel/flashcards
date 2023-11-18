@@ -82,7 +82,7 @@ export const actions = {
           .update(decks)
           .set({
             title: form.data.deckTitle,
-            description: form.data.deckDescription,
+            description: form.data.deckDescription ?? null,
           })
           .where(eq(decks.id, parseInt(params.deckId)));
       }
