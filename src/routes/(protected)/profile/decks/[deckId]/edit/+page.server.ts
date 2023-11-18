@@ -67,8 +67,12 @@ export const actions = {
 
     try {
       const deckInDb = await getDeckWithFlashcardsAndTags(parseInt(params.deckId));
-      let newFlashcards = [];
 
+      if(deckInDb?.title !== form.data.deckTitle || deckInDb?.description !== form.data.deckDescription) {
+        await dbHttp.update(decks).set({title: form.data.deckTitle, description: form.data.deckDescription}).where(eq(decks.id, parseInt(params.deckId)));
+      }
+      
+      let newFlashcards = [];
       for (let i = 0; i < form.data.flashcards.length; i++) {
         if(deckInDb?.flashcards[i] === undefined) {
           // new flashcard
