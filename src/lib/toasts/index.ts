@@ -10,3 +10,8 @@ export const successDeleteToast: ToastSettings = {
   timeout: 3000,
   background: "variant-filled-success",
 };
+export const successEditToast: ToastSettings = {
+  message: `Deck updated successfully`,
+  timeout: 3000,
+  background: "variant-filled-success",
+}

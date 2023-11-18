@@ -2,12 +2,17 @@
   import { superForm } from "sveltekit-superforms/client";
   import type { PageData } from "./$types";
   import Loader from "$lib/assets/loader.svelte";
-  import { InputChip } from "@skeletonlabs/skeleton";
+  import { InputChip, getToastStore } from "@skeletonlabs/skeleton";
+  import { errorToast, successEditToast } from "$lib/toasts";
 
   export let data: PageData;
 
+  const toastStore = getToastStore();
+
   const { form, errors, constraints, enhance, delayed } = superForm(data.form, {
     dataType: "json",
+    onResult: () => toastStore.trigger(successEditToast),
+    onError: () => toastStore.trigger(errorToast),
   });
 
   const addNewFlashcard = () => {

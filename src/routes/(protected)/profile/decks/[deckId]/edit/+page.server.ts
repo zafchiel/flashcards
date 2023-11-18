@@ -8,17 +8,14 @@ import { dbHttp } from "$lib/server/db";
 import { decks, flashcards, deckTags } from "$lib/server/db/schema";
 import { createFlashcard } from "$lib/server/actions/createFlashcard";
 import { eq } from "drizzle-orm";
+import { createTags } from "$lib/server/actions/createTags";
 
 const schema = z.object({
   deckTitle: z
     .string()
     .min(3, { message: "Must contain at least 3 characters" })
     .max(31),
-  deckDescription: z
-    .string()
-    .min(6, { message: "Must contain at least 6 characters" })
-    .max(255)
-    .optional(),
+  deckDescription: z.string().max(255).optional(),
   flashcards: z
     .array(
       z.object({
@@ -59,40 +56,61 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 export const actions = {
   default: async ({ request, params }) => {
     const form = await superValidate(request, schema);
-    let redirectId = null;
 
     if (!form.valid) {
       return fail(400, { form });
     }
 
     try {
-      const deckInDb = await getDeckWithFlashcardsAndTags(parseInt(params.deckId));
+      const deckInDb = await getDeckWithFlashcardsAndTags(
+        parseInt(params.deckId)
+      );
 
-      if(deckInDb?.title !== form.data.deckTitle || deckInDb?.description !== form.data.deckDescription) {
-        await dbHttp.update(decks).set({title: form.data.deckTitle, description: form.data.deckDescription}).where(eq(decks.id, parseInt(params.deckId)));
+      if (form.data.tags?.length !== deckInDb?.tags.length) {
+        await dbHttp
+          .delete(deckTags)
+          .where(eq(deckTags.deckId, parseInt(params.deckId)));
+        if (form.data.tags)
+          await createTags(form.data.tags, parseInt(params.deckId));
       }
-      
+
+      if (
+        deckInDb?.title !== form.data.deckTitle ||
+        deckInDb?.description !== form.data.deckDescription
+      ) {
+        await dbHttp
+          .update(decks)
+          .set({
+            title: form.data.deckTitle,
+            description: form.data.deckDescription,
+          })
+          .where(eq(decks.id, parseInt(params.deckId)));
+      }
+
       let newFlashcards = [];
       for (let i = 0; i < form.data.flashcards.length; i++) {
-        if(deckInDb?.flashcards[i] === undefined) {
+        if (deckInDb?.flashcards[i] === undefined) {
           // new flashcard
-          const data = {...form.data.flashcards[i]};
-          newFlashcards.push(data);
+          newFlashcards.push({ ...form.data.flashcards[i] });
         } else {
           // updated flashcard
-          const data = {...form.data.flashcards[i], id: deckInDb?.flashcards[i].id};
-          await dbHttp.update(flashcards).set(data).where(eq(flashcards.id, data.id));
+          const data = {
+            ...form.data.flashcards[i],
+            id: deckInDb?.flashcards[i].id,
+          };
+          await dbHttp
+            .update(flashcards)
+            .set(data)
+            .where(eq(flashcards.id, data.id));
         }
-      };
-
+      }
       await createFlashcard(parseInt(params.deckId), newFlashcards);
-      // redirectId = newDeckId;
     } catch (error) {
       if (error instanceof DatabaseError) {
         return message(form, error.message, { status: 500 });
       }
     }
 
-    // throw redirect(302, `/profile/decks/${redirectId}`);
+    throw redirect(302, `/profile/decks/${params.deckId}`);
   },
 };
