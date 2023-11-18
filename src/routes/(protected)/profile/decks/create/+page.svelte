@@ -24,8 +24,6 @@
 
   addNewFlashcard();
   addNewFlashcard();
-
-  let list: string[] = [];
 </script>
 
 <h1 class="h1 mb-10">Create new deck</h1>
