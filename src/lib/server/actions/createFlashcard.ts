@@ -9,8 +9,8 @@ type Flashcard = {
 export const createFlashcard = async (deckId: number, flashcardData: Flashcard | Flashcard[]) => {
     if(Array.isArray(flashcardData)) {
         const data = flashcardData.map(flashcard => ({deckId, ...flashcard}))
-        const result = await dbHttp.insert(flashcards).values(data)
+        await dbHttp.insert(flashcards).values(data)
     } else {
-        const result = await dbHttp.insert(flashcards).values({deckId, ...flashcardData})
+        await dbHttp.insert(flashcards).values({deckId, ...flashcardData})
     }
 }

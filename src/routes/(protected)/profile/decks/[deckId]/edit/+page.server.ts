@@ -6,6 +6,8 @@ import { getDeckWithFlashcardsAndTags } from "$lib/server/actions/getDeckWithFla
 import { DatabaseError } from "@neondatabase/serverless";
 import { dbHttp } from "$lib/server/db";
 import { decks, flashcards, deckTags } from "$lib/server/db/schema";
+import { createFlashcard } from "$lib/server/actions/createFlashcard";
+import { eq } from "drizzle-orm";
 
 const schema = z.object({
   deckTitle: z
@@ -64,8 +66,22 @@ export const actions = {
     }
 
     try {
-      // const deckInDb = await getDeckWithFlashcardsAndTags(parseInt(params.deckId));
-      // await dbHttp.insert(flashcards).values(flashcardsData)
+      const deckInDb = await getDeckWithFlashcardsAndTags(parseInt(params.deckId));
+      let newFlashcards = [];
+
+      for (let i = 0; i < form.data.flashcards.length; i++) {
+        if(deckInDb?.flashcards[i] === undefined) {
+          // new flashcard
+          const data = {...form.data.flashcards[i]};
+          newFlashcards.push(data);
+        } else {
+          // updated flashcard
+          const data = {...form.data.flashcards[i], id: deckInDb?.flashcards[i].id};
+          await dbHttp.update(flashcards).set(data).where(eq(flashcards.id, data.id));
+        }
+      };
+
+      await createFlashcard(parseInt(params.deckId), newFlashcards);
       // redirectId = newDeckId;
     } catch (error) {
       if (error instanceof DatabaseError) {
