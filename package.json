@@ -39,6 +39,7 @@
     "@neondatabase/serverless": "^0.6.0",
     "drizzle-orm": "^0.28.6",
     "lucia": "^2.7.3",
+    "motion": "^10.16.4",
     "ws": "^8.14.2"
   }
 }
