@@ -4,6 +4,7 @@
   import Loader from "$lib/assets/loader.svelte";
   import { InputChip, getToastStore } from "@skeletonlabs/skeleton";
   import { errorToast, successEditToast } from "$lib/toasts";
+  import Trash from "$lib/assets/trash.svelte";
 
   export let data: PageData;
 
@@ -24,6 +25,16 @@
       { taint: false }
     );
     return false;
+  };
+
+  const removeFlashcard = (index: number) => {
+    form.update(
+      ($form) => {
+        $form.flashcards.splice(index, 1);
+        return $form;
+      },
+      { taint: false }
+    );
   };
 </script>
 
@@ -85,7 +96,7 @@
 
     {#each $form.flashcards as _, i}
       <div
-        class="relative flex flex-wrap gap-3 justify-stretch items-center card p-5 mb-3 rounded-tl-none"
+        class="relative flex flex-wrap gap-3 justify-stretch card p-5 mb-3 rounded-tl-none"
       >
         <div
           class="index-badge w-7 h-7 pl-1 variant-soft-primary absolute top-0 left-0 z-10"
@@ -121,6 +132,11 @@
             <p class="text-error-500 text-sm">{$errors.flashcards[i].answer}</p>
           {/if}
         </div>
+        <button
+          type="button"
+          on:click={() => removeFlashcard(i)}
+          class="btn-icon-sm btn-icon variant-outline-error"><Trash /></button
+        >
       </div>
     {/each}
     <div class="flex justify-between items-center">
