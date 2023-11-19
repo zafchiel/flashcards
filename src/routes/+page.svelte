@@ -2,6 +2,6 @@
 </script>
 
 <section class="p-10">
-  <h1 class="h1 font-bold gradient-heading">Fishki HUH</h1>
-  <p>do zrobienia fishi do nauki słówek</p>
+  <h1 class="h1 font-bold gradient-heading">Flashcards HUH</h1>
+  <p>nic</p>
 </section>
