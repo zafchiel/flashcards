@@ -13,7 +13,7 @@
   const { form, errors, constraints, enhance, delayed } = superForm(data.form, {
     dataType: "json",
     onResult: ({ result }) => {
-      if (result.type === "success") {
+      if (result.type === "redirect") {
         toastStore.trigger(successEditToast);
       }
     },
