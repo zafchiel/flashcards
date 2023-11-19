@@ -29,7 +29,7 @@ const schema = z.object({
           .max(255),
       })
     )
-    .min(2)
+    .min(2, { message: "Must contain at least 2 flashcards" })
     .max(100),
   tags: z.array(z.string().max(50)).max(10).optional(),
 });

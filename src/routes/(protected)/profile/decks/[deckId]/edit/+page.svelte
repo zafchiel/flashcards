@@ -12,7 +12,11 @@
 
   const { form, errors, constraints, enhance, delayed } = superForm(data.form, {
     dataType: "json",
-    onResult: () => toastStore.trigger(successEditToast),
+    onResult: ({ result }) => {
+      if (result.type === "success") {
+        toastStore.trigger(successEditToast);
+      }
+    },
     onError: () => toastStore.trigger(errorToast),
   });
 
@@ -93,6 +97,9 @@
     </div>
 
     <h3 class="h3 p-3 text-primary-500 font-semibold">Flashcards</h3>
+    {#if $errors.flashcards}
+      <p class="text-error-500 text-sm">{$errors.flashcards._errors}</p>
+    {/if}
 
     {#each $form.flashcards as _, i}
       <div
