@@ -7,7 +7,7 @@
     type ModalSettings,
   } from "@skeletonlabs/skeleton";
   import DisplayTags from "./displayTags.svelte";
-  import { invalidate } from "$app/navigation";
+  import { goto, invalidate } from "$app/navigation";
   import { errorToast, successDeleteToast } from "$lib/toasts";
 
   export let deck: {
@@ -66,13 +66,23 @@
     {/if}
   </div>
   <div class="flex flex-col gap-2">
-    <button class="btn-icon btn-icon-sm variant-filled"><Edit /></button>
+    <button
+      on:click={(e) => {
+        e.preventDefault();
+        goto(`/profile/decks/${deck.id}/edit`);
+      }}
+      class="btn-icon btn-icon-sm variant-filled"
+    >
+      <Edit />
+    </button>
     <button
       on:click={(e) => {
         e.preventDefault();
         modalStore.trigger(modal);
       }}
-      class="btn-icon btn-icon-sm variant-filled-error"><Trash /></button
+      class="btn-icon btn-icon-sm variant-filled-error"
     >
+      <Trash />
+    </button>
   </div>
 </a>
