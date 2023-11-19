@@ -37,6 +37,12 @@
       case "ArrowRight":
         handleChangeCard("next");
         break;
+      case "ArrowUp":
+        showAnswer = true;
+        break;
+      case "ArrowDown":
+        showAnswer = false;
+        break;
       case "Space":
         showAnswer = !showAnswer;
         break;
