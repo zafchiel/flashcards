@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { PageData } from "./$types";
   import DeckCard from "$lib/components/deckCard.svelte";
+  import { flip } from "svelte/animate";
 
   export let data: PageData;
 </script>
@@ -16,6 +17,8 @@
     <p>No decks found</p>
   {/if}
   {#each data.decks as deck (deck.id)}
-    <DeckCard {deck} />
+    <div animate:flip={{ duration: 500 }}>
+      <DeckCard {deck} />
+    </div>
   {/each}
 </section>
