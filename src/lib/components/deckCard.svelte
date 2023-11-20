@@ -28,6 +28,8 @@
   const modalStore = getModalStore();
   const toastStore = getToastStore();
 
+  let isDeleting: boolean = false;
+
   const modal: ModalSettings = {
     type: "confirm",
     title: "Are you sure",
@@ -40,10 +42,14 @@
         });
         const response = await res.json();
         if (response.success) {
+          isDeleting = true;
           modalStore.close();
           invalidate("/api/decks");
           toastStore.trigger(successDeleteToast);
-        } else toastStore.trigger(errorToast);
+        } else {
+          isDeleting = false;
+          toastStore.trigger(errorToast);
+        }
       }
     },
   };
@@ -52,6 +58,7 @@
 <a
   href="/profile/decks/{deck.id}"
   class="h-full max-w-md card p-4 variant-filled-primary flex gap-3 card-hover"
+  class:deleting-animation={isDeleting}
 >
   <div class="min-w-0 break-words">
     <h2 class="h2 font-semibold">{deck.title}</h2>
@@ -86,3 +93,15 @@
     </button>
   </div>
 </a>
+
+<style>
+  .deleting-animation {
+    opacity: 0.7;
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  @keyframes pulsing {
+    50% {
+      opacity: 0.5;
+    }
+  }
+</style>
