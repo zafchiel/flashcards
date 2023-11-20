@@ -17,6 +17,18 @@ declare global {
 		}
 	}
 
+	// New ViewTransition API types
+	interface ViewTransition {
+		updateCallbackDone: Promise<void>;
+		ready: Promise<void>;
+		finished: Promise<void>;
+		skipTransition: () => void;
+	}
+
+	interface Document {
+		startViewTransition(updateCallback: () => Promise<void>): ViewTransition;
+	}
+
 }
 
 // THIS IS IMPORTANT!!!
