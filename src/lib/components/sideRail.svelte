@@ -7,42 +7,50 @@
   export let user: User | undefined;
 </script>
 
-<AppRail class="h-screen ">
-  <svelte:fragment slot="lead">
-    <AppRailAnchor href="/" selected={$page.url.pathname === "/"}>
-      <p class="font-bold text-lg">F/HUH</p>
-    </AppRailAnchor>
-  </svelte:fragment>
+<aside>
+  <AppRail class="h-screen ">
+    <svelte:fragment slot="lead">
+      <AppRailAnchor href="/" selected={$page.url.pathname === "/"}>
+        <p class="font-bold text-lg">F/HUH</p>
+      </AppRailAnchor>
+    </svelte:fragment>
 
-  {#if user}
+    {#if user}
+      <AppRailAnchor
+        href="/profile/decks"
+        selected={$page.url.pathname === "/profile/decks"}>Dekcs</AppRailAnchor
+      >
+    {:else}
+      <AppRailAnchor href="/signup" selected={$page.url.pathname === "/signup"}
+        >Sign-Up</AppRailAnchor
+      >
+      <AppRailAnchor href="/login" selected={$page.url.pathname === "/login"}
+        >Login</AppRailAnchor
+      >
+    {/if}
+
     <AppRailAnchor
-      href="/profile/decks"
-      selected={$page.url.pathname === "/profile/decks"}>Dekcs</AppRailAnchor
+      href="/discover"
+      selected={$page.url.pathname === "/discover"}
     >
-  {:else}
-    <AppRailAnchor href="/signup" selected={$page.url.pathname === "/signup"}
-      >Sign-Up</AppRailAnchor
-    >
-    <AppRailAnchor href="/login" selected={$page.url.pathname === "/login"}
-      >Login</AppRailAnchor
-    >
-  {/if}
-
-  <AppRailAnchor href="/discover" selected={$page.url.pathname === "/discover"}>
-    Discover
-  </AppRailAnchor>
-
-  <svelte:fragment slot="trail">
-    <div class="flex justify-center items-center p-3">
-      <LightSwitch />
-    </div>
-    <AppRailAnchor href="/profile" selected={$page.url.pathname === "/profile"}>
-      <div class="flex flex-col justify-center items-center">
-        {#if user?.avatar}
-          <img src={user.avatar} alt="User Avatar" class="w-10 h-10" />
-        {/if}
-        Profile
-      </div>
+      Discover
     </AppRailAnchor>
-  </svelte:fragment>
-</AppRail>
+
+    <svelte:fragment slot="trail">
+      <div class="flex justify-center items-center p-3">
+        <LightSwitch />
+      </div>
+      <AppRailAnchor
+        href="/profile"
+        selected={$page.url.pathname === "/profile"}
+      >
+        <div class="flex flex-col justify-center items-center">
+          {#if user?.avatar}
+            <img src={user.avatar} alt="User Avatar" class="w-10 h-10" />
+          {/if}
+          Profile
+        </div>
+      </AppRailAnchor>
+    </svelte:fragment>
+  </AppRail>
+</aside>
