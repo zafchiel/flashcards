@@ -12,7 +12,7 @@
     >Create Deck</a
   >
 </div>
-<section class="flex gap-3 flex-wrap">
+<section class="flex gap-3 flex-wrap items-stretch">
   {#if data.decks.length === 0}
     <p>No decks found</p>
   {/if}

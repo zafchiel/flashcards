@@ -51,9 +51,9 @@
 
 <a
   href="/profile/decks/{deck.id}"
-  class="card p-4 variant-filled-primary flex gap-3 card-hover"
+  class="h-full max-w-md card p-4 variant-filled-primary flex gap-3 card-hover"
 >
-  <div>
+  <div class="min-w-0 break-words">
     <h2 class="h2 font-semibold">{deck.title}</h2>
     <p class="text-sm opacity-60">
       {deck.createdAt?.toLocaleString("en-GB")}
