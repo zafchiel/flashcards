@@ -4,7 +4,7 @@
   import type { User } from "lucia";
   import { LightSwitch } from "@skeletonlabs/skeleton";
 
-  export let user: User | null;
+  export let user: User | undefined;
 </script>
 
 <AppRail class="h-screen ">
