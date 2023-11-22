@@ -7,8 +7,6 @@ export const tooltip = (element: HTMLElement, params: { content: string }) => {
 
     tooltip.className =
       "variant-filled-primary text-sm absolute p-2 rounded-md border m-0 pointer-events-none";
-    tooltip.style.opacity = "1";
-    tooltip.style.transition = "opacity 0.3s ease-in-out";
     element.appendChild(tooltip);
   };
 
@@ -19,7 +17,6 @@ export const tooltip = (element: HTMLElement, params: { content: string }) => {
   };
 
   const mouseOut = () => {
-    tooltip.style.opacity = "0";
     tooltip.remove();
     if (title) element.setAttribute("title", title);
   };
