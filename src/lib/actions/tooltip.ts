@@ -6,7 +6,7 @@ export const tooltip = (element: HTMLElement, params: { content: string }) => {
     element.removeAttribute("title");
 
     tooltip.className =
-      "variant-filled-primary text-sm absolute p-2 rounded-md border m-0 pointer-events-none";
+      "variant-filled-primary bg-primary-400 text-sm absolute p-2 z-10 rounded-md border pointer-events-none";
     element.appendChild(tooltip);
   };
 
