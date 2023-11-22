@@ -1,34 +1,31 @@
-export const tooltip = (element: HTMLElement) => {
-    const tooltip = document.createElement("div");
-    const mouseEnter = (event: MouseEvent) => {
-        tooltip.style = `
-            width: 1rem;
-            height: 1rem;
-            background: hotpink;
-            position: fixed;
-            top: ${event.pageY};
-            left: ${event.pageX};
-        `;
-        element.appendChild(tooltip);
-    }
+export const tooltip = (element: HTMLElement, params: { content: string }) => {
+  const tooltip = document.createElement("div");
+  const mouseOver = () => {
+    tooltip.innerText = params.content;
 
-    const mouseMove = (event: MouseEvent) => {
-        tooltip.style.top = `${event.pageY}`;
-        tooltip.style.left = `${event.pageX}`;
-        
-    }
+    tooltip.className =
+      "variant-filled-primary fixed p-2 rounded-md border transition-all";
+    element.appendChild(tooltip);
+  };
 
-    const mouseLeave = (event: MouseEvent) => {
-        element.removeChild(tooltip)
-    }
+  const mouseMove = (event: MouseEvent) => {
+    tooltip.style.top = `${event.clientY + 5}px`;
+    tooltip.style.left = `${event.clientX + 5}px`;
+  };
 
-    element.addEventListener("mouseenter", mouseEnter)
-    element.addEventListener("mousemove", mouseMove)
-    element.addEventListener("mouseleave", mouseLeave)
-    
-    return {
-        destroy() {
-            element.removeEventListener("mouseenter", mouseEnter)
-        }
-    }
-}
+  const mouseOut = () => {
+    tooltip.remove();
+  };
+
+  element.addEventListener("mouseover", mouseOver);
+  element.addEventListener("mousemove", mouseMove);
+  element.addEventListener("mouseout", mouseOut);
+
+  return {
+    destroy() {
+      element.removeEventListener("mouseover", mouseOver);
+      element.removeEventListener("mousemove", mouseMove);
+      element.removeEventListener("mouseout", mouseOut);
+    },
+  };
+};
