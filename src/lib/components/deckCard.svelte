@@ -9,6 +9,7 @@
   import DisplayTags from "./displayTags.svelte";
   import { goto, invalidate } from "$app/navigation";
   import { errorToast, successDeleteToast } from "$lib/toasts";
+  import { tooltip } from "$lib/actions/tooltip";
 
   export let deck: {
     id: number;
@@ -79,6 +80,7 @@
         goto(`/profile/decks/${deck.id}/edit`);
       }}
       class="btn-icon btn-icon-sm variant-filled"
+      use:tooltip
     >
       <Edit />
     </button>
