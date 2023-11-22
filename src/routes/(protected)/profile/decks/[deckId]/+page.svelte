@@ -36,7 +36,7 @@
 
 <div class="flex flex-col md:flex-row flex-wrap justify-between items-center">
   <div>
-    <h1 class="h1">
+    <h1 class="h1" style:--deck_id="deck-{data.deck.id}">
       {data.deck.title}
     </h1>
     <div class="opacity-60 text-sm">
@@ -60,3 +60,9 @@
 <DisplayTags tags={data.tags} />
 
 <DisplayFlashcards flashcards={data.flashcards} />
+
+<style>
+  h1 {
+    view-transition-name: var(--deck_id);
+  }
+</style>

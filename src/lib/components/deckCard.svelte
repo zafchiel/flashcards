@@ -62,7 +62,9 @@
   class:deleting-animation={isDeleting}
 >
   <div class="min-w-0 break-words">
-    <h2 class="h2 font-semibold">{deck.title}</h2>
+    <h2 class="h2 font-semibold" style:--deck_id="deck-{deck.id}">
+      {deck.title}
+    </h2>
     <p class="text-sm opacity-60">
       {deck.createdAt?.toLocaleString("en-GB")}
     </p>
@@ -106,5 +108,9 @@
     50% {
       opacity: 0.5;
     }
+  }
+
+  h2 {
+    view-transition-name: var(--deck_id);
   }
 </style>
