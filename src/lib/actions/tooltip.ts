@@ -3,7 +3,7 @@ export const tooltip = (element: HTMLElement, params: { content: string }) => {
   const title = element.getAttribute("title");
   const mouseOver = () => {
     tooltip.textContent = params.content;
-    element.removeAttribute("title")
+    element.removeAttribute("title");
 
     tooltip.className =
       "variant-filled-primary text-sm absolute p-2 rounded-md border m-0";
@@ -11,14 +11,14 @@ export const tooltip = (element: HTMLElement, params: { content: string }) => {
   };
 
   const mouseMove = (event: MouseEvent) => {
-      const rect = element.getBoundingClientRect();
-      tooltip.style.top = `${event.clientY - rect.top}px`;
-      tooltip.style.left = `${event.clientX - rect.left}px`;
+    const rect = element.getBoundingClientRect();
+    tooltip.style.top = `${event.clientY - rect.top}px`;
+    tooltip.style.left = `${event.clientX - rect.left}px`;
   };
 
   const mouseOut = () => {
     tooltip.remove();
-    if(title) element.setAttribute("title", title)
+    if (title) element.setAttribute("title", title);
   };
 
   element.addEventListener("mouseover", mouseOver);
