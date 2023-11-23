@@ -70,7 +70,8 @@ export const flashcards = pgTable('flashcards', {
 	id: serial('id').primaryKey(),
 	deckId: integer('deck_id').notNull().references(() => decks.id),
 	question: text('question').notNull(),
-	answer: text('answer').notNull()
+	answer: text('answer').notNull(),
+	learned: boolean('learned').default(false),
 })
 
 export const flashcardsRelations = relations(flashcards, ({one}) => ({
@@ -88,13 +89,13 @@ export const deckProgress = pgTable('deck_progress', {
 	completed: boolean('completed')
 })
 
-export const userFlashcardInteraction = pgTable('user_flashcard_interaction', {
-	id: serial('id').primaryKey(),
-	userId: varchar('user_id', {length: 15}).notNull().references(() => user.id),
-	flashcardId: integer('current_flashcard_id').notNull().references(() => flashcards.id),
-	interactionDate: timestamp('interaction_date').defaultNow(),
-	correct: boolean('correct')
-})
+// export const userFlashcardInteraction = pgTable('user_flashcard_interaction', {
+// 	id: serial('id').primaryKey(),
+// 	userId: varchar('user_id', {length: 15}).notNull().references(() => user.id),
+// 	flashcardId: integer('current_flashcard_id').notNull().references(() => flashcards.id),
+// 	interactionDate: timestamp('interaction_date').defaultNow(),
+// 	correct: boolean('correct')
+// })
 
 export const deckTags = pgTable('deck_tags', {
 	id: serial('id').primaryKey(),
@@ -114,5 +115,5 @@ export type Key = typeof key.$inferSelect;
 export type Session = typeof session.$inferSelect;
 export type Deck = typeof decks.$inferSelect;
 export type Flashcard = typeof flashcards.$inferSelect;
-export type UserFlashcardInteraction = typeof userFlashcardInteraction.$inferSelect;
+// export type UserFlashcardInteraction = typeof userFlashcardInteraction.$inferSelect;
 export type DeckTags = typeof deckTags.$inferSelect;

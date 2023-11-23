@@ -5,30 +5,29 @@
 // src/app.d.ts
 /// <reference types="lucia" />
 declare global {
-	namespace Lucia {
-		type Auth = import("$lib/server/lucia").Auth;
-		type DatabaseUserAttributes = import("$lib/server/db/schema").User;
-		type DatabaseSessionAttributes = {};
-	}
-	namespace App {
-		interface Locals {
-			auth: import('Lucia').AuthRequest;
-			user: {username: string, avatar: string | null, userId: string};
-		}
-	}
+  namespace Lucia {
+    type Auth = import("$lib/server/lucia").Auth;
+    type DatabaseUserAttributes = import("$lib/server/db/schema").User;
+    type DatabaseSessionAttributes = {};
+  }
+  namespace App {
+    interface Locals {
+      auth: import("Lucia").AuthRequest;
+      user: { username: string; avatar: string | null; userId: string };
+    }
+  }
 
-	// New ViewTransition API types
-	interface ViewTransition {
-		updateCallbackDone: Promise<void>;
-		ready: Promise<void>;
-		finished: Promise<void>;
-		skipTransition: () => void;
-	}
+  // New ViewTransition API types
+  interface ViewTransition {
+    updateCallbackDone: Promise<void>;
+    ready: Promise<void>;
+    finished: Promise<void>;
+    skipTransition: () => void;
+  }
 
-	interface Document {
-		startViewTransition(updateCallback: () => Promise<void>): ViewTransition;
-	}
-
+  interface Document {
+    startViewTransition(updateCallback: () => Promise<void>): ViewTransition;
+  }
 }
 
 // THIS IS IMPORTANT!!!
