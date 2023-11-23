@@ -53,6 +53,11 @@
   };
 
   const switchShowCorrectFlashcards = () => {
+    if (filteredFlashcards.length === 0) {
+      showLearned = true;
+      filteredFlashcards = flashcards;
+      return;
+    }
     if (showLearned) {
       filteredFlashcards = flashcards;
     } else if (!showLearned) {

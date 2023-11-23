@@ -15,6 +15,7 @@
 <div class="container relative">
   {#if flashcard.learned !== null}
     <SlideToggle
+      size="sm"
       name="toggleLearned"
       bind:checked={flashcard.learned}
       on:change={() => dispatch("learnedChange")}
