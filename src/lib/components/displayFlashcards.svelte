@@ -4,8 +4,11 @@
   import ArrowLeft from "$lib/assets/arrowLeft.svelte";
   import ArrowRight from "$lib/assets/arrowRight.svelte";
   import { fly } from "svelte/transition";
+  import { SlideToggle } from "@skeletonlabs/skeleton";
 
   export let flashcards: Flashcard[];
+  let filteredFlashcards: Flashcard[];
+  let show = true;
 
   let currentFlashcardIndex = 0;
   let previousIndex = 0;
@@ -48,6 +51,16 @@
         break;
     }
   };
+
+  const switchShowCorrectFlashcards = () => {
+    if (show) {
+      filteredFlashcards = flashcards;
+    } else if (!show) {
+      filteredFlashcards = flashcards.filter(
+        (flashcard) => flashcard.learned === false
+      );
+    }
+  };
 </script>
 
 <svelte:window on:keydown={handleKeyDown} />
@@ -86,4 +99,16 @@
       <ArrowRight />
     </button>
   </div>
+
+  <SlideToggle
+    name="showLearned"
+    bind:checked={show}
+    on:change={switchShowCorrectFlashcards}
+  >
+    {#if show}
+      Showing Learned
+    {:else}
+      Hiding Learned
+    {/if}
+  </SlideToggle>
 </div>
