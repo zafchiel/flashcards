@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { Flashcard } from "$lib/server/db/schema";
+  import { SlideToggle } from "@skeletonlabs/skeleton";
 
   export let flashcard: Flashcard;
   export let showAnswer: Boolean;
@@ -25,6 +26,16 @@
       </div>
     {/if}
   </button>
+
+  {#if flashcard.learned}
+    <SlideToggle name="toggleLearned" bind:checked={flashcard.learned}>
+      {#if flashcard.learned}
+        Learned
+      {:else}
+        Not Learned
+      {/if}
+    </SlideToggle>
+  {/if}
 </div>
 
 <style>

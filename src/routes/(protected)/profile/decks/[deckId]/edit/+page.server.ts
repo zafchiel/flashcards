@@ -121,6 +121,7 @@ export const actions = {
               .where(eq(flashcards.id, data.id));
           }
         }
+        await createFlashcard(parseInt(params.deckId), newFlashcards);
       }
 
       // If the number of new flashcards is lower than in the db, then we need to delete the flashcards

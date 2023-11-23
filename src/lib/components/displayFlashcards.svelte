@@ -7,8 +7,8 @@
   import { SlideToggle } from "@skeletonlabs/skeleton";
 
   export let flashcards: Flashcard[];
-  let filteredFlashcards: Flashcard[];
-  let show = true;
+  let filteredFlashcards: Flashcard[] = flashcards;
+  let showLearned = true;
 
   let currentFlashcardIndex = 0;
   let previousIndex = 0;
@@ -18,14 +18,14 @@
     previousIndex = currentFlashcardIndex;
     switch (direction) {
       case "next":
-        if (currentFlashcardIndex === flashcards.length - 1) {
+        if (currentFlashcardIndex === filteredFlashcards.length - 1) {
           currentFlashcardIndex = 0;
         } else currentFlashcardIndex++;
         showAnswer = false;
         break;
       case "prev":
         if (currentFlashcardIndex === 0) {
-          currentFlashcardIndex = flashcards.length - 1;
+          currentFlashcardIndex = filteredFlashcards.length - 1;
         } else currentFlashcardIndex--;
         showAnswer = false;
         break;
@@ -53,9 +53,9 @@
   };
 
   const switchShowCorrectFlashcards = () => {
-    if (show) {
+    if (showLearned) {
       filteredFlashcards = flashcards;
-    } else if (!show) {
+    } else if (!showLearned) {
       filteredFlashcards = flashcards.filter(
         (flashcard) => flashcard.learned === false
       );
@@ -74,7 +74,8 @@
       }}
     >
       <FlashcardCard
-        flashcard={flashcards[currentFlashcardIndex]}
+        flashcard={filteredFlashcards[currentFlashcardIndex] ??
+          flashcards[currentFlashcardIndex]}
         {showAnswer}
       />
     </div>
@@ -89,7 +90,10 @@
     </button>
 
     <div class="text-center p-3">
-      <p>{currentFlashcardIndex + 1}/{flashcards.length}</p>
+      <p>
+        {currentFlashcardIndex + 1}/{filteredFlashcards.length ??
+          flashcards.length}
+      </p>
     </div>
 
     <button
@@ -102,10 +106,10 @@
 
   <SlideToggle
     name="showLearned"
-    bind:checked={show}
+    bind:checked={showLearned}
     on:change={switchShowCorrectFlashcards}
   >
-    {#if show}
+    {#if showLearned}
       Showing Learned
     {:else}
       Hiding Learned
