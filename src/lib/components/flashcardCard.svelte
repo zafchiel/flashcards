@@ -27,7 +27,7 @@
     {/if}
   </button>
 
-  {#if flashcard.learned}
+  {#if flashcard.learned !== null}
     <SlideToggle name="toggleLearned" bind:checked={flashcard.learned}>
       {#if flashcard.learned}
         Learned
