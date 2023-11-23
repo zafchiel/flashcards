@@ -1,6 +1,8 @@
 <script lang="ts">
   import type { Flashcard } from "$lib/server/db/schema";
   import { SlideToggle } from "@skeletonlabs/skeleton";
+  import { createEventDispatcher } from "svelte";
+  const dispatch = createEventDispatcher();
 
   export let flashcard: Flashcard;
   export let showAnswer: Boolean;
@@ -28,7 +30,11 @@
   </button>
 
   {#if flashcard.learned !== null}
-    <SlideToggle name="toggleLearned" bind:checked={flashcard.learned}>
+    <SlideToggle
+      name="toggleLearned"
+      bind:checked={flashcard.learned}
+      on:change={() => dispatch("learnedChange")}
+    >
       {#if flashcard.learned}
         Learned
       {:else}

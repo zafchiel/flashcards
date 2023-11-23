@@ -77,6 +77,7 @@
         flashcard={filteredFlashcards[currentFlashcardIndex] ??
           flashcards[currentFlashcardIndex]}
         {showAnswer}
+        on:learnedChange={() => switchShowCorrectFlashcards()}
       />
     </div>
   {/key}
