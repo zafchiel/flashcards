@@ -12,7 +12,21 @@
   };
 </script>
 
-<div class="container">
+<div class="container relative">
+  {#if flashcard.learned !== null}
+    <SlideToggle
+      name="toggleLearned"
+      bind:checked={flashcard.learned}
+      on:change={() => dispatch("learnedChange")}
+      class="absolute top-3 left-3 z-10"
+    >
+      {#if flashcard.learned}
+        Learned
+      {:else}
+        Not Learned
+      {/if}
+    </SlideToggle>
+  {/if}
   <button
     on:click={handleSwitchView}
     class:showAnswer
@@ -28,20 +42,6 @@
       </div>
     {/if}
   </button>
-
-  {#if flashcard.learned !== null}
-    <SlideToggle
-      name="toggleLearned"
-      bind:checked={flashcard.learned}
-      on:change={() => dispatch("learnedChange")}
-    >
-      {#if flashcard.learned}
-        Learned
-      {:else}
-        Not Learned
-      {/if}
-    </SlideToggle>
-  {/if}
 </div>
 
 <style>
