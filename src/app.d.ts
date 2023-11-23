@@ -13,7 +13,7 @@ declare global {
 	namespace App {
 		interface Locals {
 			auth: import('Lucia').AuthRequest;
-			user: { username: string, avatar: string, userId: string };
+			user: {username: string, avatar: string | null, userId: string};
 		}
 	}
 
