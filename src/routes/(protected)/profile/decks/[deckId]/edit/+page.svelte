@@ -42,7 +42,7 @@
   };
 </script>
 
-<h1 class="mb-10">
+<h1 class="md:mb-10 mb-3">
   <span class="text-3xl"> Edit:&nbsp;</span>
   <a
     href={`/profile/decks/${data.deckId}`}
@@ -103,14 +103,16 @@
 
     {#each $form.flashcards as _, i}
       <div
-        class="relative flex flex-wrap gap-3 justify-stretch card p-5 mb-3 rounded-tl-none"
+        class="relative flex flex-col sm:flex-row sm:gap-3 justify-stretch card p-5 mb-3 rounded-tl-none"
       >
+        <!-- Nr of flashcard badge -->
         <div
           class="index-badge w-7 h-7 pl-1 variant-soft-primary absolute top-0 left-0 z-10"
         >
           {i + 1}
         </div>
-        <div class="grow min-w-[200px]">
+
+        <div class="flex-grow">
           <label for="question-{i}" class="label">Question</label>
           <textarea
             bind:value={$form.flashcards[i].question}
@@ -124,9 +126,7 @@
               {$errors.flashcards[i].question}
             </p>
           {/if}
-        </div>
 
-        <div class="grow min-w-[200px]">
           <label for="answer-{i}" class="label">Answer</label>
           <textarea
             bind:value={$form.flashcards[i].answer}
@@ -136,13 +136,17 @@
             id="answer-{i}"
           />
           {#if $errors.flashcards?.[i]?.answer}
-            <p class="text-error-500 text-sm">{$errors.flashcards[i].answer}</p>
+            <p class="text-error-500 text-sm">
+              {$errors.flashcards[i].answer}
+            </p>
           {/if}
         </div>
+
         <button
           type="button"
           on:click={() => removeFlashcard(i)}
-          class="btn-icon-sm btn-icon variant-outline-error"><Trash /></button
+          class="btn-icon-sm btn-icon variant-outline-error self-end sm:self-auto order-first sm:order-last"
+          ><Trash /></button
         >
       </div>
     {/each}
