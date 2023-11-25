@@ -128,6 +128,7 @@
         currentFlashcardIndex = 0;
       }
     }}
+    class="mt-9"
   >
     {#if showLearned}
       Showing Learned

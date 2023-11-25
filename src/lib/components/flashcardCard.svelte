@@ -22,7 +22,7 @@
       class="absolute top-3 left-3 z-10"
     >
       {#if flashcard.learned}
-        Learned
+        Card Learned
       {:else}
         Not Learned
       {/if}
