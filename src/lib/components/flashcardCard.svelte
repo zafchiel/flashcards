@@ -34,11 +34,11 @@
     class="card card-hover w-full flex justify-center items-center p-6 text-xl font-semibold md:text-3xl cursor-pointer min-h-[300px]"
   >
     {#if showAnswer}
-      <div class="front">
+      <div class="front text-primary-200">
         {flashcard.answer}
       </div>
     {:else}
-      <div class="back">
+      <div class="back text-secondary-200">
         {flashcard.question}
       </div>
     {/if}
