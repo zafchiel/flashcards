@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { Flashcard } from "$lib/server/db/schema";
+  import { tooltip } from "$lib/actions/tooltip";
   import { createEventDispatcher } from "svelte";
   const dispatch = createEventDispatcher();
 
@@ -26,7 +27,11 @@
         class="hidden"
         on:change={handleLearnedChange}
       />
-      <label for="starToggle" class="cursor-pointer">
+      <label
+        for="starToggle"
+        class="cursor-pointer"
+        use:tooltip={{ content: "Mark as learned" }}
+      >
         <svg
           width="32"
           height="32"

@@ -2,18 +2,18 @@ export const tooltip = (element: HTMLElement, params: { content: string }) => {
   const tooltip = document.createElement("div");
   const title = element.getAttribute("title");
   const mouseOver = () => {
-    tooltip.textContent = params.content;
+    tooltip.innerText = params.content;
     element.removeAttribute("title");
 
     tooltip.className =
-      "variant-filled-primary bg-primary-400 text-sm absolute p-2 z-10 rounded-md border pointer-events-none";
+      "card variant-filled text-sm absolute min-w-max p-2 z-10 rounded-md pointer-events-none";
     element.appendChild(tooltip);
   };
 
   const mouseMove = (event: MouseEvent) => {
     const rect = element.getBoundingClientRect();
-    tooltip.style.top = `${event.clientY - rect.top}px`;
-    tooltip.style.left = `${event.clientX - rect.left}px`;
+    tooltip.style.top = `${event.clientY - rect.top + 5}px`;
+    tooltip.style.left = `${event.clientX - rect.left + 5}px`;
   };
 
   const mouseOut = () => {
