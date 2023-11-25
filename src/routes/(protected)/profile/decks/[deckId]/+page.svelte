@@ -36,28 +36,30 @@
 
 <div class="flex flex-col md:flex-row flex-wrap justify-between items-center">
   <div>
-    <h1 class="h1" style:--deck_id="deck-{data.deck.id}">
+    <h1
+      class="h1 text-primary-500 font-bold"
+      style:--deck_id="deck-{data.deck.id}"
+    >
       {data.deck.title}
     </h1>
     <div class="opacity-60 text-sm">
       <p>Created: {data.deck.createdAt?.toLocaleString("en-GB")}</p>
       <p>Last Update: {data.deck.lastUpdate?.toLocaleString("en-GB")}</p>
     </div>
+    <DisplayTags tags={data.tags} />
   </div>
 
-  <div class="flex gap-5">
-    <a
-      href={`/profile/decks/${data.deck.id}/edit`}
-      class="btn md:btn-lg variant-outline-secondary">Edit</a
-    >
+  <div class="flex md:flex-col gap-5">
     <button
       on:click={() => modalStore.trigger(modal)}
-      class="btn md:btn-lg variant-outline-error">Delete</button
+      class="btn md:btn-lg variant-outline-error flex-1 min-w-0">Delete</button
+    >
+    <a
+      href={`/profile/decks/${data.deck.id}/edit`}
+      class="btn md:btn-lg variant-outline-secondary flex-1 min-w-0">Edit</a
     >
   </div>
 </div>
-
-<DisplayTags tags={data.tags} />
 
 <DisplayFlashcards flashcards={data.flashcards} />
 

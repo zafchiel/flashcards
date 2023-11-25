@@ -73,7 +73,7 @@
 
 <svelte:window on:keydown={handleKeyDown} />
 
-<div class="mt-10">
+<div class="md:mt-10 mt-3">
   {#key currentFlashcardIndex}
     <div
       in:fly={{

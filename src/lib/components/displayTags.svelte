@@ -6,6 +6,6 @@
 
 <div class="p-2">
   {#each tags as tag (tag.id)}
-    <span class="chip variant-filled mr-2">{tag.tagName}</span>
+    <span class="chip variant-filled mr-2 mb-2">{tag.tagName}</span>
   {/each}
 </div>
