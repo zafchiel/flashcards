@@ -13,7 +13,7 @@
 
   const handleLearnedChange = (e: Event) => {
     flashcard.learned = (e.target as HTMLInputElement)?.checked;
-    dispatch("learnedChange");
+    dispatch("learnedChange", { learned: flashcard.learned });
   };
 </script>
 

@@ -9,6 +9,8 @@
   import { onDestroy } from "svelte";
 
   export let flashcards: Flashcard[];
+  // create deep copy for comparison
+  const initFlashcards = JSON.parse(JSON.stringify(flashcards));
 
   let showLearned = true;
 
@@ -65,9 +67,24 @@
     }
   };
 
-  // Clean up
+  const handleLearnedChange = (e: CustomEvent) => {
+    $filteredFlashcards[currentFlashcardIndex].learned = e.detail.learned;
+  };
+
   onDestroy(() => {
+    // Un subscribing from filteredFlashcards
     unsub();
+    for (let i = 0; i < initFlashcards.length; i++) {
+      if (initFlashcards[i].learned !== flashcards[i].learned) {
+        fetch(`/api/flashcard?id=${flashcards[i].id}`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(flashcards[i]),
+        });
+      }
+    }
   });
 </script>
 
@@ -84,16 +101,7 @@
       <FlashcardCard
         flashcard={$filteredFlashcards[currentFlashcardIndex]}
         {showAnswer}
-        on:learnedChange={() => {
-          if (!showLearned) {
-            filteredFlashcards.update((flashcards) => {
-              return flashcards.filter(
-                (flashcard) => flashcard.learned === false
-              );
-            });
-            currentFlashcardIndex = previousIndex;
-          }
-        }}
+        on:learnedChange={handleLearnedChange}
       />
     </div>
   {/key}

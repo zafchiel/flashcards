@@ -2,7 +2,6 @@ import { json } from "@sveltejs/kit";
 import type { RequestHandler } from "./$types";
 import { deleteDeck } from "$lib/server/actions/deleteDeck";
 import { DatabaseError } from "@neondatabase/serverless";
-import { dbHttp } from "$lib/server/db";
 import { getUserDecksWithTags } from "$lib/server/actions/getUserDecksWithTags";
 
 // Delete deck handler
