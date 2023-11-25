@@ -3,13 +3,13 @@
   import type { PageData } from "./$types";
   import Loader from "$lib/assets/loader.svelte";
   import { InputChip } from "@skeletonlabs/skeleton";
+  import Trash from "$lib/assets/trash.svelte";
 
   export let data: PageData;
 
-  const { form, errors, constraints, enhance, message, delayed } = superForm(
-    data.form,
-    { dataType: "json" }
-  );
+  const { form, errors, constraints, enhance, delayed } = superForm(data.form, {
+    dataType: "json",
+  });
 
   const addNewFlashcard = () => {
     form.update(
@@ -20,6 +20,16 @@
       { taint: false }
     );
     return false;
+  };
+
+  const removeFlashcard = (index: number) => {
+    form.update(
+      ($form) => {
+        $form.flashcards.splice(index, 1);
+        return $form;
+      },
+      { taint: false }
+    );
   };
 
   addNewFlashcard();
@@ -77,14 +87,16 @@
 
     {#each $form.flashcards as _, i}
       <div
-        class="relative flex flex-wrap gap-3 justify-stretch items-center card p-5 mb-3 rounded-tl-none"
+        class="relative flex flex-col sm:flex-row sm:gap-3 justify-stretch card p-5 mb-3 rounded-tl-none"
       >
+        <!-- Nr of flashcard badge -->
         <div
           class="index-badge w-7 h-7 pl-1 variant-soft-primary absolute top-0 left-0 z-10"
         >
           {i + 1}
         </div>
-        <div class="grow min-w-[200px]">
+
+        <div class="flex-grow">
           <label for="question-{i}" class="label">Question</label>
           <textarea
             bind:value={$form.flashcards[i].question}
@@ -98,9 +110,7 @@
               {$errors.flashcards[i].question}
             </p>
           {/if}
-        </div>
 
-        <div class="grow min-w-[200px]">
           <label for="answer-{i}" class="label">Answer</label>
           <textarea
             bind:value={$form.flashcards[i].answer}
@@ -110,9 +120,18 @@
             id="answer-{i}"
           />
           {#if $errors.flashcards?.[i]?.answer}
-            <p class="text-error-500 text-sm">{$errors.flashcards[i].answer}</p>
+            <p class="text-error-500 text-sm">
+              {$errors.flashcards[i].answer}
+            </p>
           {/if}
         </div>
+
+        <button
+          type="button"
+          on:click={() => removeFlashcard(i)}
+          class="btn-icon-sm btn-icon variant-outline-error self-end sm:self-auto order-first sm:order-last"
+          ><Trash /></button
+        >
       </div>
     {/each}
     <div class="flex justify-between items-center">
