@@ -83,6 +83,14 @@
       <FlashcardCard
         flashcard={filteredFlashcards[currentFlashcardIndex] || flashcards[0]}
         {showAnswer}
+        on:learnedChange={() => {
+          if (!showLearned) {
+            filteredFlashcards = filteredFlashcards.filter(
+              (flashcard) => flashcard.learned === false
+            );
+            currentFlashcardIndex--;
+          }
+        }}
       />
     </div>
   {/key}
