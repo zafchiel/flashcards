@@ -5,12 +5,23 @@
   import ArrowRight from "$lib/assets/arrowRight.svelte";
   import { fly } from "svelte/transition";
   import { SlideToggle } from "@skeletonlabs/skeleton";
+  import { writable } from "svelte/store";
+  import { onDestroy } from "svelte";
 
   export let flashcards: Flashcard[];
 
   let showLearned = true;
 
-  $: filteredFlashcards = showLearned
+  const filteredFlashcards = writable(flashcards);
+
+  const unsub = filteredFlashcards.subscribe((values) => {
+    if (values.length === 0) {
+      alert("No flashcards to show");
+      showLearned = true;
+    }
+  });
+
+  $: $filteredFlashcards = showLearned
     ? flashcards
     : flashcards.filter((flashcard) => flashcard.learned === false);
 
@@ -18,7 +29,7 @@
   let previousIndex = 0;
   let showAnswer = false;
 
-  $: maxIndex = filteredFlashcards.length - 1;
+  $: maxIndex = $filteredFlashcards.length - 1;
 
   const handleChangeCard = (direction: "next" | "prev") => {
     previousIndex = currentFlashcardIndex;
@@ -54,20 +65,10 @@
     }
   };
 
-  // const switchShowCorrectFlashcards = () => {
-  //   if (filteredFlashcards.length === 0) {
-  //     showLearned = true;
-  //     filteredFlashcards = flashcards;
-  //     return;
-  //   }
-  //   if (showLearned) {
-  //     filteredFlashcards = flashcards;
-  //   } else if (!showLearned) {
-  //     filteredFlashcards = flashcards.filter(
-  //       (flashcard) => flashcard.learned === false
-  //     );
-  //   }
-  // };
+  // Clean up
+  onDestroy(() => {
+    unsub();
+  });
 </script>
 
 <svelte:window on:keydown={handleKeyDown} />
@@ -81,14 +82,16 @@
       }}
     >
       <FlashcardCard
-        flashcard={filteredFlashcards[currentFlashcardIndex] || flashcards[0]}
+        flashcard={$filteredFlashcards[currentFlashcardIndex]}
         {showAnswer}
         on:learnedChange={() => {
           if (!showLearned) {
-            filteredFlashcards = filteredFlashcards.filter(
-              (flashcard) => flashcard.learned === false
-            );
-            currentFlashcardIndex--;
+            filteredFlashcards.update((flashcards) => {
+              return flashcards.filter(
+                (flashcard) => flashcard.learned === false
+              );
+            });
+            currentFlashcardIndex = previousIndex;
           }
         }}
       />
@@ -105,8 +108,7 @@
 
     <div class="text-center p-3">
       <p>
-        {currentFlashcardIndex + 1}/{filteredFlashcards.length ||
-          flashcards.length}
+        {currentFlashcardIndex + 1}/{$filteredFlashcards.length}
       </p>
     </div>
 
