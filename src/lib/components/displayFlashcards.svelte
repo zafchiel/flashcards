@@ -7,29 +7,31 @@
   import { SlideToggle } from "@skeletonlabs/skeleton";
 
   export let flashcards: Flashcard[];
-  let filteredFlashcards: Flashcard[] = flashcards;
+
   let showLearned = true;
+
+  $: filteredFlashcards = showLearned
+    ? flashcards
+    : flashcards.filter((flashcard) => flashcard.learned === false);
 
   let currentFlashcardIndex = 0;
   let previousIndex = 0;
   let showAnswer = false;
 
+  $: maxIndex = filteredFlashcards.length - 1;
+
   const handleChangeCard = (direction: "next" | "prev") => {
     previousIndex = currentFlashcardIndex;
-    switch (direction) {
-      case "next":
-        if (currentFlashcardIndex === filteredFlashcards.length - 1) {
-          currentFlashcardIndex = 0;
-        } else currentFlashcardIndex++;
-        showAnswer = false;
-        break;
-      case "prev":
-        if (currentFlashcardIndex === 0) {
-          currentFlashcardIndex = filteredFlashcards.length - 1;
-        } else currentFlashcardIndex--;
-        showAnswer = false;
-        break;
-    }
+    currentFlashcardIndex =
+      direction === "next"
+        ? currentFlashcardIndex === maxIndex
+          ? 0
+          : currentFlashcardIndex + 1
+        : currentFlashcardIndex === 0
+          ? maxIndex
+          : currentFlashcardIndex - 1;
+
+    showAnswer = false;
   };
 
   const handleKeyDown = (e: KeyboardEvent) => {
@@ -52,20 +54,20 @@
     }
   };
 
-  const switchShowCorrectFlashcards = () => {
-    if (filteredFlashcards.length === 0) {
-      showLearned = true;
-      filteredFlashcards = flashcards;
-      return;
-    }
-    if (showLearned) {
-      filteredFlashcards = flashcards;
-    } else if (!showLearned) {
-      filteredFlashcards = flashcards.filter(
-        (flashcard) => flashcard.learned === false
-      );
-    }
-  };
+  // const switchShowCorrectFlashcards = () => {
+  //   if (filteredFlashcards.length === 0) {
+  //     showLearned = true;
+  //     filteredFlashcards = flashcards;
+  //     return;
+  //   }
+  //   if (showLearned) {
+  //     filteredFlashcards = flashcards;
+  //   } else if (!showLearned) {
+  //     filteredFlashcards = flashcards.filter(
+  //       (flashcard) => flashcard.learned === false
+  //     );
+  //   }
+  // };
 </script>
 
 <svelte:window on:keydown={handleKeyDown} />
@@ -79,10 +81,8 @@
       }}
     >
       <FlashcardCard
-        flashcard={filteredFlashcards[currentFlashcardIndex] ??
-          flashcards[currentFlashcardIndex]}
+        flashcard={filteredFlashcards[currentFlashcardIndex] || flashcards[0]}
         {showAnswer}
-        on:learnedChange={() => switchShowCorrectFlashcards()}
       />
     </div>
   {/key}
@@ -97,7 +97,7 @@
 
     <div class="text-center p-3">
       <p>
-        {currentFlashcardIndex + 1}/{filteredFlashcards.length ??
+        {currentFlashcardIndex + 1}/{filteredFlashcards.length ||
           flashcards.length}
       </p>
     </div>
@@ -113,7 +113,11 @@
   <SlideToggle
     name="showLearned"
     bind:checked={showLearned}
-    on:change={switchShowCorrectFlashcards}
+    on:change={() => {
+      if (!showLearned) {
+        currentFlashcardIndex = 0;
+      }
+    }}
   >
     {#if showLearned}
       Showing Learned
