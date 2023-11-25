@@ -36,7 +36,7 @@
   addNewFlashcard();
 </script>
 
-<h1 class="h1 mb-10">Create new deck</h1>
+<h1 class="h1 md:mb-10 mb-3">Create new deck</h1>
 
 <section>
   <form method="post" use:enhance>
@@ -97,11 +97,14 @@
         </div>
 
         <div class="flex-grow">
-          <label for="question-{i}" class="label">Question</label>
+          <label
+            for="question-{i}"
+            class="label font-semibold text-secondary-300">Question</label
+          >
           <textarea
             bind:value={$form.flashcards[i].question}
             class:input-error={$errors.flashcards?.[i]?.question}
-            class="textarea"
+            class="textarea mb-2"
             name="question-{i}"
             id="question-{i}"
           />
@@ -111,7 +114,9 @@
             </p>
           {/if}
 
-          <label for="answer-{i}" class="label">Answer</label>
+          <label for="answer-{i}" class="label font-semibold text-primary-300"
+            >Answer</label
+          >
           <textarea
             bind:value={$form.flashcards[i].answer}
             class:input-error={$errors.flashcards?.[i]?.answer}

@@ -113,7 +113,9 @@
         </div>
 
         <div class="flex-grow">
-          <label for="question-{i}" class="label">Question</label>
+          <label for="question-{i}" class="label text-secondary-300"
+            >Question</label
+          >
           <textarea
             bind:value={$form.flashcards[i].question}
             class:input-error={$errors.flashcards?.[i]?.question}
@@ -127,7 +129,7 @@
             </p>
           {/if}
 
-          <label for="answer-{i}" class="label">Answer</label>
+          <label for="answer-{i}" class="label text-primary-300">Answer</label>
           <textarea
             bind:value={$form.flashcards[i].answer}
             class:input-error={$errors.flashcards?.[i]?.answer}
