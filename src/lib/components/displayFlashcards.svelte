@@ -7,7 +7,7 @@
   import { SlideToggle } from "@skeletonlabs/skeleton";
   import { writable } from "svelte/store";
   import { onDestroy } from "svelte";
-  import Shuffle from "$lib/assets/shuffle.svelte";
+  import ShuffleIcon from "$lib/assets/shuffleIcon.svelte";
   import shuffleArray from "$lib/utils/shuffleArray";
 
   export let flashcards: Flashcard[];
@@ -138,7 +138,7 @@
       }}
       class="btn-icon variant-filled rounded-md"
     >
-      <Shuffle />
+      <ShuffleIcon />
     </button>
     Shuffle deck
   </div>

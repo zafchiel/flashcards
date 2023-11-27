@@ -1,10 +1,10 @@
 <script lang="ts">
   import { superForm } from "sveltekit-superforms/client";
   import type { PageData } from "./$types";
-  import Loader from "$lib/assets/loader.svelte";
+  import LoaderIcon from "$lib/assets/loaderIcon.svelte";
   import { InputChip, getToastStore } from "@skeletonlabs/skeleton";
   import { errorToast, successEditToast } from "$lib/toasts";
-  import Trash from "$lib/assets/trash.svelte";
+  import TrashIcon from "$lib/assets/trashIcon.svelte";
 
   export let data: PageData;
 
@@ -150,7 +150,7 @@
           type="button"
           on:click={() => removeFlashcard(i)}
           class="btn-icon-sm btn-icon variant-outline-error self-end sm:self-auto order-first sm:order-last"
-          ><Trash /></button
+          ><TrashIcon /></button
         >
       </div>
     {/each}
@@ -165,7 +165,7 @@
         >Save changes
         {#if $delayed}
           <span class="animate-spin ml-2">
-            <Loader />
+            <LoaderIcon />
           </span>
         {/if}
       </button>

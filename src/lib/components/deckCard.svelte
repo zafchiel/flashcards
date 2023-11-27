@@ -1,6 +1,6 @@
 <script lang="ts">
-  import Trash from "$lib/assets/trash.svelte";
-  import Edit from "$lib/assets/edit.svelte";
+  import TrashIcon from "$lib/assets/trashIcon.svelte";
+  import EditIcon from "$lib/assets/editIcon.svelte";
   import {
     getModalStore,
     getToastStore,
@@ -84,7 +84,7 @@
       }}
       class="btn-icon btn-icon-sm variant-filled"
     >
-      <Edit />
+      <EditIcon />
     </button>
     <button
       use:tooltip={{ content: "Delete deck" }}
@@ -94,7 +94,7 @@
       }}
       class="btn-icon btn-icon-sm variant-filled-error"
     >
-      <Trash />
+      <TrashIcon />
     </button>
   </div>
 </a>

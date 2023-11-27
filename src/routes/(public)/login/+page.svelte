@@ -1,7 +1,7 @@
 <script lang="ts">
   import { superForm } from "sveltekit-superforms/client";
   import type { PageData } from "./$types";
-  import Loader from "$lib/assets/loader.svelte";
+  import LoaderIcon from "$lib/assets/loaderIcon.svelte";
 
   export let data: PageData;
 
@@ -58,7 +58,7 @@
           {#if $delayed}
             <span class="animate-spin ml-2">
               <!-- ⏳ -->
-              <Loader />
+              <LoaderIcon />
             </span>
           {/if}
         </button>
