@@ -34,9 +34,7 @@ const schema = z.object({
   tags: z.array(z.string().max(50)).max(10).optional(),
 });
 
-export const load = async ({ locals }) => {
-  const session = await locals.auth.validate();
-  if (!session) throw redirect(302, "/");
+export const load = async () => {
   const form = await superValidate(schema);
   return { form };
 };
@@ -68,6 +66,6 @@ export const actions = {
       }
     }
 
-    throw redirect(302, `/profile/decks/${redirectId}`);
+    throw redirect(302, `/decks/${redirectId}`);
   },
 };

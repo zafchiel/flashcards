@@ -34,10 +34,7 @@ const schema = z.object({
   tags: z.array(z.string().max(50)).max(10).optional(),
 });
 
-export const load: PageServerLoad = async ({ locals, params }) => {
-  const session = await locals.auth.validate();
-  if (!session) throw redirect(302, "/");
-
+export const load: PageServerLoad = async ({ params }) => {
   const deck = await getDeckWithFlashcardsAndTags(parseInt(params.deckId));
   if (!deck) throw error(404, "Deck not found");
 
@@ -133,6 +130,6 @@ export const actions = {
       }
     }
 
-    throw redirect(302, `/profile/decks/${params.deckId}`);
+    throw redirect(302, `/decks/${params.deckId}`);
   },
 };
