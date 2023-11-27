@@ -8,6 +8,7 @@
   import { writable } from "svelte/store";
   import { onDestroy } from "svelte";
   import Shuffle from "$lib/assets/shuffle.svelte";
+  import shuffleArray from "$lib/utils/shuffleArray";
 
   export let flashcards: Flashcard[];
   // create deep copy for comparison
@@ -130,9 +131,17 @@
     </button>
   </div>
 
-  <button class="btn-icon variant-filled rounded-md">
-    <Shuffle />
-  </button>
+  <div class="flex items-center gap-3">
+    <button
+      on:click={() => {
+        $filteredFlashcards = shuffleArray($filteredFlashcards);
+      }}
+      class="btn-icon variant-filled rounded-md"
+    >
+      <Shuffle />
+    </button>
+    Shuffle deck
+  </div>
   <br />
 
   <SlideToggle
