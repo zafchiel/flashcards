@@ -16,9 +16,8 @@
     </svelte:fragment>
 
     {#if user}
-      <AppRailAnchor
-        href="/profile/decks"
-        selected={$page.url.pathname === "/profile/decks"}>Dekcs</AppRailAnchor
+      <AppRailAnchor href="/decks" selected={$page.url.pathname === "/decks"}
+        >Dekcs</AppRailAnchor
       >
     {:else}
       <AppRailAnchor href="/signup" selected={$page.url.pathname === "/signup"}

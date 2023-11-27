@@ -57,7 +57,7 @@
 </script>
 
 <a
-  href="/profile/decks/{deck.id}"
+  href="/decks/{deck.id}"
   class="h-full max-w-md card p-4 variant-filled-primary flex gap-3 card-hover"
   class:deleting-animation={isDeleting}
 >
@@ -80,7 +80,7 @@
       use:tooltip={{ content: "Edit deck" }}
       on:click={(e) => {
         e.preventDefault();
-        goto(`/profile/decks/${deck.id}/edit`);
+        goto(`/decks/${deck.id}/edit`);
       }}
       class="btn-icon btn-icon-sm variant-filled"
     >
