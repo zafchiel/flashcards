@@ -3,6 +3,8 @@
   import { page } from "$app/stores";
   import type { User } from "lucia";
   import { LightSwitch } from "@skeletonlabs/skeleton";
+  import DeckIcon from "$lib/assets/deckIcon.svelte";
+  import GlobeIcon from "$lib/assets/globeIcon.svelte";
 
   export let user: User | undefined;
 </script>
@@ -16,9 +18,12 @@
     </svelte:fragment>
 
     {#if user}
-      <AppRailAnchor href="/decks" selected={$page.url.pathname === "/decks"}
-        >Dekcs</AppRailAnchor
-      >
+      <AppRailAnchor href="/decks" selected={$page.url.pathname === "/decks"}>
+        <div class="flex flex-col items-center justify-center gap-1">
+          <DeckIcon />
+          <p>Dekcs</p>
+        </div>
+      </AppRailAnchor>
     {:else}
       <AppRailAnchor href="/signup" selected={$page.url.pathname === "/signup"}
         >Sign-Up</AppRailAnchor
@@ -32,7 +37,10 @@
       href="/discover"
       selected={$page.url.pathname === "/discover"}
     >
-      Discover
+      <div class="flex flex-col items-center justify-center gap-1">
+        <GlobeIcon />
+        <p>Discover</p>
+      </div>
     </AppRailAnchor>
 
     <svelte:fragment slot="trail">

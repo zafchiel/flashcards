@@ -46,7 +46,7 @@
   <span class="text-3xl"> Edit:&nbsp;</span>
   <a
     style:--deck_id="deck-{data.deckId}"
-    href={`/profile/decks/${data.deckId}`}
+    href={`/decks/${data.deckId}`}
     class="text-6xl deck_title_heading font-semibold text-primary-500"
     >{$form.deckTitle}</a
   >
