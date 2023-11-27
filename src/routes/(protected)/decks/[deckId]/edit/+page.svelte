@@ -54,7 +54,7 @@
 
 <section>
   <form method="post" use:enhance>
-    <h3 class="h3 p-3 text-primary-500 font-semibold">Deck details</h3>
+    <h2 class="h2 p-3 text-primary-500 font-semibold">Deck details</h2>
 
     <div>
       <label for="deckTitle" class="label">Deck title</label>
@@ -93,11 +93,12 @@
       <InputChip
         bind:value={$form.tags}
         name="tags"
+        rounded="rounded-md"
         placeholder="Write any tag and click enter"
       />
     </div>
 
-    <h3 class="h3 p-3 text-primary-500 font-semibold">Flashcards</h3>
+    <h2 class="h2 p-3 text-primary-500 font-semibold">Flashcards</h2>
     {#if $errors.flashcards}
       <p class="text-error-500 text-sm">{$errors.flashcards._errors}</p>
     {/if}
