@@ -47,7 +47,7 @@
   <a
     style:--deck_id="deck-{data.deckId}"
     href={`/profile/decks/${data.deckId}`}
-    class="text-6xl deck_title_heading uppercase font-semibold text-primary-500"
+    class="text-6xl deck_title_heading font-semibold text-primary-500"
     >{$form.deckTitle}</a
   >
 </h1>
@@ -114,7 +114,7 @@
         </div>
 
         <div class="flex-grow">
-          <label for="question-{i}" class="label text-secondary-300"
+          <label for="question-{i}" class="label text-secondary-700"
             >Question</label
           >
           <textarea
@@ -130,7 +130,7 @@
             </p>
           {/if}
 
-          <label for="answer-{i}" class="label text-primary-300">Answer</label>
+          <label for="answer-{i}" class="label text-primary-700">Answer</label>
           <textarea
             bind:value={$form.flashcards[i].answer}
             class:input-error={$errors.flashcards?.[i]?.answer}

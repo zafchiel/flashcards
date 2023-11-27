@@ -99,7 +99,7 @@
         <div class="flex-grow">
           <label
             for="question-{i}"
-            class="label font-semibold text-secondary-300">Question</label
+            class="label font-semibold text-secondary-700">Question</label
           >
           <textarea
             bind:value={$form.flashcards[i].question}
@@ -114,7 +114,7 @@
             </p>
           {/if}
 
-          <label for="answer-{i}" class="label font-semibold text-primary-300"
+          <label for="answer-{i}" class="label font-semibold text-primary-700"
             >Answer</label
           >
           <textarea

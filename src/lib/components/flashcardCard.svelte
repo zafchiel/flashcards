@@ -19,6 +19,7 @@
 
 <div class="container relative">
   {#if flashcard.learned !== null}
+    <!-- Is Leaner star icon -->
     <div class="absolute top-3 left-3 z-10">
       <input
         type="checkbox"
@@ -54,11 +55,11 @@
     class="card card-hover w-full flex justify-center items-center p-6 text-xl font-semibold md:text-3xl cursor-pointer min-h-[300px]"
   >
     {#if showAnswer}
-      <div class="front text-primary-200">
+      <div class="front dark:text-primary-200 text-primary-700">
         {flashcard.answer}
       </div>
     {:else}
-      <div class="back text-secondary-200">
+      <div class="back dark:text-secondary-300 text-secondary-700">
         {flashcard.question}
       </div>
     {/if}
