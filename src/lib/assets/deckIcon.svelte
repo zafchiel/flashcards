@@ -1,5 +1,11 @@
-<svg width="36" height="36" viewBox="-3 -5 24 24">
-  <g fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round">
+<svg
+  width="36"
+  height="36"
+  viewBox="-4 -5 24 24"
+  fill="none"
+  stroke="currentColor"
+>
+  <g stroke-linecap="round" stroke-linejoin="round">
     <path
       d="m5.5.5h6c1.1045695 0 2 .8954305 2 2v10c0 1.1045695-.8954305 2-2 2h-6c-1.1045695 0-2-.8954305-2-2v-10c0-1.1045695.8954305-2 2-2zm8 2.5h1c1.1045695 0 2 .8954305 2 2v5c0 1.1045695-.8954305 2-2 2h-1z"
     ></path>

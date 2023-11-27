@@ -58,7 +58,7 @@
 
 <a
   href="/decks/{deck.id}"
-  class="h-full max-w-md card p-4 variant-filled-primary flex gap-3 card-hover"
+  class="h-full max-w-md card p-4 variant-ghost-primary flex gap-3 card-hover"
   class:deleting-animation={isDeleting}
 >
   <div class="min-w-0 break-words">
@@ -82,7 +82,7 @@
         e.preventDefault();
         goto(`/decks/${deck.id}/edit`);
       }}
-      class="btn-icon btn-icon-sm variant-filled"
+      class="btn-icon btn-icon-sm variant-filled-secondary"
     >
       <EditIcon />
     </button>
@@ -92,7 +92,7 @@
         e.preventDefault();
         modalStore.trigger(modal);
       }}
-      class="btn-icon btn-icon-sm variant-filled-error"
+      class="btn-icon btn-icon-sm variant-outline-error"
     >
       <TrashIcon />
     </button>
