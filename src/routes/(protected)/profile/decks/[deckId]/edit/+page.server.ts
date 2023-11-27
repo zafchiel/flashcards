@@ -74,36 +74,32 @@ export const actions = {
           await createTags(form.data.tags, parseInt(params.deckId));
       }
 
-      if (
-        deckInDb?.title !== form.data.deckTitle ||
-        deckInDb?.description !== form.data.deckDescription
-      ) {
-        await dbHttp
-          .update(decks)
-          .set({
-            title: form.data.deckTitle,
-            description: form.data.deckDescription ?? null,
-          })
-          .where(eq(decks.id, parseInt(params.deckId)));
-      }
+      await dbHttp
+        .update(decks)
+        .set({
+          title: form.data.deckTitle,
+          description: form.data.deckDescription ?? null,
+          lastUpdate: new Date(),
+        })
+        .where(eq(decks.id, parseInt(params.deckId)));
 
       // If the number of flashcards is the same, then we can update the flashcards
-      if(deckInDb?.flashcards.length === form.data.flashcards.length) {
+      if (deckInDb?.flashcards.length === form.data.flashcards.length) {
         for (let i = 0; i < form.data.flashcards.length; i++) {
-            // updated flashcard
-            const data = {
-              ...form.data.flashcards[i],
-              id: deckInDb?.flashcards[i].id,
-            };
-            await dbHttp
-              .update(flashcards)
-              .set(data)
-              .where(eq(flashcards.id, data.id));
+          // updated flashcard
+          const data = {
+            ...form.data.flashcards[i],
+            id: deckInDb?.flashcards[i].id,
+          };
+          await dbHttp
+            .update(flashcards)
+            .set(data)
+            .where(eq(flashcards.id, data.id));
         }
       }
 
       // If the number of new flashcards is higher than in the db, then we need to create new flashcards or update the existing ones
-      if(deckInDb?.flashcards.length! < form.data.flashcards.length) {
+      if (deckInDb?.flashcards.length! < form.data.flashcards.length) {
         let newFlashcards = [];
         for (let i = 0; i < form.data.flashcards.length; i++) {
           if (deckInDb?.flashcards[i] === undefined) {
@@ -125,8 +121,10 @@ export const actions = {
       }
 
       // If the number of new flashcards is lower than in the db, then we need to delete the flashcards
-      if(deckInDb?.flashcards.length! > form.data.flashcards.length){
-        await dbHttp.delete(flashcards).where(eq(flashcards.deckId, parseInt(params.deckId)));
+      if (deckInDb?.flashcards.length! > form.data.flashcards.length) {
+        await dbHttp
+          .delete(flashcards)
+          .where(eq(flashcards.deckId, parseInt(params.deckId)));
         await createFlashcard(parseInt(params.deckId), form.data.flashcards);
       }
     } catch (error) {
