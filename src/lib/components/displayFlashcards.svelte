@@ -7,6 +7,7 @@
   import { SlideToggle } from "@skeletonlabs/skeleton";
   import { writable } from "svelte/store";
   import { onDestroy } from "svelte";
+  import Shuffle from "$lib/assets/shuffle.svelte";
 
   export let flashcards: Flashcard[];
   // create deep copy for comparison
@@ -129,6 +130,11 @@
     </button>
   </div>
 
+  <button class="btn-icon variant-filled rounded-md">
+    <Shuffle />
+  </button>
+  <br />
+
   <SlideToggle
     name="showLearned"
     bind:checked={showLearned}
@@ -137,7 +143,7 @@
         currentFlashcardIndex = 0;
       }
     }}
-    class="mt-9"
+    active="bg-secondary-500"
   >
     {#if showLearned}
       Showing Learned
