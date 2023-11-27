@@ -20,6 +20,7 @@
     if (values.length === 0) {
       alert("No flashcards to show");
       showLearned = true;
+      $filteredFlashcards = flashcards;
     }
   });
 

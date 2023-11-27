@@ -8,7 +8,7 @@
 </script>
 
 <aside>
-  <AppRail class="h-[100svh]">
+  <AppRail>
     <svelte:fragment slot="lead">
       <AppRailAnchor href="/" selected={$page.url.pathname === "/"}>
         <p class="font-bold text-lg">F/HUH</p>

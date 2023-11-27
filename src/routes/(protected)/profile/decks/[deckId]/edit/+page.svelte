@@ -45,8 +45,9 @@
 <h1 class="md:mb-10 mb-3">
   <span class="text-3xl"> Edit:&nbsp;</span>
   <a
+    style:--deck_id="deck-{data.deckId}"
     href={`/profile/decks/${data.deckId}`}
-    class="text-6xl uppercase font-semibold text-primary-500"
+    class="text-6xl deck_title_heading uppercase font-semibold text-primary-500"
     >{$form.deckTitle}</a
   >
 </h1>
@@ -175,5 +176,9 @@
   .index-badge {
     -webkit-clip-path: circle(100.2% at 0 0);
     clip-path: circle(100.2% at 0 0);
+  }
+
+  .deck_title_heading {
+    view-transition-name: var(--deck_id);
   }
 </style>
