@@ -34,7 +34,9 @@
   };
 </script>
 
-<div class="flex flex-col md:flex-row flex-wrap justify-between items-center">
+<div
+  class="flex flex-col md:flex-row flex-wrap justify-between md:items-center"
+>
   <div>
     <h1
       class="h1 text-primary-500 font-bold"
@@ -52,12 +54,16 @@
   <div class="flex md:flex-col gap-5">
     <button
       on:click={() => modalStore.trigger(modal)}
-      class="btn md:btn-lg variant-outline-error flex-1 min-w-0">Delete</button
+      class="btn md:btn-lg variant-outline-error flex-1 min-w-0"
     >
+      Delete
+    </button>
     <a
       href={`/decks/${data.deck.id}/edit`}
-      class="btn md:btn-lg variant-outline-secondary flex-1 min-w-0">Edit</a
+      class="btn md:btn-lg variant-outline-secondary flex-1 min-w-0"
     >
+      Edit
+    </a>
   </div>
 </div>
 
