@@ -1,9 +1,7 @@
 export const tooltip = (element: HTMLElement, params: { content: string }) => {
   const tooltip = document.createElement("div");
-  const title = element.getAttribute("title");
   const mouseOver = () => {
     tooltip.innerText = params.content;
-    element.removeAttribute("title");
 
     tooltip.className =
       "card variant-filled text-sm absolute min-w-max p-2 z-10 rounded-md pointer-events-none";
@@ -18,7 +16,6 @@ export const tooltip = (element: HTMLElement, params: { content: string }) => {
 
   const mouseOut = () => {
     tooltip.remove();
-    if (title) element.setAttribute("title", title);
   };
 
   element.addEventListener("mouseover", mouseOver);
