@@ -8,7 +8,7 @@ export const load = async ({params, locals}) => {
     const userId = locals.user.userId
 
     const deck = await getDeckById(parseInt(deckId));
-    if(deck.userId !== userId) return fail(401)
+    if(deck.userId !== userId) throw fail(401, {message: 'You are not authorized to view this deck'})
     const flashcards = await getDecksFlashcards(parseInt(deckId));
     const tags = await getDeckTags(parseInt(deckId));
     
