@@ -45,7 +45,7 @@
         if (response.success) {
           isDeleting = true;
           modalStore.close();
-          invalidate("/api/decks");
+          invalidate("invalidate:decks");
           toastStore.trigger(successDeleteToast);
         } else {
           isDeleting = false;
