@@ -10,12 +10,9 @@
   };
 
   const handleLearnedChange = (e: Event) => {
-    $filteredFlashcards = $filteredFlashcards.map((flashcard, index) => {
-      if (index === currentFlashcardIndex) {
-        flashcard.learned = (e.target as HTMLInputElement)?.checked;
-      }
-      return flashcard;
-    });
+    $filteredFlashcards[currentFlashcardIndex].learned = (
+      e.target as HTMLInputElement
+    ).checked;
   };
 </script>
 
