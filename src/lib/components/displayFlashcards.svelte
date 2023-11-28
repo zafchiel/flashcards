@@ -9,6 +9,8 @@
   import { onDestroy } from "svelte";
   import ShuffleIcon from "$lib/assets/shuffleIcon.svelte";
   import shuffleArray from "$lib/utils/shuffleArray";
+  import SettingsIcon from "$lib/assets/settingsIcon.svelte";
+  import { tooltip } from "$lib/actions/tooltip";
 
   export let flashcards: Flashcard[];
   // create deep copy for comparison
@@ -109,40 +111,44 @@
     </div>
   {/key}
 
-  <div class="flex justify-between items-center p-3">
+  <!-- Controls Component -->
+  <div class="flex justify-between gap-3 items-center p-3">
     <button
-      on:click={() => handleChangeCard("prev")}
-      class="btn-icon btn-icon-lg variant-filled"
-    >
-      <ArrowLeft />
-    </button>
-
-    <div class="text-center p-3">
-      <p>
-        {currentFlashcardIndex + 1}/{$filteredFlashcards.length}
-      </p>
-    </div>
-
-    <button
-      on:click={() => handleChangeCard("next")}
-      class="btn-icon btn-icon-lg variant-filled"
-    >
-      <ArrowRight />
-    </button>
-  </div>
-
-  <div class="flex items-center gap-3">
-    <button
+      use:tooltip={{ content: "Shuffle flashcards" }}
       on:click={() => {
         $filteredFlashcards = shuffleArray($filteredFlashcards);
       }}
-      class="btn-icon variant-filled rounded-md"
     >
       <ShuffleIcon />
     </button>
-    Shuffle deck
+
+    <!-- Navigation -->
+    <div class="flex gap-3">
+      <button
+        on:click={() => handleChangeCard("prev")}
+        class="btn-icon btn-icon-lg variant-filled"
+      >
+        <ArrowLeft />
+      </button>
+
+      <div class="text-center p-3">
+        <p>
+          {currentFlashcardIndex + 1}/{$filteredFlashcards.length}
+        </p>
+      </div>
+
+      <button
+        on:click={() => handleChangeCard("next")}
+        class="btn-icon btn-icon-lg variant-filled"
+      >
+        <ArrowRight />
+      </button>
+    </div>
+
+    <button use:tooltip={{ content: "Settings" }}>
+      <SettingsIcon />
+    </button>
   </div>
-  <br />
 
   <SlideToggle
     name="showLearned"
@@ -153,6 +159,7 @@
       }
     }}
     active="bg-secondary-500"
+    class="mt-10"
   >
     {#if showLearned}
       Showing Learned
