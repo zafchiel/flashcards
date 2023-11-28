@@ -25,8 +25,10 @@
 
 <div class="flex">
   <SideRail user={data.user} />
-  <div class="relative w-full h-screen overflow-y-auto overflow-x-hidden">
+  <main
+    class="p-3 md:p-10 relative w-full h-screen overflow-y-auto overflow-x-hidden max-w-4xl"
+  >
     <ProgressBar />
     <slot />
-  </div>
+  </main>
 </div>

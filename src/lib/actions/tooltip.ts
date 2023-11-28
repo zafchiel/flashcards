@@ -4,14 +4,13 @@ export const tooltip = (element: HTMLElement, params: { content: string }) => {
     tooltip.innerText = params.content;
 
     tooltip.className =
-      "card variant-filled text-sm absolute min-w-max p-2 z-10 rounded-md pointer-events-none";
+      "card variant-filled text-sm fixed min-w-max p-2 z-10 rounded-md pointer-events-none";
     element.appendChild(tooltip);
   };
 
   const mouseMove = (event: MouseEvent) => {
-    const rect = element.getBoundingClientRect();
-    tooltip.style.top = `${event.clientY - rect.top + 5}px`;
-    tooltip.style.left = `${event.clientX - rect.left + 5}px`;
+    tooltip.style.top = `${event.pageY + 5}px`;
+    tooltip.style.left = `${event.pageX + 5}px`;
   };
 
   const mouseOut = () => {
