@@ -1,10 +1,8 @@
 <script lang="ts">
-  import type { Flashcard } from "$lib/server/db/schema";
   import { tooltip } from "$lib/actions/tooltip";
-  import { createEventDispatcher } from "svelte";
-  const dispatch = createEventDispatcher();
+  import { filteredFlashcards } from "$lib/stores/filteredFlashcards";
 
-  export let flashcard: Flashcard;
+  export let currentFlashcardIndex: number;
   export let showAnswer: Boolean;
 
   const handleSwitchView = () => {
@@ -12,13 +10,17 @@
   };
 
   const handleLearnedChange = (e: Event) => {
-    flashcard.learned = (e.target as HTMLInputElement)?.checked;
-    dispatch("learnedChange", { learned: flashcard.learned });
+    $filteredFlashcards = $filteredFlashcards.map((flashcard, index) => {
+      if (index === currentFlashcardIndex) {
+        flashcard.learned = (e.target as HTMLInputElement)?.checked;
+      }
+      return flashcard;
+    });
   };
 </script>
 
 <div class="container relative">
-  {#if flashcard.learned !== null}
+  {#if $filteredFlashcards[currentFlashcardIndex]}
     <!-- Is Leaner star icon -->
     <div class="absolute top-3 left-3 z-10">
       <input
@@ -37,7 +39,9 @@
           width="32"
           height="32"
           viewBox="0 0 32 32"
-          fill={flashcard.learned ? "currentColor" : "none"}
+          fill={$filteredFlashcards[currentFlashcardIndex].learned
+            ? "currentColor"
+            : "none"}
           stroke="currentColor"
           stroke-width="2"
           stroke-linecap="round"
@@ -56,11 +60,11 @@
   >
     {#if showAnswer}
       <div class="front dark:text-primary-200 text-primary-700">
-        {flashcard.answer}
+        {$filteredFlashcards[currentFlashcardIndex].answer}
       </div>
     {:else}
       <div class="back dark:text-secondary-300 text-secondary-700">
-        {flashcard.question}
+        {$filteredFlashcards[currentFlashcardIndex].question}
       </div>
     {/if}
   </button>

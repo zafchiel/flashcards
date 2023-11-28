@@ -5,20 +5,31 @@
   import ArrowRight from "$lib/assets/arrowRight.svelte";
   import { fly } from "svelte/transition";
   import { SlideToggle } from "@skeletonlabs/skeleton";
-  import { writable } from "svelte/store";
+  // import { writable } from "svelte/store";
   import { onDestroy } from "svelte";
   import ShuffleIcon from "$lib/assets/shuffleIcon.svelte";
   import shuffleArray from "$lib/utils/shuffleArray";
-  import SettingsIcon from "$lib/assets/settingsIcon.svelte";
   import { tooltip } from "$lib/actions/tooltip";
+  import SettingsDrawer from "./settingsDrawer.svelte";
+  import { filteredFlashcards } from "$lib/stores/filteredFlashcards";
 
+  // import { getDrawerStore } from "@skeletonlabs/skeleton";
+
+  // const drawerStore = getDrawerStore();
+  // drawerStore.subscribe((value) => {
+  //   console.log(value.meta);
+  // });
   export let flashcards: Flashcard[];
+  $filteredFlashcards = flashcards;
   // create deep copy for comparison
   const initFlashcards = JSON.parse(JSON.stringify(flashcards));
 
   let showLearned = true;
+  let currentFlashcardIndex = 0;
+  let previousIndex = 0;
+  let showAnswer = false;
 
-  const filteredFlashcards = writable(flashcards);
+  // const filteredFlashcards = writable(flashcards);
 
   const unsub = filteredFlashcards.subscribe((values) => {
     if (values.length === 0) {
@@ -26,15 +37,12 @@
       showLearned = true;
       $filteredFlashcards = flashcards;
     }
+    showLearned = showLearned;
   });
 
   $: $filteredFlashcards = showLearned
     ? flashcards
     : flashcards.filter((flashcard) => flashcard.learned === false);
-
-  let currentFlashcardIndex = 0;
-  let previousIndex = 0;
-  let showAnswer = false;
 
   $: maxIndex = $filteredFlashcards.length - 1;
 
@@ -72,10 +80,6 @@
     }
   };
 
-  const handleLearnedChange = (e: CustomEvent) => {
-    $filteredFlashcards[currentFlashcardIndex].learned = e.detail.learned;
-  };
-
   onDestroy(() => {
     // Un subscribing from filteredFlashcards
     unsub();
@@ -103,11 +107,7 @@
         duration: 500,
       }}
     >
-      <FlashcardCard
-        flashcard={$filteredFlashcards[currentFlashcardIndex]}
-        {showAnswer}
-        on:learnedChange={handleLearnedChange}
-      />
+      <FlashcardCard {currentFlashcardIndex} {showAnswer} />
     </div>
   {/key}
 
@@ -145,9 +145,7 @@
       </button>
     </div>
 
-    <button use:tooltip={{ content: "Settings" }}>
-      <SettingsIcon />
-    </button>
+    <SettingsDrawer />
   </div>
 
   <SlideToggle
