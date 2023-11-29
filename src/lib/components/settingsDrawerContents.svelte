@@ -11,6 +11,7 @@
   const drawerStore = getDrawerStore();
   const toastStore = getToastStore();
 
+  // To compare stingified settings
   const initialSettings = JSON.stringify($drawerStore.meta);
 
   // Update deck settings on closing modal
