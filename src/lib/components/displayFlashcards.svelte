@@ -13,12 +13,6 @@
   import SettingsDrawer from "./settingsDrawer.svelte";
   import { filteredFlashcards } from "$lib/stores/filteredFlashcards";
 
-  // import { getDrawerStore } from "@skeletonlabs/skeleton";
-
-  // const drawerStore = getDrawerStore();
-  // drawerStore.subscribe((value) => {
-  //   console.log(value.meta);
-  // });
   export let flashcards: Flashcard[];
   $filteredFlashcards = flashcards;
   // create deep copy for comparison

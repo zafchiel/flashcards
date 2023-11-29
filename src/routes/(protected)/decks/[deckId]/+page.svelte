@@ -6,12 +6,15 @@
   import {
     getModalStore,
     getToastStore,
+    getDrawerStore,
     type ModalSettings,
   } from "@skeletonlabs/skeleton";
 
+  export let data;
+
+  const drawerStore = getDrawerStore();
   const modalStore = getModalStore();
   const toastStore = getToastStore();
-  export let data;
 
   const modal: ModalSettings = {
     type: "confirm",
@@ -32,6 +35,8 @@
       }
     },
   };
+
+  $: console.log($drawerStore.meta);
 </script>
 
 <div
