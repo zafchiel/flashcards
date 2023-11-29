@@ -36,8 +36,6 @@
     },
   };
 
-  $: console.log($drawerStore.meta);
-
   $drawerStore.meta = {
     ...$drawerStore.meta,
     public: data.deck.public,
