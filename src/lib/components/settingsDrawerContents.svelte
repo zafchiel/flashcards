@@ -11,7 +11,7 @@
       on:click={() => {
         $drawerStore.meta = {
           ...$drawerStore.meta,
-          public: "cos",
+          message: "cps",
         };
       }}
     >

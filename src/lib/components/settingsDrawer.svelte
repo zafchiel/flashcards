@@ -14,6 +14,10 @@
     width: "w-[280px] md:w-[480px]",
     padding: "p-2",
     rounded: "rounded-xl",
+    meta: {
+      message: "Hello world",
+      public: false,
+    },
   };
 </script>
 
