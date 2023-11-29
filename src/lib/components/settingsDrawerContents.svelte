@@ -1,13 +1,19 @@
 <script lang="ts">
-  import { getDrawerStore, SlideToggle } from "@skeletonlabs/skeleton";
+  import {
+    getDrawerStore,
+    getToastStore,
+    SlideToggle,
+  } from "@skeletonlabs/skeleton";
   import { page } from "$app/stores";
   import { onDestroy } from "svelte";
+  import { errorToast, successSavedSettignsToast } from "$lib/toasts";
 
   const drawerStore = getDrawerStore();
+  const toastStore = getToastStore();
 
   // Update deck settings on closing modal
   onDestroy(async () => {
-    await fetch(`/api/decks?deckId=${$page.params.deckId}`, {
+    const res = await fetch(`/api/decks?deckId=${$page.params.deckId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -16,6 +22,11 @@
         public: $drawerStore.meta.public,
       }),
     });
+    if (!res.ok) {
+      toastStore.trigger(errorToast);
+    } else {
+      toastStore.trigger(successSavedSettignsToast);
+    }
   });
 </script>
 

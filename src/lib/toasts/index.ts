@@ -15,3 +15,9 @@ export const successEditToast: ToastSettings = {
   timeout: 3000,
   background: "variant-filled-success",
 }
+
+export const successSavedSettignsToast: ToastSettings = {
+  message: `Settings saved successfully`,
+  timeout: 3000,
+  background: "variant-filled-success",
+}
