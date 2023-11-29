@@ -11,8 +11,12 @@
   const drawerStore = getDrawerStore();
   const toastStore = getToastStore();
 
+  const initialSettings = JSON.parse(JSON.stringify($drawerStore.meta));
+
   // Update deck settings on closing modal
   onDestroy(async () => {
+    if (initialSettings.public === $drawerStore.meta.public) return;
+
     const res = await fetch(`/api/decks?deckId=${$page.params.deckId}`, {
       method: "PATCH",
       headers: {
