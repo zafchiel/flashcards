@@ -16,6 +16,12 @@
   const modalStore = getModalStore();
   const toastStore = getToastStore();
 
+  // Update deck settings in drawer on initialising component
+  $drawerStore.meta = {
+    ...$drawerStore.meta,
+    public: data.deck.public,
+  };
+
   const modal: ModalSettings = {
     type: "confirm",
     title: "Are you sure",
@@ -34,11 +40,6 @@
         } else toastStore.trigger(errorToast);
       }
     },
-  };
-
-  $drawerStore.meta = {
-    ...$drawerStore.meta,
-    public: data.deck.public,
   };
 </script>
 
