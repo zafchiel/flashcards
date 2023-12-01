@@ -53,8 +53,25 @@
           {/if}
         </div>
 
+        <div>
+          <label for="repeatPassword" class="label">Repeat Password</label>
+          <input
+            bind:value={$form.repeatPassword}
+            {...$constraints.password}
+            class:input-error={$errors.password}
+            type="password"
+            name="repeatPassword"
+            id="repeatPassword"
+            placeholder="*****"
+            class="input"
+          />
+          {#if $errors.repeatPassword}
+            <p class="text-xs text-error-500">{$errors.repeatPassword}</p>
+          {/if}
+        </div>
+
         <button class="btn variant-filled"
-          >Login
+          >Register
           {#if $delayed}
             <span class="animate-spin ml-2">
               <!-- ⏳ -->
