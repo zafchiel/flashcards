@@ -1,8 +1,7 @@
 <script lang="ts">
   import type { PageData } from "./$types";
-  import DeckCard from "$lib/components/deckCard.svelte";
-  import { flip } from "svelte/animate";
   import PlusIcon from "$lib/assets/plusIcon.svelte";
+  import DisplayDeckList from "$lib/components/displayDeckList.svelte";
 
   export let data: PageData;
 </script>
@@ -17,13 +16,5 @@
     Create Deck
   </a>
 </div>
-<section class="flex gap-3 flex-wrap items-stretch">
-  {#if data.decks.length === 0}
-    <p>No decks found</p>
-  {/if}
-  {#each data.decks as deck (deck.id)}
-    <div animate:flip={{ duration: 500 }}>
-      <DeckCard {deck} />
-    </div>
-  {/each}
-</section>
+
+<DisplayDeckList decks={data.decks} />
