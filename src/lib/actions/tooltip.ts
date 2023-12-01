@@ -1,10 +1,10 @@
 export const tooltip = (element: HTMLElement, params: { content: string }) => {
-  const tooltip = document.createElement("div");
+  const tooltip = document.createElement("span");
   const mouseOver = () => {
     tooltip.innerText = params.content;
 
     tooltip.className =
-      "card variant-filled text-sm fixed min-w-max p-2 z-10 rounded-md pointer-events-none";
+      "variant-filled text-sm fixed min-w-max p-2 z-10 rounded-md pointer-events-none";
     element.appendChild(tooltip);
   };
 

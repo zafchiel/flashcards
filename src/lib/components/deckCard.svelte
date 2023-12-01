@@ -10,21 +10,11 @@
   import { goto, invalidate } from "$app/navigation";
   import { errorToast, successDeleteToast } from "$lib/toasts";
   import { tooltip } from "$lib/actions/tooltip";
+  import type { Deck, DeckTags } from "$lib/server/db/schema";
 
-  export let deck: {
-    id: number;
-    userId: string;
-    title: string;
-    description: string | null;
-    public: boolean | null;
-    createdAt: Date | null;
-    lastUpdate: Date | null;
-    tags: {
-      id: number;
-      deckId: number | null;
-      tagName: string;
-    }[];
-  };
+  type DecksWithTags<T> = Deck & { tags: T[] };
+
+  export let deck: DecksWithTags<DeckTags>;
 
   const modalStore = getModalStore();
   const toastStore = getToastStore();

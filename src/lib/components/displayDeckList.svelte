@@ -9,7 +9,7 @@
   export let decks: DecksWithTags<DeckTags>[];
 </script>
 
-<section class="flex gap-3 flex-wrap items-stretch">
+<section class="flex gap-3 flex-wrap">
   {#if decks.length === 0}
     <p>No decks found</p>
   {/if}
