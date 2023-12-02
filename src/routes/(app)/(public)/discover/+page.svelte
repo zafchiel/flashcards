@@ -1,6 +1,4 @@
 <script lang="ts">
-  import { flip } from "svelte/animate";
-  import DeckCard from "$lib/components/deckCard.svelte";
   import type { PageData } from "./$types";
   import DisplayDeckList from "$lib/components/displayDeckList.svelte";
 
