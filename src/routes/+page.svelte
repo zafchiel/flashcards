@@ -22,7 +22,7 @@
   });
 </script>
 
-<section class="p-10 flex flex-col gap-5 items-stretch">
+<section class="p-10 flex flex-col gap-5">
   <h1 class="h1 font-bold gradient-heading text-center">Flashcards HUH</h1>
   <div
     id="fancydiv"
@@ -33,6 +33,11 @@
     <p id="secondSide" class="h3 place-self-center opacity-0">Remember More</p>
   </div>
 </section>
+
+<div class="flex gap-3 justify-center items-center">
+  <a href="/signup" class="btn variant-filled-primary">Get Started</a>
+  <a href="/login" class="btn variant-outline-secondary">Sign-in</a>
+</div>
 
 <style>
   section {

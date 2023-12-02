@@ -1,6 +1,4 @@
 <script lang="ts">
-  import ProgressBar from "$lib/components/progressBar.svelte";
-  import SideRail from "$lib/components/sideRail.svelte";
   import {
     Drawer,
     Modal,
@@ -11,8 +9,12 @@
   import { onNavigate } from "$app/navigation";
   import SettingsDrawerContents from "$lib/components/settingsDrawerContents.svelte";
   import "../app.postcss";
+  import type { LayoutData } from "./$types";
+  import ProgressBar from "$lib/components/progressBar.svelte";
+  import SideRail from "$lib/components/sideRail.svelte";
 
-  export let data;
+  export let data: LayoutData;
+
   initializeStores();
 
   const drawerStore = getDrawerStore();
@@ -37,12 +39,16 @@
 <Modal />
 <Toast />
 
-<div class="flex">
-  <SideRail user={data.user} />
-  <main
-    class="p-3 md:p-10 relative w-full h-screen overflow-y-auto overflow-x-hidden max-w-4xl"
-  >
-    <ProgressBar />
-    <slot />
-  </main>
-</div>
+{#if data.user}
+  <div class="flex">
+    <SideRail user={data.user} />
+    <main
+      class="p-3 md:p-10 relative w-full h-screen overflow-y-auto overflow-x-hidden max-w-4xl"
+    >
+      <ProgressBar />
+      <slot />
+    </main>
+  </div>
+{:else}
+  <slot />
+{/if}
