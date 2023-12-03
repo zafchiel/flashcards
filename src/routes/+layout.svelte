@@ -39,6 +39,7 @@
 <Modal />
 <Toast />
 
+<!-- Show side rail only if user is logged in -->
 {#if data.user}
   <div class="flex">
     <SideRail user={data.user} />

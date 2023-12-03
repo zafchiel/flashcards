@@ -5,6 +5,7 @@
   export let data;
 </script>
 
+<!-- If user is logged in don't duplicate layout -->
 {#if data.user}
   <slot />
 {:else}
