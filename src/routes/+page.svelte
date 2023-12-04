@@ -23,19 +23,20 @@
 </script>
 
 <main class="min-h-[100svh]">
-  <section class="p-10 flex flex-col items-center gap-5">
-    <div class="max-w-xl text-center">
-      <h1 class="h1 font-bold gradient-heading text-center">Flashcards HUH</h1>
+  <section class="p-10 flex flex-col md:flex-row items-center gap-5">
+    <div class="max-w-xl">
+      <h1 class="h1 font-bold gradient-heading">Flashcards HUH</h1>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos magni
         distinctio ut nihil eius commodi modi at alias. Fugit saepe modi aperiam
         nesciunt dicta repudiandae vero, magnam ea eaque animi.
       </p>
+      <div class="p-3 flex gap-3 items-center">
+        <a href="/signup" class="btn variant-filled-primary">Get Started</a>
+        <a href="/login" class="btn variant-outline-secondary">Sign-in</a>
+      </div>
     </div>
-    <div
-      id="fancydiv"
-      class="p-14 min-h-[200px] md:mx-24 grid relative font-bold"
-    >
+    <div id="fancydiv" class="min-h-[200px] w-full grid relative font-bold">
       <CardSvg />
       <p id="firstSide" class="h3 place-self-center">Learn Easily</p>
       <p id="secondSide" class="h3 place-self-center opacity-0">
@@ -43,11 +44,6 @@
       </p>
     </div>
   </section>
-
-  <div class="flex gap-3 justify-center items-center">
-    <a href="/signup" class="btn variant-filled-primary">Get Started</a>
-    <a href="/login" class="btn variant-outline-secondary">Sign-in</a>
-  </div>
 </main>
 
 <style>
