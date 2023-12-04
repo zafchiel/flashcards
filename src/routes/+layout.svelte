@@ -9,11 +9,6 @@
   import { onNavigate } from "$app/navigation";
   import SettingsDrawerContents from "$lib/components/settingsDrawerContents.svelte";
   import "../app.postcss";
-  import type { LayoutData } from "./$types";
-  import ProgressBar from "$lib/components/progressBar.svelte";
-  import SideRail from "$lib/components/sideRail.svelte";
-
-  export let data: LayoutData;
 
   initializeStores();
 
