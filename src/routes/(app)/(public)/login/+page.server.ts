@@ -12,7 +12,7 @@ const schema = z.object({
 
 export const load = async ({ locals }) => {
 	const session = await locals.auth.validate();
-	if (session) throw redirect(302, "/");
+	if (session) throw redirect(302, "/decks");
 	const form = await superValidate(schema);
 	return {form};
 };

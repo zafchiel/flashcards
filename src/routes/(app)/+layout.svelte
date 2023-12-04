@@ -6,7 +6,7 @@
 </script>
 
 <!-- If user is logged in don't duplicate layout -->
-{#if data.user}
+{#if !data.user}
   <slot />
 {:else}
   <div class="flex">
