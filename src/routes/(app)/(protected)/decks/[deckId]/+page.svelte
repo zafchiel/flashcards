@@ -53,6 +53,7 @@
     >
       {data.deck.title}
     </h1>
+    <p>Owner: {data.owner}</p>
     <div class="opacity-60 text-sm">
       <p>Created: {data.deck.createdAt?.toLocaleString("en-GB")}</p>
       <p>Last Update: {data.deck.lastUpdate?.toLocaleString("en-GB")}</p>

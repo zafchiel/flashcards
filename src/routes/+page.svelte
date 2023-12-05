@@ -1,12 +1,12 @@
 <script lang="ts">
-  import CardSvg from "$lib/assets/cardSVG.svelte";
+  import CardSvg from "$lib/assets/animatedCardSVG.svelte";
 </script>
 
 <main class="min-h-[100svh] flex items-center justify-center">
   <section
     class="p-4 m-2 md:p-10 flex flex-col items-center gap-5 card variant-soft-surface shadow-lg"
   >
-    <div class="max-w-xl mb-10">
+    <div class="max-w-xl mb-5">
       <h1 class="h1 font-bold gradient-heading">Flashcards HUH</h1>
       <p class="text-sm md:text-base">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos magni
