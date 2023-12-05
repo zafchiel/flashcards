@@ -31,18 +31,21 @@
 
 <main class="min-h-[100svh] flex items-center justify-center">
   <section
-    class="p-10 flex flex-col items-center gap-5 card variant-soft-surface shadow-lg"
+    class="p-4 m-2 md:p-10 flex flex-col items-center gap-5 card variant-soft-surface shadow-lg"
   >
     <div class="max-w-xl mb-10">
       <h1 class="h1 font-bold gradient-heading">Flashcards HUH</h1>
-      <p>
+      <p class="text-sm md:text-base">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos magni
         distinctio ut nihil eius commodi modi at alias. Fugit saepe modi aperiam
         nesciunt dicta repudiandae vero, magnam ea eaque animi.
       </p>
-      <div class="p-3 flex gap-3 items-center">
-        <a href="/signup" class="btn variant-filled-primary">Get Started</a>
-        <a href="/login" class="btn variant-outline-secondary">Sign-in</a>
+      <div class="p-3 flex flex-wrap gap-3 items-center max-w-xs">
+        <a href="/signup" class="btn variant-filled-primary flex-1"
+          >Get Started</a
+        >
+        <a href="/login" class="btn variant-outline-secondary flex-1">Sign-in</a
+        >
       </div>
     </div>
     <div
@@ -50,8 +53,8 @@
       class="min-h-[200px] min-w-full relative font-bold flex justify-center items-center"
     >
       <CardSvg />
-      <p id="firstSide" class="h3">Learn Easily</p>
-      <p id="secondSide" class="h3 hidden">Remember More</p>
+      <p id="firstSide" class="text-xl md:text-3xl">Learn Easily</p>
+      <p id="secondSide" class="text-xl md:text-3xl hidden">Remember More</p>
     </div>
   </section>
 </main>
