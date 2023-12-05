@@ -1,8 +1,45 @@
-<svg width="100%" height="100%" class="stroke-secondary-500 absolute inset-0">
-  <g>
-    <rect pathLength="1" rx="16" height="100%" width="100%" />
-  </g>
-</svg>
+<script lang="ts">
+  import { onMount } from "svelte";
+  import { timeline } from "motion";
+
+  onMount(async () => {
+    const draw = (progress: number) => ({
+      strokeDashoffset: 1 - progress,
+      visibility: "visible",
+    });
+
+    timeline([
+      ["rect", draw(1), { duration: 2 }],
+      [
+        "div#fancydiv",
+        { rotateX: 180, animationDuration: 2 },
+        { easing: "ease-in-out", delay: 1 },
+      ],
+      [
+        "#firstSide",
+        { display: "none", animationDuration: 0.5 },
+        { at: "-0.3" },
+      ],
+      [
+        "#secondSide",
+        { display: "block", rotateX: -180, animationDuration: 0.5 },
+      ],
+    ]);
+  });
+</script>
+
+<div
+  id="fancydiv"
+  class="min-h-[200px] min-w-full relative font-bold flex justify-center items-center"
+>
+  <svg width="100%" height="100%" class="stroke-secondary-500 absolute inset-0">
+    <g>
+      <rect pathLength="1" rx="16" height="100%" width="100%" />
+    </g>
+  </svg>
+  <p id="firstSide" class="text-xl md:text-3xl">Learn Easily</p>
+  <p id="secondSide" class="text-xl md:text-3xl hidden">Remember More</p>
+</div>
 
 <style>
   rect {

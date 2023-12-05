@@ -1,32 +1,5 @@
 <script lang="ts">
   import CardSvg from "$lib/assets/cardSVG.svelte";
-  import { onMount } from "svelte";
-  import { timeline } from "motion";
-
-  onMount(async () => {
-    const draw = (progress: number) => ({
-      strokeDashoffset: 1 - progress,
-      visibility: "visible",
-    });
-
-    timeline([
-      ["rect", draw(1), { duration: 2 }],
-      [
-        "div#fancydiv",
-        { rotateX: 180, animationDuration: 2 },
-        { easing: "ease-in-out", delay: 1 },
-      ],
-      [
-        "#firstSide",
-        { display: "none", animationDuration: 0.5 },
-        { at: "-0.3" },
-      ],
-      [
-        "#secondSide",
-        { display: "block", rotateX: -180, animationDuration: 0.5 },
-      ],
-    ]);
-  });
 </script>
 
 <main class="min-h-[100svh] flex items-center justify-center">
@@ -48,14 +21,7 @@
         >
       </div>
     </div>
-    <div
-      id="fancydiv"
-      class="min-h-[200px] min-w-full relative font-bold flex justify-center items-center"
-    >
-      <CardSvg />
-      <p id="firstSide" class="text-xl md:text-3xl">Learn Easily</p>
-      <p id="secondSide" class="text-xl md:text-3xl hidden">Remember More</p>
-    </div>
+    <CardSvg />
   </section>
 </main>
 
