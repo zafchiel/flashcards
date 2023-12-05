@@ -53,7 +53,7 @@
     >
       {data.deck.title}
     </h1>
-    <p>Owner: {data.owner}</p>
+    <p>Owner: {data.isOwner}</p>
     <div class="opacity-60 text-sm">
       <p>Created: {data.deck.createdAt?.toLocaleString("en-GB")}</p>
       <p>Last Update: {data.deck.lastUpdate?.toLocaleString("en-GB")}</p>
@@ -61,23 +61,31 @@
     <DisplayTags tags={data.tags} />
   </div>
 
-  <div class="flex md:flex-col gap-5">
-    <button
-      on:click={() => modalStore.trigger(modal)}
-      class="btn md:btn-lg variant-outline-error flex-1 min-w-0"
-    >
-      Delete
-    </button>
-    <a
-      href={`/decks/${data.deck.id}/edit`}
-      class="btn md:btn-lg variant-outline-secondary flex-1 min-w-0"
-    >
-      Edit
-    </a>
-  </div>
+  {#if data.isOwner}
+    <div class="flex md:flex-col gap-5">
+      <button
+        on:click={() => modalStore.trigger(modal)}
+        class="btn md:btn-lg variant-outline-error flex-1 min-w-0"
+      >
+        Delete
+      </button>
+      <a
+        href={`/decks/${data.deck.id}/edit`}
+        class="btn md:btn-lg variant-outline-secondary flex-1 min-w-0"
+      >
+        Edit
+      </a>
+    </div>
+  {:else}
+    <div>
+      <button class="btn md:btn-lg variant-outline-secondary"
+        >Save as yours</button
+      >
+    </div>
+  {/if}
 </div>
 
-<DisplayFlashcards flashcards={data.flashcards} />
+<DisplayFlashcards flashcards={data.flashcards} isOwner={data.isOwner} />
 
 <style>
   h1 {

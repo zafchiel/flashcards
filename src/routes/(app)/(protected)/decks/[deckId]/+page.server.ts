@@ -7,12 +7,12 @@ export const load = async ({ params, locals }) => {
   const userId = locals.user.userId;
 
   // Determining if user accesing deck is the owner
-  let owner = false;
+  let isOwner = false;
 
   const deck = await getDeckById(parseInt(deckId));
-  if (deck.userId === userId) owner = true;
+  if (deck.userId === userId) isOwner = true;
   const flashcards = await getDecksFlashcards(parseInt(deckId));
   const tags = await getDeckTags(parseInt(deckId));
 
-  return { deck, flashcards, tags, owner };
+  return { deck, flashcards, tags, isOwner };
 };

@@ -6,13 +6,14 @@
   import { fly } from "svelte/transition";
   import { SlideToggle } from "@skeletonlabs/skeleton";
   // import { writable } from "svelte/store";
-  import { onDestroy } from "svelte";
+  import { onDestroy, onMount } from "svelte";
   import ShuffleIcon from "$lib/assets/shuffleIcon.svelte";
   import shuffleArray from "$lib/utils/shuffleArray";
   import { tooltip } from "$lib/actions/tooltip";
   import SettingsDrawer from "./settingsDrawer.svelte";
   import { filteredFlashcards } from "$lib/stores/filteredFlashcards";
 
+  export let isOwner: boolean;
   export let flashcards: Flashcard[];
   $filteredFlashcards = flashcards;
   // create deep copy for comparison
@@ -74,9 +75,23 @@
     }
   };
 
+  // If not owner, reset learned to false
+  if (!isOwner) {
+    onMount(() => {
+      $filteredFlashcards = $filteredFlashcards.map((flashcard) => ({
+        ...flashcard,
+        learned: false,
+      }));
+    });
+  }
+
   onDestroy(() => {
     // Un subscribing from filteredFlashcards
     unsub();
+
+    // If not owner, don't save
+    if (!isOwner) return;
+
     for (let i = 0; i < initFlashcards.length; i++) {
       if (initFlashcards[i].learned !== flashcards[i].learned) {
         fetch(`/api/flashcard?id=${flashcards[i].id}`, {
@@ -139,7 +154,9 @@
       </button>
     </div>
 
-    <SettingsDrawer />
+    <div class:pointer-events-none={!isOwner} class:opacity-50={!isOwner}>
+      <SettingsDrawer />
+    </div>
   </div>
 
   <SlideToggle
