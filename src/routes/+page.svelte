@@ -16,8 +16,15 @@
         { rotateX: 180, animationDuration: 2 },
         { easing: "ease-in-out", delay: 1 },
       ],
-      ["#firstSide", { opacity: 0, animationDuration: 0.5 }, { at: "-0.3" }],
-      ["#secondSide", { opacity: 1, rotateX: -180, animationDuration: 0.5 }],
+      [
+        "#firstSide",
+        { display: "none", animationDuration: 0.5 },
+        { at: "-0.3" },
+      ],
+      [
+        "#secondSide",
+        { display: "block", rotateX: -180, animationDuration: 0.5 },
+      ],
     ]);
   });
 </script>
@@ -36,12 +43,13 @@
         <a href="/login" class="btn variant-outline-secondary">Sign-in</a>
       </div>
     </div>
-    <div id="fancydiv" class="min-h-[200px] w-full grid relative font-bold">
+    <div
+      id="fancydiv"
+      class="min-h-[200px] w-full relative font-bold flex justify-center items-center"
+    >
       <CardSvg />
-      <p id="firstSide" class="h3 place-self-center">Learn Easily</p>
-      <p id="secondSide" class="h3 place-self-center opacity-0">
-        Remember More
-      </p>
+      <p id="firstSide" class="h3">Learn Easily</p>
+      <p id="secondSide" class="h3 hidden">Remember More</p>
     </div>
   </section>
 </main>
