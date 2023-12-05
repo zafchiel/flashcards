@@ -29,9 +29,11 @@
   });
 </script>
 
-<main class="min-h-[100svh]">
-  <section class="p-10 flex flex-col md:flex-row items-center gap-5">
-    <div class="max-w-xl">
+<main class="min-h-[100svh] flex items-center justify-center">
+  <section
+    class="p-10 flex flex-col items-center gap-5 card variant-soft-surface shadow-lg"
+  >
+    <div class="max-w-xl mb-10">
       <h1 class="h1 font-bold gradient-heading">Flashcards HUH</h1>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos magni
@@ -45,7 +47,7 @@
     </div>
     <div
       id="fancydiv"
-      class="min-h-[200px] w-full relative font-bold flex justify-center items-center"
+      class="min-h-[200px] min-w-full relative font-bold flex justify-center items-center"
     >
       <CardSvg />
       <p id="firstSide" class="h3">Learn Easily</p>

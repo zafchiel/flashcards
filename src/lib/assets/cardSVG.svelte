@@ -1,4 +1,4 @@
-<svg width="100%" height="100%" class="stroke-primary-500 absolute inset-0">
+<svg width="100%" height="100%" class="stroke-secondary-500 absolute inset-0">
   <g>
     <rect pathLength="1" rx="16" height="100%" width="100%" />
   </g>
