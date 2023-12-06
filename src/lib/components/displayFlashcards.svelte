@@ -12,6 +12,10 @@
   import { tooltip } from "$lib/actions/tooltip";
   import SettingsDrawer from "./settingsDrawer.svelte";
   import { filteredFlashcards } from "$lib/stores/filteredFlashcards";
+  import { getToastStore } from "@skeletonlabs/skeleton";
+  import { allFlashcardsLearnedToast } from "$lib/toasts";
+
+  const toastStore = getToastStore();
 
   export let isOwner: boolean;
   export let flashcards: Flashcard[];
@@ -28,7 +32,7 @@
 
   const unsub = filteredFlashcards.subscribe((values) => {
     if (values.length === 0) {
-      alert("No flashcards to show");
+      toastStore.trigger(allFlashcardsLearnedToast);
       showLearned = true;
       $filteredFlashcards = flashcards;
     }

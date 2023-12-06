@@ -21,3 +21,9 @@ export const successSavedSettignsToast: ToastSettings = {
   timeout: 3000,
   background: "variant-filled-success",
 }
+
+export const allFlashcardsLearnedToast: ToastSettings = {
+  message: `All flashcards learned!`,
+  timeout: 3000,
+  background: "variant-filled-success",
+}

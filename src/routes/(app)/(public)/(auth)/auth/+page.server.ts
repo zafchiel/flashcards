@@ -12,10 +12,11 @@ const formSchema = z.object({
   repeatPassword: z.string().min(6).max(255).optional(),
 });
 
-
 export const load = async ({ locals, url }) => {
-    const pageType = url.searchParams.get("t");
-    if(!(pageType === "signin" || pageType === "signup")) throw redirect(302, "auth?t=signup");
+  const pageType = url.searchParams.get("t");
+  if (!(pageType === "signin" || pageType === "signup")) {
+    throw redirect(302, "auth?t=signup");
+  }
 
   const session = await locals.auth.validate();
   if (session) throw redirect(302, "/decks");
@@ -29,7 +30,8 @@ export const actions = {
 
     if (!form.valid) return fail(400, { form });
 
-	if(form.data.password !== form.data.repeatPassword) return setError(form, "repeatPassword", "Passwords do not match");
+    if (form.data.password !== form.data.repeatPassword)
+      return setError(form, "repeatPassword", "Passwords do not match");
 
     const { username, password } = form.data;
     try {
@@ -64,39 +66,40 @@ export const actions = {
 
   signin: async ({ request, locals }) => {
     const form = await superValidate(request, formSchema);
-    
-    if(!form.valid) {
-        return fail(400, {form})
+
+    if (!form.valid) {
+      return fail(400, { form });
     }
 
-    const {username, password} = form.data;
-    
+    const { username, password } = form.data;
+
     try {
-        // find user by key
-        // and validate password
-        const key = await auth.useKey(
-            "username",
-            username.toLowerCase(),
-            password
-        );
-        const session = await auth.createSession({
-            userId: key.userId,
-            attributes: {}
-        });
-        locals.auth.setSession(session); // set session cookie
+      // find user by key
+      // and validate password
+      const key = await auth.useKey(
+        "username",
+        username.toLowerCase(),
+        password
+      );
+      const session = await auth.createSession({
+        userId: key.userId,
+        attributes: {},
+      });
+      locals.auth.setSession(session); // set session cookie
     } catch (e) {
-        if (
-            e instanceof LuciaError &&
-            (e.message === "AUTH_INVALID_KEY_ID" ||
-                e.message === "AUTH_INVALID_PASSWORD")
-        ) {
-            // user does not exist
-            // or invalid password
-            return message(form, "Username of password is invalid!", { status: 403 });
-        }
-        return message(form, "Something went wrong", { status: 500})
+      if (
+        e instanceof LuciaError &&
+        (e.message === "AUTH_INVALID_KEY_ID" ||
+          e.message === "AUTH_INVALID_PASSWORD")
+      ) {
+        // user does not exist
+        // or invalid password
+        return message(form, "Username of password is invalid!", {
+          status: 403,
+        });
+      }
+      return message(form, "Something went wrong", { status: 500 });
     }
     throw redirect(302, "/decks");
-}
-
+  },
 };
