@@ -33,10 +33,7 @@
       >
     {/if}
 
-    <AppRailAnchor
-      href="/discover"
-      selected={$page.url.pathname === "/explore"}
-    >
+    <AppRailAnchor href="/explore" selected={$page.url.pathname === "/explore"}>
       <div class="flex flex-col items-center justify-center gap-1">
         <GlobeIcon />
         <p>Explore</p>

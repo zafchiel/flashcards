@@ -84,7 +84,7 @@
         {/if}
         <p class="text-sm">
           Have account already? <a
-            href="/signup"
+            href="/login"
             class="text-secondary-400 underline">sign-in instead</a
           >
         </p>
