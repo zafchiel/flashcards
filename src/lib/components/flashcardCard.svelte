@@ -86,4 +86,8 @@
   .back {
     transform: rotateX(180deg);
   }
+
+  #starToggle + label:hover svg {
+    fill: currentColor;
+  }
 </style>
