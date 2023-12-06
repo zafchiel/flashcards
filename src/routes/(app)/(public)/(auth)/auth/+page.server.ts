@@ -59,8 +59,6 @@ export const actions = {
       }
       return message(form, "Something went wrong", { status: 500 });
     }
-    // redirect to
-    // make sure you don't throw inside a try/catch block!
     throw redirect(302, "/decks");
   },
 
@@ -98,7 +96,6 @@ export const actions = {
         }
         return message(form, "Something went wrong", { status: 500})
     }
-    // redirect to
     throw redirect(302, "/decks");
 }
 

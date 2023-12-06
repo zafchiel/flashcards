@@ -80,7 +80,7 @@
           </div>
         {/if}
 
-        <button class="btn variant-filled">
+        <button class="btn variant-filled mt-3 rounded-md">
           {#if pageType === "signup"}
             Register
           {:else}

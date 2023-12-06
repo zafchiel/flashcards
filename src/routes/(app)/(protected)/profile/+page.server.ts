@@ -8,6 +8,6 @@ export const actions = {
 
         await auth.invalidateSession(session.sessionId);
         locals.auth.setSession(null);
-        throw redirect(302, '/login');
+        throw redirect(302, '/auth?t=signin');
     }
 }

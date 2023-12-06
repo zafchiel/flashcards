@@ -14,10 +14,11 @@
         nesciunt dicta repudiandae vero, magnam ea eaque animi.
       </p>
       <div class="p-3 flex flex-wrap gap-3 items-center max-w-xs">
-        <a href="/signup" class="btn variant-filled-primary flex-1"
+        <a href="/auth?t=signup" class="btn variant-filled-primary flex-1"
           >Get Started</a
         >
-        <a href="/login" class="btn variant-outline-secondary flex-1">Sign-in</a
+        <a href="/auth?=signin" class="btn variant-outline-secondary flex-1"
+          >Sign-in</a
         >
       </div>
     </div>
