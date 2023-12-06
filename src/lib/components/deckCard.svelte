@@ -67,7 +67,7 @@
   </div>
   <div class="flex flex-col gap-2">
     <button
-      use:tooltip={{ content: "Edit deck" }}
+      title="Edit deck"
       on:click={(e) => {
         e.preventDefault();
         goto(`/decks/${deck.id}/edit`);
@@ -77,7 +77,7 @@
       <EditIcon />
     </button>
     <button
-      use:tooltip={{ content: "Delete deck" }}
+      title="Delete deck"
       on:click={(e) => {
         e.preventDefault();
         modalStore.trigger(modal);

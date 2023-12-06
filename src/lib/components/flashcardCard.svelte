@@ -30,6 +30,7 @@
       <label
         for="starToggle"
         class="cursor-pointer"
+        title="Mark as learned"
         use:tooltip={{ content: "Mark as learned" }}
       >
         <svg
