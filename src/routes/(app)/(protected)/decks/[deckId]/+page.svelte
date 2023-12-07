@@ -15,6 +15,7 @@
   } from "@skeletonlabs/skeleton";
   import type { ActionData } from "./$types.js";
   import { enhance } from "$app/forms";
+  import LoaderIcon from "$lib/assets/loaderIcon.svelte";
 
   export let data;
   export let form: ActionData;
@@ -29,6 +30,9 @@
     public: data.deck.public,
   };
 
+  let isFormLoading = false;
+
+  // If saving deck as yours was successful, redirect to new deck page
   $: if (form?.success) {
     toastStore.trigger(succesSavinDeckAsYoursToast);
     goto(`/decks/${form.newDeckId}`);
@@ -90,10 +94,26 @@
     </div>
   {:else}
     <div>
-      <form method="post" action="?/saveDeck" use:enhance>
-        <button class="btn md:btn-lg variant-outline-secondary"
-          >Save as yours</button
-        >
+      <form
+        method="post"
+        action="?/saveDeck"
+        use:enhance={() => {
+          isFormLoading = true;
+          return async ({ update, result }) => {
+            isFormLoading = false;
+            update();
+          };
+        }}
+      >
+        <button class="btn md:btn-lg variant-outline-secondary">
+          Save as yours
+          {#if isFormLoading}
+            <span class="animate-spin ml-2">
+              <!-- ⏳ -->
+              <LoaderIcon />
+            </span>
+          {/if}
+        </button>
       </form>
     </div>
   {/if}
