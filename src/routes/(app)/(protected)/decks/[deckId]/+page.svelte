@@ -98,8 +98,10 @@
         method="post"
         action="?/saveDeck"
         use:enhance={() => {
-          isFormLoading = true;
-          return async ({ update, result }) => {
+          setTimeout(() => {
+            isFormLoading = true;
+          }, 300);
+          return async ({ update }) => {
             isFormLoading = false;
             update();
           };
