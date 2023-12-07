@@ -2,7 +2,11 @@
   import { goto } from "$app/navigation";
   import DisplayFlashcards from "$lib/components/displayFlashcards.svelte";
   import DisplayTags from "$lib/components/displayTags.svelte";
-  import { errorToast, successDeleteToast } from "$lib/toasts/index.js";
+  import {
+    errorToast,
+    succesSavinDeckAsYoursToast,
+    successDeleteToast,
+  } from "$lib/toasts/index.js";
   import {
     getModalStore,
     getToastStore,
@@ -10,6 +14,7 @@
     type ModalSettings,
   } from "@skeletonlabs/skeleton";
   import type { ActionData } from "./$types.js";
+  import { enhance } from "$app/forms";
 
   export let data;
   export let form: ActionData;
@@ -23,6 +28,11 @@
     ...$drawerStore.meta,
     public: data.deck.public,
   };
+
+  $: if (form?.success) {
+    toastStore.trigger(succesSavinDeckAsYoursToast);
+    goto(`/decks/${form.newDeckId}`);
+  }
 
   const modal: ModalSettings = {
     type: "confirm",
@@ -80,7 +90,7 @@
     </div>
   {:else}
     <div>
-      <form method="post" action="?/saveDeck">
+      <form method="post" action="?/saveDeck" use:enhance>
         <button class="btn md:btn-lg variant-outline-secondary"
           >Save as yours</button
         >

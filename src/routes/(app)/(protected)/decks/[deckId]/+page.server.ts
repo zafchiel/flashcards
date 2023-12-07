@@ -6,7 +6,7 @@ import { getDeckTags } from "$lib/server/actions/getDeckTags";
 import { getDeckWithFlashcardsAndTags } from "$lib/server/actions/getDeckWithFlashcardsAndTags.js";
 import { getDecksFlashcards } from "$lib/server/actions/getDecksFlashcards.js";
 import type { Actions } from "@sveltejs/kit";
-import { fail, redirect } from "@sveltejs/kit";
+import { fail } from "@sveltejs/kit";
 
 export const load = async ({ params, locals }) => {
   const deckId = params.deckId;
@@ -30,17 +30,17 @@ export const actions: Actions = {
 
     try {
       const deck = await getDeckWithFlashcardsAndTags(deckId);
-      if(!deck) {
-        return fail(400, { message: "Deck not found" })
+      if (!deck) {
+        return fail(400, { message: "Deck not found" });
       }
-  
+
       const newDeck = await createDeck(
         locals.user.userId,
         deck.title,
         deck.description || undefined
       );
       newDeckId = newDeck.newDeckId;
-  
+
       const newFlashcards = deck.flashcards.map((flashcard) => ({
         ...flashcard,
         id: undefined,
@@ -48,13 +48,15 @@ export const actions: Actions = {
         learned: false,
       }));
       await createFlashcard(newDeckId, newFlashcards);
-  
-      const newTags = deck.tags.map(tag => tag.tagName);
-      await createTags(newTags, newDeckId);
-      
+
+      if (deck.tags.length !== 0) {
+        const newTags = deck.tags.map((tag) => tag.tagName);
+        await createTags(newTags, newDeckId);
+      }
+
+      return { success: true, newDeckId };
     } catch (error: any) {
-      return fail(500, { message: error.message })
+      return fail(500, { message: error.message });
     }
-    throw redirect(303, `/decks/${newDeckId}`)
   },
 };
