@@ -9,8 +9,10 @@
     getDrawerStore,
     type ModalSettings,
   } from "@skeletonlabs/skeleton";
+  import type { ActionData } from "./$types.js";
 
   export let data;
+  export let form: ActionData;
 
   const drawerStore = getDrawerStore();
   const modalStore = getModalStore();

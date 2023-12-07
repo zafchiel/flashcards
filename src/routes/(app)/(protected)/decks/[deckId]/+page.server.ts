@@ -6,6 +6,7 @@ import { getDeckTags } from "$lib/server/actions/getDeckTags";
 import { getDeckWithFlashcardsAndTags } from "$lib/server/actions/getDeckWithFlashcardsAndTags.js";
 import { getDecksFlashcards } from "$lib/server/actions/getDecksFlashcards.js";
 import type { Actions } from "@sveltejs/kit";
+import { fail, redirect } from "@sveltejs/kit";
 
 export const load = async ({ params, locals }) => {
   const deckId = params.deckId;
@@ -25,25 +26,35 @@ export const load = async ({ params, locals }) => {
 export const actions: Actions = {
   saveDeck: async ({ locals, params }) => {
     const deckId = parseInt(params.deckId!);
+    let newDeckId: number;
 
-    const deck = await getDeckWithFlashcardsAndTags(deckId);
-    if(!deck) throw new Error("Deck not found");
-
-    const newDeck = await createDeck(
-      locals.user.userId,
-      deck.title,
-      deck.description || undefined
-    );
-
-    const newFlashcards = deck.flashcards.map((flashcard) => ({
-      ...flashcard,
-      id: undefined,
-      deckId: newDeck.newDeckId,
-      learned: false,
-    }));
-    await createFlashcard(newDeck.newDeckId, newFlashcards);
-
-    const newTags = deck.tags.map(tag => tag.tagName);
-    await createTags(newTags, newDeck.newDeckId);
+    try {
+      const deck = await getDeckWithFlashcardsAndTags(deckId);
+      if(!deck) {
+        return fail(400, { message: "Deck not found" })
+      }
+  
+      const newDeck = await createDeck(
+        locals.user.userId,
+        deck.title,
+        deck.description || undefined
+      );
+      newDeckId = newDeck.newDeckId;
+  
+      const newFlashcards = deck.flashcards.map((flashcard) => ({
+        ...flashcard,
+        id: undefined,
+        deckId: newDeckId,
+        learned: false,
+      }));
+      await createFlashcard(newDeckId, newFlashcards);
+  
+      const newTags = deck.tags.map(tag => tag.tagName);
+      await createTags(newTags, newDeckId);
+      
+    } catch (error: any) {
+      return fail(500, { message: error.message })
+    }
+    throw redirect(303, `/decks/${newDeckId}`)
   },
 };
