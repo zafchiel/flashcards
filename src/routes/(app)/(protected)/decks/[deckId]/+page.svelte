@@ -78,9 +78,11 @@
     </div>
   {:else}
     <div>
-      <button class="btn md:btn-lg variant-outline-secondary"
-        >Save as yours</button
-      >
+      <form method="post" action="?/saveDeck">
+        <button class="btn md:btn-lg variant-outline-secondary"
+          >Save as yours</button
+        >
+      </form>
     </div>
   {/if}
 </div>

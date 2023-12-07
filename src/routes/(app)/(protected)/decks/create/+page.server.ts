@@ -51,7 +51,7 @@ export const actions = {
     const { deckTitle, deckDescription, flashcards, tags } = form.data;
 
     try {
-      const { deckId: newDeckId } = await createDeck(
+      const { newDeckId } = await createDeck(
         locals.user.userId,
         deckTitle,
         deckDescription
