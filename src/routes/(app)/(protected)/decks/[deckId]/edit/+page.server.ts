@@ -1,6 +1,6 @@
 import { error, fail, redirect } from "@sveltejs/kit";
 import { message, superValidate } from "sveltekit-superforms/server";
-import { z } from "zod";
+import  type { z } from "zod";
 import type { PageServerLoad } from "../$types";
 import { getDeckWithFlashcardsAndTags } from "$lib/server/actions/getDeckWithFlashcardsAndTags";
 import { DatabaseError } from "@neondatabase/serverless";
@@ -9,50 +9,27 @@ import { decks, flashcards, deckTags } from "$lib/server/db/schema";
 import { createFlashcard } from "$lib/server/actions/createFlashcard";
 import { eq } from "drizzle-orm";
 import { createTags } from "$lib/server/actions/createTags";
-
-const schema = z.object({
-  deckTitle: z
-    .string()
-    .min(3, { message: "Must contain at least 3 characters" })
-    .max(31),
-  deckDescription: z.string().max(255).optional(),
-  flashcards: z
-    .array(
-      z.object({
-        question: z
-          .string()
-          .min(1, { message: "Must contain at least 1 character" })
-          .max(255),
-        answer: z
-          .string()
-          .min(1, { message: "Must contain at least 1 character" })
-          .max(255),
-      })
-    )
-    .min(2, { message: "Must contain at least 2 flashcards" })
-    .max(100),
-  tags: z.array(z.string().max(50)).max(10).optional(),
-});
+import { _deckFormSchema } from "../../create/+page.server";
 
 export const load: PageServerLoad = async ({ params }) => {
   const deck = await getDeckWithFlashcardsAndTags(parseInt(params.deckId));
   if (!deck) throw error(404, "Deck not found");
 
   const tagsArray = deck.tags.map((tag) => tag.tagName);
-  const deckFormInitData: z.infer<typeof schema> = {
+  const deckFormInitData: z.infer<typeof _deckFormSchema> = {
     deckTitle: deck.title,
     deckDescription: deck.description ?? undefined,
     flashcards: deck.flashcards,
     tags: tagsArray,
   };
 
-  const form = await superValidate(deckFormInitData, schema);
+  const form = await superValidate(deckFormInitData, _deckFormSchema);
   return { form, deckId: deck.id };
 };
 
 export const actions = {
   default: async ({ request, params }) => {
-    const form = await superValidate(request, schema);
+    const form = await superValidate(request, _deckFormSchema);
 
     if (!form.valid) {
       return fail(400, { form });
