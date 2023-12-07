@@ -85,6 +85,9 @@
     </div>
 
     <h2 class="h2 p-3 text-primary-500 font-semibold">Flashcards</h2>
+    {#if $errors.flashcards}
+      <p class="text-error-500 text-sm">{$errors.flashcards._errors}</p>
+    {/if}
 
     {#each $form.flashcards as _, i}
       <div

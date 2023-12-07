@@ -18,7 +18,8 @@
       ["#firstSide", { display: "none" }, { at: "-0.7" }],
       [
         "#secondSide",
-        { display: "block", rotateX: -180, animationDuration: 1 },
+        { display: "block", rotateX: 180, animationDuration: 0.5 },
+        { at: 3 },
       ],
     ]);
   });
