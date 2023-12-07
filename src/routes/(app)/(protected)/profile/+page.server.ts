@@ -1,5 +1,11 @@
+import { getUserDecks } from "$lib/server/actions/getUserDecks.js";
 import { auth } from "$lib/server/lucia.js";
 import { fail, redirect } from "@sveltejs/kit";
+
+export const load = async ({locals}) => {
+    const decks = await getUserDecks(locals.user.userId);
+    return { numberOfDecks: decks.length };
+}
 
 export const actions = {
     logout: async ({locals}) => {

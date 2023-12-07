@@ -10,18 +10,29 @@
     <button class="btn md:btn-lg variant-filled-secondary">Log-out</button>
   </form>
 </div>
-<div class="flex items-center">
+<div class="flex">
   <Avatar
     src={data.user?.avatar ?? undefined}
     initials={data.user?.username.slice(0, 2)}
     alt="User profile"
     rounded="rounded-none"
+    width="w-32"
   />
-  <div
-    class="font-bold border-t border-r border-b self-stretch rounded-r-sm p-3"
-  >
-    <p class="text-3xl break-words">
-      {data.user?.username}
-    </p>
+  <div class="flex flex-col justify-between pl-2 py-1">
+    <div>
+      <p class="text-3xl break-words font-semibold">
+        {data.user?.username}
+      </p>
+      <p class="text-sm opacity-60">username</p>
+    </div>
+
+    <div>
+      <p>
+        Number of decks:
+        <span class="opacity-60">
+          {data.numberOfDecks}
+        </span>
+      </p>
+    </div>
   </div>
 </div>
