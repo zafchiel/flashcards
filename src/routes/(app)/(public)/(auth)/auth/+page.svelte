@@ -25,6 +25,21 @@
         Sign-in
       {/if}
     </h1>
+    {#if pageType === "signup"}
+      <p class="text-sm">
+        Have account already? <a
+          href="/auth?t=signin"
+          class="text-secondary-400 underline">sign-in instead</a
+        >
+      </p>
+    {:else}
+      <p class="text-sm">
+        Don't have account? <a
+          href="/auth?t=signup"
+          class="text-secondary-400 underline">sign-up instead</a
+        >
+      </p>
+    {/if}
     <form method="post" use:enhance action={`?/${pageType}`}>
       <div class="flex flex-col gap-3 border-t pt-4">
         <div>
@@ -97,28 +112,17 @@
           <p class="text-primary-400">{$message}</p>
         {/if}
 
+        <div class="flex gap-3 items-center justify-center px-2">
+          <div class="w-full border-t"></div>
+          <p class="uppercase text-center">or</p>
+          <div class="w-full border-t"></div>
+        </div>
         <a href="/auth/github" class="btn variant-outline-tertiary"
-          >Sign-in with Github</a
+          >Continue with Github</a
         >
         <a href="/auth/google" class="btn variant-outline-tertiary"
-          >Sign-in with Google</a
+          >Continue with Google</a
         >
-
-        {#if pageType === "signup"}
-          <p class="text-sm">
-            Have account already? <a
-              href="/auth?t=signin"
-              class="text-secondary-400 underline">sign-in instead</a
-            >
-          </p>
-        {:else}
-          <p class="text-sm">
-            Don't have account? <a
-              href="/auth?t=signup"
-              class="text-secondary-400 underline">sign-up instead</a
-            >
-          </p>
-        {/if}
       </div>
     </form>
   </div>
