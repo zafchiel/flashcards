@@ -51,7 +51,7 @@
   class="h-full max-w-md card p-4 variant-ghost-primary flex gap-3 card-hover"
   class:deleting-animation={isDeleting}
 >
-  <div class="min-w-0 break-words">
+  <div>
     <h2 class="h2 font-semibold" style:--deck_id="deck-{deck.id}">
       {deck.title}
     </h2>
