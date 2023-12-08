@@ -4,8 +4,11 @@ export const tooltip = (element: HTMLElement, params: { content: string }) => {
     tooltip.innerText = params.content;
 
     tooltip.className =
-      "variant-filled text-sm fixed min-w-max p-2 z-10 rounded-md pointer-events-none";
+      "variant-filled text-sm fixed hidden min-w-max p-2 z-10 rounded-md pointer-events-none";
     element.appendChild(tooltip);
+    setTimeout(() => {
+      tooltip.classList.remove("hidden");
+    }, 400)
   };
 
   const mouseMove = (event: MouseEvent) => {
