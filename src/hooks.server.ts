@@ -6,7 +6,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 	if(event.url.pathname.startsWith('/profile') || event.url.pathname.startsWith('/decks')) {
 		const session = await event.locals.auth.validate();
-		if(!session) throw redirect(302, '/login');
+		if(!session) throw redirect(302, '/auth?t=signin');
 		event.locals.user = session.user;
 	}
 	return await resolve(event);

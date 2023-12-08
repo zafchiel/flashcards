@@ -4,6 +4,9 @@ import { dev } from "$app/environment";
 import { pg } from "@lucia-auth/adapter-postgresql";
 import { pool } from "./db";
 
+import { github } from "@lucia-auth/oauth/providers";
+import { GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET } from "$env/static/private";
+
 export const auth = lucia({
 	env: dev ? "DEV" : "PROD",
 	middleware: sveltekit(),
@@ -20,5 +23,10 @@ export const auth = lucia({
     }
   }
 });
+
+export const githubAuth = github(auth, {
+  clientId: GITHUB_CLIENT_ID,
+  clientSecret: GITHUB_CLIENT_SECRET,
+})
 
 export type Auth = typeof auth;

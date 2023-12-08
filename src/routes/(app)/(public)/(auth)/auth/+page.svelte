@@ -97,6 +97,10 @@
           <p class="text-primary-400">{$message}</p>
         {/if}
 
+        <a href="/auth/github" class="btn variant-outline-tertiary"
+          >Sign-in with Github</a
+        >
+
         {#if pageType === "signup"}
           <p class="text-sm">
             Have account already? <a
