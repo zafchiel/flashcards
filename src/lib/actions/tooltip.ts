@@ -5,15 +5,15 @@ export const tooltip = (element: HTMLElement, params: { content: string }) => {
 
     tooltip.className =
       "variant-filled text-sm fixed hidden min-w-max p-2 z-10 rounded-md pointer-events-none";
-    element.appendChild(tooltip);
+    document.body.appendChild(tooltip);
     setTimeout(() => {
       tooltip.classList.remove("hidden");
     }, 400)
   };
 
   const mouseMove = (event: MouseEvent) => {
-    tooltip.style.top = `${event.pageY + 5}px`;
-    tooltip.style.left = `${event.pageX + 5}px`;
+    tooltip.style.top = `${event.pageY + 7}px`;
+    tooltip.style.left = `${event.pageX + 7}px`;
   };
 
   const mouseOut = () => {
