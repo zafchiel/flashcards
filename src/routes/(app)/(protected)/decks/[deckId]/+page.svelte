@@ -74,7 +74,7 @@
       <p>Created: {data.deck.createdAt?.toLocaleString("en-GB")}</p>
       <p>Last Update: {data.deck.lastUpdate?.toLocaleString("en-GB")}</p>
     </div>
-    <DisplayTags tags={data.tags} />
+    <DisplayTags tags={data.deck.tags} />
   </div>
 
   {#if data.isOwner}
@@ -121,7 +121,7 @@
   {/if}
 </div>
 
-<DisplayFlashcards flashcards={data.flashcards} isOwner={data.isOwner} />
+<DisplayFlashcards flashcards={data.deck.flashcards} isOwner={data.isOwner} />
 
 <style>
   h1 {

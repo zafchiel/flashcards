@@ -9,18 +9,19 @@ import type { Actions } from "@sveltejs/kit";
 import { fail } from "@sveltejs/kit";
 
 export const load = async ({ params, locals }) => {
-  const deckId = params.deckId;
+  const deckId = parseInt(params.deckId);
   const userId = locals.user.userId;
 
   // Determining if user accesing deck is the owner
   let isOwner = false;
 
-  const deck = await getDeckById(parseInt(deckId));
-  if (deck.userId === userId) isOwner = true;
-  const flashcards = await getDecksFlashcards(parseInt(deckId));
-  const tags = await getDeckTags(parseInt(deckId));
+  const deck = await getDeckWithFlashcardsAndTags(deckId);
+  if(!deck) throw new Error("Deck not found");
+  if(deck.userId === userId) isOwner = true;
 
-  return { deck, flashcards, tags, isOwner };
+
+
+  return { deck, isOwner };
 };
 
 export const actions: Actions = {
