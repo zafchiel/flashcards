@@ -100,6 +100,9 @@
         <a href="/auth/github" class="btn variant-outline-tertiary"
           >Sign-in with Github</a
         >
+        <a href="/auth/google" class="btn variant-outline-tertiary"
+          >Sign-in with Google</a
+        >
 
         {#if pageType === "signup"}
           <p class="text-sm">
