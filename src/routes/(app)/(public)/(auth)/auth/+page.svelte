@@ -3,6 +3,8 @@
   import type { PageData } from "./$types";
   import LoaderIcon from "$lib/assets/loaderIcon.svelte";
   import { page } from "$app/stores";
+  import GithubIcon from "$lib/assets/githubIcon.svelte";
+  import GoogleIcon from "$lib/assets/googleIcon.svelte";
 
   export let data: PageData;
   $: pageType = $page.url.searchParams.get("t");
@@ -117,12 +119,14 @@
           <p class="uppercase text-center">or</p>
           <div class="w-full border-t"></div>
         </div>
-        <a href="/auth/github" class="btn variant-outline-tertiary"
-          >Continue with Github</a
-        >
-        <a href="/auth/google" class="btn variant-outline-tertiary"
-          >Continue with Google</a
-        >
+        <a href="/auth/github" class="btn variant-outline-tertiary flex gap-2">
+          <GithubIcon />
+          Continue with Github
+        </a>
+        <a href="/auth/google" class="btn variant-outline-tertiary flex gap-2">
+          <GoogleIcon />
+          Continue with Google
+        </a>
       </div>
     </form>
   </div>
