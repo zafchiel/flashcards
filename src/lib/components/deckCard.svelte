@@ -28,18 +28,24 @@
     // TRUE if confirm pressed, FALSE if cancel pressed
     response: async (r: boolean) => {
       if (r) {
-        const res = await fetch(`/api/decks?deckId=${deck.id}`, {
-          method: "DELETE",
-        });
-        const response = await res.json();
-        if (response.success) {
-          isDeleting = true;
-          modalStore.close();
-          invalidate("invalidate:decks");
-          toastStore.trigger(successDeleteToast);
-        } else {
-          isDeleting = false;
+        isDeleting = true;
+        try {
+          const res = await fetch(`/api/decks?deckId=${deck.id}`, {
+            method: "DELETE",
+          });
+          const response = await res.json();
+
+          if (response.success) {
+            modalStore.close();
+            invalidate("invalidate:decks");
+            toastStore.trigger(successDeleteToast);
+          } else {
+            throw new Error(response.message);
+          }
+        } catch (error) {
           toastStore.trigger(errorToast);
+        } finally {
+          isDeleting = false;
         }
       }
     },
@@ -92,11 +98,11 @@
 <style>
   .deleting-animation {
     opacity: 0.7;
-    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    animation: pulsing 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }
   @keyframes pulsing {
     50% {
-      opacity: 0.5;
+      opacity: 0.3;
     }
   }
 
