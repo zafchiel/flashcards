@@ -6,7 +6,7 @@ import { getDeckTags } from "$lib/server/actions/getDeckTags";
 import { getDeckWithFlashcardsAndTags } from "$lib/server/actions/getDeckWithFlashcardsAndTags.js";
 import { getDecksFlashcards } from "$lib/server/actions/getDecksFlashcards.js";
 import type { Actions } from "@sveltejs/kit";
-import { fail } from "@sveltejs/kit";
+import { error, fail } from "@sveltejs/kit";
 
 export const load = async ({ params, locals }) => {
   const deckId = parseInt(params.deckId);
@@ -16,7 +16,7 @@ export const load = async ({ params, locals }) => {
   let isOwner = false;
 
   const deck = await getDeckWithFlashcardsAndTags(deckId);
-  if(!deck) throw new Error("Deck not found");
+  if(!deck) throw error(403, "Deck not found");
   if(deck.userId === userId) isOwner = true;
 
 
