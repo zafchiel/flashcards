@@ -14,6 +14,7 @@
 
   type DecksWithTags<T> = Deck & { tags: T[] };
 
+  export let isPublic: boolean = false;
   export let deck: DecksWithTags<DeckTags>;
 
   const modalStore = getModalStore();
@@ -71,28 +72,30 @@
       </div>
     {/if}
   </div>
-  <div class="flex flex-col gap-2">
-    <button
-      use:tooltip={{ content: "Edit deck" }}
-      on:click={(e) => {
-        e.preventDefault();
-        goto(`/decks/${deck.id}/edit`);
-      }}
-      class="btn-icon btn-icon-sm variant-filled-secondary"
-    >
-      <EditIcon />
-    </button>
-    <button
-      use:tooltip={{ content: "Delete deck" }}
-      on:click={(e) => {
-        e.preventDefault();
-        modalStore.trigger(modal);
-      }}
-      class="btn-icon btn-icon-sm variant-outline-error"
-    >
-      <TrashIcon />
-    </button>
-  </div>
+  {#if !isPublic}
+    <div class="flex flex-col gap-2">
+      <button
+        use:tooltip={{ content: "Edit deck" }}
+        on:click={(e) => {
+          e.preventDefault();
+          goto(`/decks/${deck.id}/edit`);
+        }}
+        class="btn-icon btn-icon-sm variant-filled-secondary"
+      >
+        <EditIcon />
+      </button>
+      <button
+        use:tooltip={{ content: "Delete deck" }}
+        on:click={(e) => {
+          e.preventDefault();
+          modalStore.trigger(modal);
+        }}
+        class="btn-icon btn-icon-sm variant-outline-error"
+      >
+        <TrashIcon />
+      </button>
+    </div>
+  {/if}
 </a>
 
 <style>

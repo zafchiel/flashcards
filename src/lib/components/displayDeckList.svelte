@@ -6,6 +6,7 @@
   // typing sheningans
   type DecksWithTags<T> = Deck & { tags: T[] };
 
+  export let isPublic: boolean = false;
   export let decks: DecksWithTags<DeckTags>[];
 </script>
 
@@ -15,7 +16,7 @@
   {/if}
   {#each decks as deck (deck.id)}
     <div animate:flip={{ duration: 500 }}>
-      <DeckCard {deck} />
+      <DeckCard {deck} {isPublic} />
     </div>
   {/each}
 </section>
