@@ -1,10 +1,7 @@
 import { createDeck } from "$lib/server/actions/createDeck.js";
 import { createFlashcard } from "$lib/server/actions/createFlashcard.js";
 import { createTags } from "$lib/server/actions/createTags.js";
-import { getDeckById } from "$lib/server/actions/getDeckById.js";
-import { getDeckTags } from "$lib/server/actions/getDeckTags";
 import { getDeckWithFlashcardsAndTags } from "$lib/server/actions/getDeckWithFlashcardsAndTags.js";
-import { getDecksFlashcards } from "$lib/server/actions/getDecksFlashcards.js";
 import type { Actions } from "@sveltejs/kit";
 import { error, fail } from "@sveltejs/kit";
 
