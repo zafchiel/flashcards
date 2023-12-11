@@ -15,13 +15,19 @@
   <slot />
 {:else}
   <div class="flex">
+    <!-- Determine which nav to display -->
+    <!-- Currently causing layout shift -->
     {#if windowWidth > 768}
       <SideRail user={data.user} />
     {:else}
       <BottomNav user={data.user} />
     {/if}
+
     <main class="h-screen overflow-y-auto w-full">
-      <div class="p-3 md:p-10 relative w-full overflow-x-hidden max-w-4xl">
+      <div
+        class="p-3 md:p-10 relative w-full overflow-x-hidden max-w-4xl"
+        class:pb-14={windowWidth < 768}
+      >
         <ProgressBar />
         <slot />
       </div>
