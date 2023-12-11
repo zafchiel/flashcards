@@ -1,12 +1,12 @@
 <script lang="ts">
   import { flip } from "svelte/animate";
-  import DeckCard from "$lib/components/deckCard.svelte";
-  import type { Deck, DeckTags } from "$lib/server/db/schema";
+  import type { Deck, DeckTags, User } from "$lib/server/db/schema";
+  import PublicDeckCard from "./publicDeckCard.svelte";
 
   // typing sheningans
-  type DecksWithTags<T> = Deck & { tags: T[] };
+  type DecksWithTags<T, U> = Deck & { tags: T[]; user: U };
 
-  export let decks: DecksWithTags<DeckTags>[];
+  export let decks: DecksWithTags<DeckTags, User>[];
 </script>
 
 <section class="flex gap-3 flex-wrap">
@@ -15,7 +15,7 @@
   {/if}
   {#each decks as deck (deck.id)}
     <div animate:flip={{ duration: 500 }}>
-      <DeckCard {deck} />
+      <PublicDeckCard {deck} />
     </div>
   {/each}
 </section>

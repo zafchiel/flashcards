@@ -6,7 +6,8 @@ export const getAllPublicDecks = async () => {
     const result = await dbHttp.query.decks.findMany({
         where: eq(decks.public, true),
         with: {
-            tags: true
+            tags: true,
+            user: true,
         }
     })
     return result;
