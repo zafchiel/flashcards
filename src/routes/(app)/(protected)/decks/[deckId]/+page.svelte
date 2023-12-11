@@ -69,7 +69,10 @@
     >
       {data.deck.title}
     </h1>
-    <p>Owner: {data.isOwner}</p>
+    <p class="text-sm">
+      <span class="opacity-60">Owner: </span>
+      <span class="font-semibold">{data.isOwner ? "You" : "Not You"}</span>
+    </p>
     <div class="opacity-60 text-sm">
       <p>Created: {data.deck.createdAt?.toLocaleString("en-GB")}</p>
       <p>Last Update: {data.deck.lastUpdate?.toLocaleString("en-GB")}</p>
