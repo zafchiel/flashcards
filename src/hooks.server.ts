@@ -1,7 +1,7 @@
 import { auth } from "$lib/server/lucia";
 import { redirect, type Handle } from "@sveltejs/kit";
 
-const protectedPaths = ["/profile", "/decks"];
+const protectedPaths = ["/profile", "/decks", "/api"];
 
 const isPathProtected = (path: string, protectedPathsArray: string[]) => {
   return protectedPathsArray.some((protectedPath) =>
