@@ -1,7 +1,7 @@
 <svg
   width="36"
   height="36"
-  viewBox="-4 -5 24 24"
+  viewBox="0 0 24 24"
   fill="none"
   stroke="currentColor"
 >

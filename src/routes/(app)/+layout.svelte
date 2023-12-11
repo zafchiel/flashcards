@@ -1,16 +1,25 @@
 <script lang="ts">
+  import BottomNav from "$lib/components/bottomNav.svelte";
   import ProgressBar from "$lib/components/progressBar.svelte";
   import SideRail from "$lib/components/sideRail.svelte";
 
   export let data;
+
+  let windowWidth: number;
 </script>
+
+<svelte:window bind:innerWidth={windowWidth} />
 
 <!-- If user is logged in don't duplicate layout -->
 {#if !data.user}
   <slot />
 {:else}
   <div class="flex">
-    <SideRail user={data.user} />
+    {#if windowWidth > 768}
+      <SideRail user={data.user} />
+    {:else}
+      <BottomNav user={data.user} />
+    {/if}
     <main class="h-screen overflow-y-auto w-full">
       <div class="p-3 md:p-10 relative w-full overflow-x-hidden max-w-4xl">
         <ProgressBar />
