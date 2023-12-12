@@ -6,6 +6,7 @@
   export let data;
 
   let windowWidth: number;
+  $: console.log(windowWidth);
 </script>
 
 <svelte:window bind:innerWidth={windowWidth} />
@@ -16,10 +17,9 @@
 {:else}
   <div class="flex">
     <!-- Determine which nav to display -->
-    <!-- Currently causing layout shift -->
     {#if windowWidth > 768}
       <SideRail user={data.user} />
-    {:else}
+    {:else if windowWidth < 768}
       <BottomNav user={data.user} />
     {/if}
 
