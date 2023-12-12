@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { AppRail, AppRailAnchor } from "@skeletonlabs/skeleton";
+  import { AppRail, AppRailAnchor, Avatar } from "@skeletonlabs/skeleton";
   import { page } from "$app/stores";
   import type { User } from "lucia";
   import { LightSwitch } from "@skeletonlabs/skeleton";
@@ -47,7 +47,12 @@
       >
         <div class="flex flex-col justify-center items-center">
           {#if user?.avatar}
-            <img src={user.avatar} alt="User Avatar" class="w-10 h-10" />
+            <Avatar
+              src={user.avatar ?? undefined}
+              initials={user.username.slice(0, 2)}
+              alt="User Profile Avatar"
+              width="w-10"
+            />
           {/if}
           Profile
         </div>

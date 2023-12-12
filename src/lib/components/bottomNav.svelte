@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { TabGroup, TabAnchor } from "@skeletonlabs/skeleton";
+  import { TabGroup, TabAnchor, Avatar } from "@skeletonlabs/skeleton";
   import { page } from "$app/stores";
   import DeckIcon from "$lib/assets/deckIcon.svelte";
   import GlobeIcon from "$lib/assets/globeIcon.svelte";
@@ -42,7 +42,12 @@
         class="flex justify-center items-center"
       >
         {#if user?.avatar}
-          <img src={user.avatar} alt="User Avatar" class="w-10 h-10" />
+          <Avatar
+            src={user.avatar ?? undefined}
+            initials={user.username.slice(0, 2)}
+            alt="User Profile Avatar"
+            width="w-10"
+          />
         {:else}
           <p>Profile</p>
         {/if}

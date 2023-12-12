@@ -18,7 +18,7 @@
   <Avatar
     src={data.user?.avatar ?? undefined}
     initials={data.user?.username.slice(0, 2)}
-    alt="User profile"
+    alt="User Profile Avatar"
     rounded="rounded-none"
     width="w-32"
   />
