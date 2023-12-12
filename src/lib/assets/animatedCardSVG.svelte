@@ -29,7 +29,12 @@
   id="fancydiv"
   class="min-h-[200px] min-w-full relative font-bold flex justify-center items-center"
 >
-  <svg width="100%" height="100%" class="stroke-secondary-500 absolute inset-0">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="100%"
+    height="100%"
+    class="stroke-secondary-500 absolute inset-0"
+  >
     <g>
       <rect pathLength="1" rx="16" height="100%" width="100%" />
     </g>
