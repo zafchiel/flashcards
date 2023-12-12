@@ -2,6 +2,10 @@
   import CardSvg from "$lib/assets/animatedCardSVG.svelte";
 </script>
 
+<svelte:head>
+  <title>Flashcards\HUH</title>
+</svelte:head>
+
 <main class="min-h-[100svh] flex items-center justify-center">
   <section
     class="p-4 m-2 md:p-10 flex flex-col items-center gap-5 card variant-soft-surface shadow-lg"

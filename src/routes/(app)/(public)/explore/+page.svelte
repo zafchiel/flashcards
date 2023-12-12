@@ -5,6 +5,10 @@
   export let data: PageData;
 </script>
 
+<svelte:head>
+  <title>Explore | Flashcards\HUH</title>
+</svelte:head>
+
 <h1 class="h1 p-4">Discover public decks</h1>
 
 <DisplayPublicDeckList decks={data.decks} />

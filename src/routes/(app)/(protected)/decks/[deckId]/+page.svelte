@@ -59,6 +59,14 @@
   };
 </script>
 
+<svelte:head>
+  <title>{data.deck.title}</title>
+  <meta
+    name="description"
+    content={`This is description of the deck ${data.deck.description}`}
+  />
+</svelte:head>
+
 <div
   class="flex flex-col md:flex-row flex-wrap justify-between md:items-center"
 >

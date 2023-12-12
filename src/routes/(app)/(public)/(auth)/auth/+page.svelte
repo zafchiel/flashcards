@@ -18,6 +18,10 @@
   };
 </script>
 
+<svelte:head>
+  <title>{pageType === "signup" ? "Register" : "Login"} | Flashcards\HUH</title>
+</svelte:head>
+
 <section class="flex flex-col justify-center items-center h-full">
   <div class="variant-soft card p-4">
     <h1 class="h1 card-header mb-4">

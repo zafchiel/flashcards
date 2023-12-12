@@ -6,6 +6,10 @@
   export let data: PageData;
 </script>
 
+<svelte:head>
+  <title>Decks | Flashcards\HUH</title>
+</svelte:head>
+
 <div class="flex justify-between items-center">
   <h1 class="h1 p-4">Decks Page</h1>
   <a

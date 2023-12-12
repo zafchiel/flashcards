@@ -4,6 +4,10 @@
   export let data;
 </script>
 
+<svelte:head>
+  <title>Profile | Flashcards\HUH</title>
+</svelte:head>
+
 <div class="flex items-center justify-between mb-10">
   <h1 class="h1">Profile page</h1>
   <form method="post" action="?/logout" use:enhance>
