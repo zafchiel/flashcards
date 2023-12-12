@@ -6,7 +6,11 @@
   } from "@skeletonlabs/skeleton";
   import { page } from "$app/stores";
   import { onDestroy } from "svelte";
-  import { errorToast, successSavedSettignsToast } from "$lib/toasts";
+  import {
+    errorToast,
+    savingSettingsStateToast,
+    successSavedSettignsToast,
+  } from "$lib/toasts";
 
   const drawerStore = getDrawerStore();
   const toastStore = getToastStore();
@@ -18,6 +22,8 @@
   onDestroy(async () => {
     // If nothing changed, don't send request
     if (initialSettings === JSON.stringify($drawerStore.meta)) return;
+
+    const watingStateToastId = toastStore.trigger(savingSettingsStateToast);
 
     const res = await fetch(`/api/decks?deckId=${$page.params.deckId}`, {
       method: "PATCH",
@@ -31,11 +37,10 @@
     if (!res.ok) {
       toastStore.trigger(errorToast);
     } else {
+      toastStore.close(watingStateToastId);
       toastStore.trigger(successSavedSettignsToast);
     }
   });
-
-  $: console.log($drawerStore.meta);
 </script>
 
 <div class="p-4">

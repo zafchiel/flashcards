@@ -33,3 +33,8 @@ export const allFlashcardsLearnedToast: ToastSettings = {
   timeout: 3000,
   background: "variant-filled-tertiary",
 }
+
+export const savingSettingsStateToast: ToastSettings = {
+  message: `Settings are being saved...`,
+  background: "variant-filled-tertiary",
+}
