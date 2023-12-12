@@ -6,7 +6,7 @@ type Payload = {
   title?: string;
   description?: string;
   userId?: string;
-  public: boolean;
+  public?: boolean;
   lastUpdate?: Date;
 };
 

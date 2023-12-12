@@ -1,21 +1,23 @@
 import { error, fail, redirect } from "@sveltejs/kit";
 import { message, superValidate } from "sveltekit-superforms/server";
-import  type { z } from "zod";
+import type { z } from "zod";
 import type { PageServerLoad } from "../$types";
 import { getDeckWithFlashcardsAndTags } from "$lib/server/actions/getDeckWithFlashcardsAndTags";
 import { DatabaseError } from "@neondatabase/serverless";
 import { dbHttp } from "$lib/server/db";
-import { decks, flashcards, deckTags } from "$lib/server/db/schema";
+import { flashcards, deckTags } from "$lib/server/db/schema";
 import { createFlashcard } from "$lib/server/actions/createFlashcard";
 import { eq } from "drizzle-orm";
 import { createTags } from "$lib/server/actions/createTags";
 import { _deckFormSchema } from "../../create/+page.server";
+import { updateDeck } from "$lib/server/actions/updateDeck";
 
 export const load: PageServerLoad = async ({ params, locals }) => {
   const deck = await getDeckWithFlashcardsAndTags(parseInt(params.deckId));
   if (!deck) throw error(404, "Deck not found");
 
-  if(deck.userId !== locals.user.userId) throw error(403, "You are not allowed to edit this deck");
+  if (deck.userId !== locals.user.userId)
+    throw error(403, "You are not allowed to edit this deck");
 
   const tagsArray = deck.tags.map((tag) => tag.tagName);
   const deckFormInitData: z.infer<typeof _deckFormSchema> = {
@@ -42,22 +44,23 @@ export const actions = {
         parseInt(params.deckId)
       );
 
-      if (form.data.tags?.length !== deckInDb?.tags.length) {
+      // Delete tags if there are any in db
+      if (deckInDb?.tags.length) {
         await dbHttp
           .delete(deckTags)
           .where(eq(deckTags.deckId, parseInt(params.deckId)));
-        if (form.data.tags)
-          await createTags(form.data.tags, parseInt(params.deckId));
+      }
+      // Create new tags if there are any
+      if (form.data.tags?.length) {
+        await createTags(form.data.tags, parseInt(params.deckId));
       }
 
-      await dbHttp
-        .update(decks)
-        .set({
-          title: form.data.deckTitle,
-          description: form.data.deckDescription ?? null,
-          lastUpdate: new Date(),
-        })
-        .where(eq(decks.id, parseInt(params.deckId)));
+      // Update deck
+      await updateDeck(parseInt(params.deckId), {
+        title: form.data.deckTitle,
+        description: form.data.deckDescription ?? undefined,
+        lastUpdate: new Date(),
+      });
 
       // If the number of flashcards is the same, then we can update the flashcards
       if (deckInDb?.flashcards.length === form.data.flashcards.length) {

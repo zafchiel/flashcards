@@ -1,4 +1,4 @@
-import { json } from "@sveltejs/kit";
+import { error, json } from "@sveltejs/kit";
 import type { RequestHandler } from "./$types";
 import { deleteDeck } from "$lib/server/actions/deleteDeck";
 import { DatabaseError } from "@neondatabase/serverless";
@@ -17,14 +17,17 @@ export const DELETE: RequestHandler = async ({ url, locals }) => {
   if (!deckId) return json({ message: "Missing deckId" }, { status: 400 });
 
   try {
-    await deleteDeck(parseInt(deckId), session.user.userId);
-    return json({ success: true, message: "Deleted" });
+    const result = await deleteDeck(parseInt(deckId), session.user.userId);
+    if(result.success) return json({ success: true, message: "Deleted" });
+    
+    return json({ error: "Failed to delete deck" }, { status: 500 });
+
   } catch (error) {
-    console.log(error);
     if (error instanceof DatabaseError) {
       return json({ error: error.message }, { status: 500 });
     }
-    return json({ error: "Something went wrong" }, { status: 500 });
+    // Handle other types of errors
+    return json({ error: "An unexpected error occurred" }, { status: 500 });
   }
 };
 
@@ -35,6 +38,8 @@ export const GET: RequestHandler = async ({ locals }) => {
 
   try {
     const result = await getUserDecksWithTags(session.user.userId);
+    if(!result) return json({ message: "No decks found" }, { status: 404 });
+
     return json(result);
     
   } catch (error) { 
@@ -47,7 +52,7 @@ export const GET: RequestHandler = async ({ locals }) => {
 
 }
 
-const payloadSchema = z.object({
+const deckPayloadSchema = z.object({
   title: z.string().optional(),
   description: z.string().optional(),
   userId: z.string().optional(),
@@ -67,7 +72,7 @@ export const PATCH: RequestHandler = async ({ url, locals, request }) => {
     if (!deckId) return json({ message: "Missing deckId" }, { status: 400 });
   
     const payload = await request.json();
-    payloadSchema.parse(payload);
+    deckPayloadSchema.parse(payload);
   
     await updateDeck(parseInt(deckId), payload);
   
