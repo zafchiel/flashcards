@@ -52,6 +52,7 @@
               initials={user.username.slice(0, 2)}
               alt="User Profile Avatar"
               width="w-10"
+              rounded="ronded-md"
             />
           {/if}
           Profile

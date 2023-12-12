@@ -10,7 +10,12 @@
 </script>
 
 <nav class="fixed inset-x-0 bottom-0 z-50">
-  <TabGroup justify="justify-around" class="bg-surface-800">
+  <TabGroup
+    hover="hover:variant-soft-primary"
+    active="border-b-2 border-primary-500"
+    justify="justify-around"
+    class="bg-surface-800"
+  >
     <TabAnchor
       href="/"
       selected={$page.url.pathname === "/"}
@@ -47,6 +52,7 @@
             initials={user.username.slice(0, 2)}
             alt="User Profile Avatar"
             width="w-10"
+            rounded="rounded-md"
           />
         {:else}
           <p>Profile</p>
