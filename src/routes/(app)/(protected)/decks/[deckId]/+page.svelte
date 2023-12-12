@@ -16,6 +16,7 @@
   import type { ActionData } from "./$types.js";
   import { enhance } from "$app/forms";
   import LoaderIcon from "$lib/assets/loaderIcon.svelte";
+  import { formatDate } from "$lib/utils/dateFormatter";
 
   export let data;
   export let form: ActionData;
@@ -81,9 +82,15 @@
       <span class="opacity-60">Owner: </span>
       <span class="font-semibold">{data.isOwner ? "You" : "Not You"}</span>
     </p>
-    <div class="opacity-60 text-sm">
-      <p>Created: {data.deck.createdAt?.toLocaleString("en-GB")}</p>
-      <p>Last Update: {data.deck.lastUpdate?.toLocaleString("en-GB")}</p>
+    <div class="text-sm">
+      <p>
+        <span class="opacity-60">Created At:</span>
+        {formatDate(data.deck.createdAt)}
+      </p>
+      <p>
+        <span class="opacity-60">Last Update:</span>
+        {formatDate(data.deck.lastUpdate)}
+      </p>
     </div>
     <DisplayTags tags={data.deck.tags} />
   </div>
