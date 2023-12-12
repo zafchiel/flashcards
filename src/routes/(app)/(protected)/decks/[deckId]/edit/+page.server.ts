@@ -13,7 +13,7 @@ import { _deckFormSchema } from "../../create/+page.server";
 
 export const load: PageServerLoad = async ({ params, locals }) => {
   const deck = await getDeckWithFlashcardsAndTags(parseInt(params.deckId));
-  if (!deck) throw error(403, "Deck not found");
+  if (!deck) throw error(404, "Deck not found");
 
   if(deck.userId !== locals.user.userId) throw error(403, "You are not allowed to edit this deck");
 

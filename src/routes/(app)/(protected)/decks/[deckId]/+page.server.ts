@@ -13,7 +13,7 @@ export const load = async ({ params, locals }) => {
   let isOwner = false;
 
   const deck = await getDeckWithFlashcardsAndTags(deckId);
-  if(!deck) throw error(403, "Deck not found");
+  if(!deck) throw error(404, "Deck not found");
   if(deck.userId === userId) isOwner = true;
 
 
@@ -29,7 +29,7 @@ export const actions: Actions = {
     try {
       const deck = await getDeckWithFlashcardsAndTags(deckId);
       if (!deck) {
-        return fail(400, { message: "Deck not found" });
+        return fail(404, { message: "Deck not found" });
       }
 
       const newDeck = await createDeck(
