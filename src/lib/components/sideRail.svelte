@@ -41,9 +41,6 @@
     </AppRailAnchor>
 
     <svelte:fragment slot="trail">
-      <div class="flex justify-center items-center p-3">
-        <LightSwitch />
-      </div>
       <AppRailAnchor
         href="/profile"
         selected={$page.url.pathname === "/profile"}

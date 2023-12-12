@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Avatar } from "@skeletonlabs/skeleton";
+  import { Avatar, LightSwitch } from "@skeletonlabs/skeleton";
   import { enhance } from "$app/forms";
   export let data;
 </script>

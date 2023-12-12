@@ -10,38 +10,46 @@
 </script>
 
 <nav class="fixed inset-x-0 bottom-0 z-50">
-  <TabGroup
-    padding="px-3 py-2"
-    justify="justify-between"
-    class="bg-surface-800"
-  >
-    <TabAnchor href="/" selected={$page.url.pathname === "/"}>
-      <!-- <svelte:fragment slot="lead">
-        <HomeIcon />
-      </svelte:fragment> -->
-      <p>Home</p>
+  <TabGroup justify="justify-around" class="bg-surface-800">
+    <TabAnchor
+      href="/"
+      selected={$page.url.pathname === "/"}
+      class="flex justify-center items-center"
+    >
+      <HomeIcon />
     </TabAnchor>
 
     {#if user}
-      <TabAnchor href="/decks" selected={$page.url.pathname === "/decks"}>
-        <!-- <svelte:fragment slot="lead">
-          <DeckIcon />
-        </svelte:fragment> -->
-        <p>Decks</p>
+      <TabAnchor
+        href="/decks"
+        selected={$page.url.pathname === "/decks"}
+        class="flex justify-center items-center"
+      >
+        <DeckIcon />
       </TabAnchor>
 
-      <TabAnchor href="/explore" selected={$page.url.pathname === "/explore"}>
-        <!-- <GlobeIcon /> -->
-        <p>Explore</p>
+      <TabAnchor
+        href="/explore"
+        selected={$page.url.pathname === "/explore"}
+        class="flex justify-center items-center"
+      >
+        <GlobeIcon />
       </TabAnchor>
 
-      <TabAnchor href="/profile" selected={$page.url.pathname === "/profile"}>
-        <!-- {#if user?.avatar}
+      <TabAnchor
+        href="/profile"
+        selected={$page.url.pathname === "/profile"}
+        class="flex justify-center items-center"
+      >
+        {#if user?.avatar}
           <img src={user.avatar} alt="User Avatar" class="w-10 h-10" />
-        {:else} -->
-        <p>Profile</p>
-        <!-- {/if} -->
+        {:else}
+          <p>Profile</p>
+        {/if}
       </TabAnchor>
     {/if}
   </TabGroup>
 </nav>
+
+<style>
+</style>

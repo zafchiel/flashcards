@@ -1,10 +1,10 @@
 <svg
-  width="24"
-  height="24"
+  width="28"
+  height="28"
   viewBox="0 0 24 24"
   fill="none"
   stroke="currentColor"
-  stroke-width="2"
+  stroke-width="1"
   stroke-linecap="round"
   stroke-linejoin="round"
   ><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><polyline
