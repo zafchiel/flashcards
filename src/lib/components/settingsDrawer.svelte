@@ -5,6 +5,8 @@
 
   const drawerStore = getDrawerStore();
 
+  export let isPublic: boolean;
+
   const drawerSettings: DrawerSettings = {
     id: "settingsDrawer",
     position: "right",
@@ -15,8 +17,7 @@
     padding: "p-2",
     rounded: "rounded-xl",
     meta: {
-      message: "Hello world",
-      public: false,
+      isPublic,
     },
   };
 </script>

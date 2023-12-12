@@ -15,6 +15,7 @@ export const load = async ({ params, locals }) => {
   const deck = await getDeckWithFlashcardsAndTags(deckId);
   if(!deck) throw error(404, "Deck not found");
   if(deck.userId === userId) isOwner = true;
+  if(!deck.public && !isOwner) throw error(403, "You are not authorized to view this deck");
 
 
 

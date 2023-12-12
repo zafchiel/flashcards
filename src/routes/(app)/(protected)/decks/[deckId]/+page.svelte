@@ -27,8 +27,7 @@
 
   // Update deck settings in drawer on initialising component
   $drawerStore.meta = {
-    ...$drawerStore.meta,
-    public: data.deck.public,
+    isPublic: data.deck.public,
   };
 
   let isFormLoading = false;
@@ -139,7 +138,11 @@
   {/if}
 </div>
 
-<DisplayFlashcards flashcards={data.deck.flashcards} isOwner={data.isOwner} />
+<DisplayFlashcards
+  isPublic={data.deck.public}
+  flashcards={data.deck.flashcards}
+  isOwner={data.isOwner}
+/>
 
 <style>
   h1 {

@@ -16,6 +16,7 @@
 
   // Update deck settings on closing modal
   onDestroy(async () => {
+    // If nothing changed, don't send request
     if (initialSettings === JSON.stringify($drawerStore.meta)) return;
 
     const res = await fetch(`/api/decks?deckId=${$page.params.deckId}`, {
@@ -24,7 +25,7 @@
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        public: $drawerStore.meta.public,
+        public: $drawerStore.meta.isPublic,
       }),
     });
     if (!res.ok) {
@@ -33,22 +34,39 @@
       toastStore.trigger(successSavedSettignsToast);
     }
   });
+
+  $: console.log($drawerStore.meta);
 </script>
 
 <div class="p-4">
-  <h3 class="h3 font-semibold mb-2">Settings</h3>
+  <div class="flex justify-between border-b pb-2">
+    <div>
+      <h3 class="h3 font-semibold leading-none">Settings</h3>
+      <p class="text-sm opacity-60">Saved automatically on close</p>
+    </div>
+    <button
+      class="btn variant-outline-warning"
+      on:click={() => {
+        drawerStore.close();
+      }}
+      >Close
+    </button>
+  </div>
+
   <div class="p-1">
     <p>Should this deck be visible to anybody?</p>
     <SlideToggle
-      bind:checked={$drawerStore.meta.public}
+      bind:checked={$drawerStore.meta.isPublic}
       name="switchPublic"
       active="bg-secondary-500"
     >
-      {#if $drawerStore.meta.public}
-        <p>Public</p>
-      {:else}
-        <p>Private</p>
-      {/if}
+      <div class="cursor-pointer">
+        {#if $drawerStore.meta.isPublic}
+          <p>Public</p>
+        {:else}
+          <p>Private</p>
+        {/if}
+      </div>
     </SlideToggle>
   </div>
 </div>

@@ -52,7 +52,7 @@ export const decks = pgTable('decks', {
 	userId: varchar('user_id', {length: 15}).notNull().references(() => user.id),
 	title: varchar('title', {length: 100}).notNull(),
 	description: text('description'),
-	public: boolean('public').default(false),
+	public: boolean('public').notNull().default(false),
 	createdAt: timestamp('created_at').defaultNow(),
 	lastUpdate: timestamp('last_update').defaultNow()
 })

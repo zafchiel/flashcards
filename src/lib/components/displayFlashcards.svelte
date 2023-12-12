@@ -17,6 +17,7 @@
 
   const toastStore = getToastStore();
 
+  export let isPublic: boolean;
   export let isOwner: boolean;
   export let flashcards: Flashcard[];
   $filteredFlashcards = flashcards;
@@ -159,7 +160,7 @@
     </div>
 
     <div class:pointer-events-none={!isOwner} class:opacity-50={!isOwner}>
-      <SettingsDrawer />
+      <SettingsDrawer {isPublic} />
     </div>
   </div>
 

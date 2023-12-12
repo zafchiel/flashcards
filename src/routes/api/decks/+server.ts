@@ -53,20 +53,31 @@ const payloadSchema = z.object({
   userId: z.string().optional(),
   public: z.boolean().optional(),
   lastUpdate: z.date().optional(),
+}).refine((data) => Object.keys(data).length > 0, {
+  message: "At least one field must be provided",
 });
 
 // Update deck
 export const PATCH: RequestHandler = async ({ url, locals, request }) => {
-  const session = await locals.auth.validate();
-  if (!session) return json({ message: "Not logged in" }, { status: 401 });
-
-  const deckId = url.searchParams.get("deckId");
-  if (!deckId) return json({ message: "Missing deckId" }, { status: 400 });
-
-  const payload = await request.json();
-  if(!payloadSchema.parse(payload)) return json({ message: "Invalid payload" }, { status: 400 });
-
-  await updateDeck(parseInt(deckId), payload);
-
-  return json({ success: true, message: "Updated" });
+  try {
+    const session = await locals.auth.validate();
+    if (!session) return json({ message: "Not logged in" }, { status: 401 });
+  
+    const deckId = url.searchParams.get("deckId");
+    if (!deckId) return json({ message: "Missing deckId" }, { status: 400 });
+  
+    const payload = await request.json();
+    payloadSchema.parse(payload);
+  
+    await updateDeck(parseInt(deckId), payload);
+  
+    return json({ success: true, message: "Updated" });
+    
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      return json({ message: error.message }, { status: 400 });
+    }
+    // Handle other types of errors
+    return json({ message: "Something went wrong" }, { status: 500 });
+  }
 }
