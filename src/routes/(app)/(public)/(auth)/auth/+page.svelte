@@ -24,30 +24,18 @@
 
 <section class="flex flex-col justify-center items-center h-full">
   <div class="variant-soft card p-4">
-    <h1 class="h1 card-header mb-4">
+    <h1 class="h1 font-bold card-header mb-4">
       {#if pageType === "signup"}
         Create new account
       {:else}
         Sign-in
       {/if}
     </h1>
-    {#if pageType === "signup"}
-      <p class="text-sm">
-        Have account already? <a
-          href="/auth?t=signin"
-          class="text-secondary-400 underline">sign-in instead</a
-        >
-      </p>
-    {:else}
-      <p class="text-sm">
-        Don't have account? <a
-          href="/auth?t=signup"
-          class="text-secondary-400 underline">sign-up instead</a
-        >
-      </p>
-    {/if}
+
+    <hr class="h-1 bg-surface-300 rounded-xl max-w-[60px] mx-auto my-5" />
+
     <form method="post" use:enhance action={`?/${pageType}`}>
-      <div class="flex flex-col gap-3 border-t pt-4">
+      <div class="flex flex-col gap-3">
         <div>
           <label for="username" class="label">Username</label>
           <input
@@ -114,22 +102,41 @@
             </span>
           {/if}
         </button>
+        {#if pageType === "signup"}
+          <p class="text-sm">
+            Have account already? <a
+              href="/auth?t=signin"
+              class="text-secondary-400 underline">sign-in instead</a
+            >
+          </p>
+        {:else}
+          <p class="text-sm">
+            Don't have account? <a
+              href="/auth?t=signup"
+              class="text-secondary-400 underline">sign-up instead</a
+            >
+          </p>
+        {/if}
         {#if $message}
           <p class="text-primary-400">{$message}</p>
         {/if}
 
         <div class="flex gap-3 items-center justify-center px-2">
-          <div class="w-full border-t"></div>
+          <hr class="h-1 bg-surface-300 rounded-xl w-full mx-auto my-5" />
           <p class="uppercase text-center">or</p>
-          <div class="w-full border-t"></div>
+          <hr class="h-1 bg-surface-300 rounded-xl w-full mx-auto my-5" />
         </div>
         <a href="/auth/github" class="btn variant-outline-tertiary flex gap-2">
           <GithubIcon />
-          Continue with Github
+          <p>
+            Continue with <span class="font-semibold">Github</span>
+          </p>
         </a>
         <a href="/auth/google" class="btn variant-outline-tertiary flex gap-2">
           <GoogleIcon />
-          Continue with Google
+          <p>
+            Continue with <span class="font-semibold">Google</span>
+          </p>
         </a>
       </div>
     </form>
