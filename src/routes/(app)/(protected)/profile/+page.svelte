@@ -50,9 +50,14 @@
   </div>
 </div>
 
-<div class="py-4">
-  <form method="post" action="?/delete" use:enhance>
+<div class="py-8">
+  <form
+    method="post"
+    action="?/delete"
+    use:enhance
+    class="flex gap-2 items-center"
+  >
     <button class="btn-sm variant-filled-error">Delete Account</button>
-    <p>This action cannot be undone!</p>
+    <p>- This action cannot be undone!</p>
   </form>
 </div>
