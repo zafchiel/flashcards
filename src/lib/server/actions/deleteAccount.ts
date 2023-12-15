@@ -1,3 +1,4 @@
+import { DatabaseError } from "@neondatabase/serverless";
 import { auth } from "../lucia";
 import { deleteDeck } from "./deleteDeck";
 import { getUserDecks } from "./getUserDecks";
@@ -27,8 +28,7 @@ export const deleteUser = async (userId: string) => {
     await auth.deleteUser(userId);
     return { success: true };
   } catch (error) {
-    return { success: false, message: error.message };
+    if (error instanceof DatabaseError) return { success: false, message: error.message };
+    return { success: false, message: "Something went wrong" };
   }
-
-  return { success: false, message: "Something went wrong" };
 };

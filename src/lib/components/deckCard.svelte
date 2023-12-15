@@ -23,7 +23,7 @@
 
   const modal: ModalSettings = {
     type: "confirm",
-    title: "Are you sure",
+    title: "Are you sure?",
     body: `You will delete <span class="text-error-500 font-semibold uppercase">${deck.title}</span> deck, this action cannot be undone`,
     // TRUE if confirm pressed, FALSE if cancel pressed
     response: async (r: boolean) => {

@@ -1,15 +1,53 @@
 <script lang="ts">
-  import { Avatar, getToastStore } from "@skeletonlabs/skeleton";
+  import {
+    Avatar,
+    getToastStore,
+    getModalStore,
+    type ModalSettings,
+  } from "@skeletonlabs/skeleton";
   import { enhance } from "$app/forms";
   import { errorToast } from "$lib/toasts/index.js";
+  import { goto } from "$app/navigation";
+  import LoaderIcon from "$lib/assets/loaderIcon.svelte";
   export let data;
-  export let form;
+  // export let form;
 
+  // $: if (form?.status === "failed") {
+  //   toastStore.trigger(errorToast);
+  // }
+
+  const modalStore = getModalStore();
   const toastStore = getToastStore();
 
-  $: if (form?.status === "failed") {
-    toastStore.trigger(errorToast);
-  }
+  let isDeleting: boolean = false;
+
+  const modal: ModalSettings = {
+    type: "confirm",
+    title: "Are you sure?",
+    body: `You will delete your account, this action cannot be undone`,
+    // TRUE if confirm pressed, FALSE if cancel pressed
+    response: async (r: boolean) => {
+      if (r) {
+        isDeleting = true;
+        try {
+          const res = await fetch(`/api/user`, {
+            method: "DELETE",
+          });
+
+          if (res.ok) {
+            modalStore.close();
+            goto("auth?t=signup");
+          } else {
+            throw new Error();
+          }
+        } catch (error) {
+          toastStore.trigger(errorToast);
+        } finally {
+          isDeleting = false;
+        }
+      }
+    },
+  };
 </script>
 
 <svelte:head>
@@ -51,13 +89,26 @@
 </div>
 
 <div class="py-8">
-  <form
+  <!-- <form
     method="post"
     action="?/delete"
     use:enhance
     class="flex gap-2 items-center"
+  > -->
+  <button
+    on:click={(e) => {
+      e.preventDefault();
+      modalStore.trigger(modal);
+    }}
+    class="btn-sm variant-filled-error flex gap-2 items-center"
   >
-    <button class="btn-sm variant-filled-error">Delete Account</button>
-    <p>- This action cannot be undone!</p>
-  </form>
+    Delete Account
+    {#if isDeleting}
+      <span class="animate-spin ml-2">
+        <LoaderIcon />
+      </span>
+    {/if}
+  </button>
+  <!-- <p>- This action cannot be undone!</p> -->
+  <!-- </form> -->
 </div>
