@@ -6,8 +6,6 @@ import { formSchema } from "./schema.js";
 import { message, setError, superValidate } from "sveltekit-superforms/server";
 import { LuciaError } from "lucia";
 
-
-
 export const load = async ({ locals, url }) => {
   const pageType = url.searchParams.get("t");
   if (!(pageType === "signin" || pageType === "signup")) {
