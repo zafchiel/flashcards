@@ -21,7 +21,7 @@
         <a href="/auth?t=signup" class="btn variant-filled-primary flex-1"
           >Get Started</a
         >
-        <a href="/auth?=signin" class="btn variant-outline-secondary flex-1"
+        <a href="/auth?t=signin" class="btn variant-outline-secondary flex-1"
           >Sign-in</a
         >
       </div>
