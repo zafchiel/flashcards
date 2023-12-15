@@ -1,26 +1,34 @@
 import { auth } from "../lucia";
-import { deleteDeck } from "./deleteDeck"
-import { getUserDecks } from "./getUserDecks"
+import { deleteDeck } from "./deleteDeck";
+import { getUserDecks } from "./getUserDecks";
 
 export const deleteUser = async (userId: string) => {
+  try {
     const userDecks = await getUserDecks(userId);
-    if(!userDecks) {
-        await auth.deleteUser(userId);
-        return { success: true };
-    };
+    if (!userDecks) {
+      await auth.deleteUser(userId);
+      return { success: true };
+    }
 
     let decksPromisesArray: Promise<any>[] = [];
-    for(const userDeck of userDecks) {
-        decksPromisesArray.push(deleteDeck(userDeck.id, userId));
+    for (const userDeck of userDecks) {
+      decksPromisesArray.push(deleteDeck(userDeck.id, userId));
     }
 
-    const promisesResults = await Promise.all(decksPromisesArray);
+    const promisesResults = await Promise.allSettled(decksPromisesArray);
 
-    if(promisesResults.every(result => result.success)){
-        await auth.deleteUser(userId);
-        return { success: true };
+    const failedDecks = promisesResults.filter(
+      (result) => result.status === "rejected"
+    );
+    if (failedDecks.length > 0) {
+      throw new Error(`Failed to delete ${failedDecks.length} decks.`);
     }
 
-    return { success: false, message: "Something went wrong" };
+    await auth.deleteUser(userId);
+    return { success: true };
+  } catch (error) {
+    return { success: false, message: error.message };
+  }
 
-}
+  return { success: false, message: "Something went wrong" };
+};

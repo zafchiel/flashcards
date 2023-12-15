@@ -22,7 +22,11 @@ export const actions = {
     const session = await locals.auth.validate();
     if (!session) throw redirect(302, "/auth?t=signin");
 
-    const res = await deleteUser(locals.user.userId);
+    try {
+        const res = await deleteUser(locals.user.userId);
+    } catch (error) {
+        return fail(500, { status: "failed", message: error.message });
+    }
     if(res.success) throw redirect(302, "/auth?t=signin");
   },
 };

@@ -1,7 +1,15 @@
 <script lang="ts">
-  import { Avatar, LightSwitch } from "@skeletonlabs/skeleton";
+  import { Avatar, getToastStore } from "@skeletonlabs/skeleton";
   import { enhance } from "$app/forms";
+  import { errorToast } from "$lib/toasts/index.js";
   export let data;
+  export let form;
+
+  const toastStore = getToastStore();
+
+  $: if (form?.status === "failed") {
+    toastStore.trigger(errorToast);
+  }
 </script>
 
 <svelte:head>
