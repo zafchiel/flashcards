@@ -1,3 +1,4 @@
+import { deleteUser } from "$lib/server/actions/deleteAccount.js";
 import { getUserDecks } from "$lib/server/actions/getUserDecks.js";
 import { auth } from "$lib/server/lucia.js";
 import { fail, redirect, error } from "@sveltejs/kit";
@@ -21,6 +22,7 @@ export const actions = {
     const session = await locals.auth.validate();
     if (!session) throw redirect(302, "/auth?t=signin");
 
-    await auth.deleteUser(session.user.userId);
+    const res = await deleteUser(locals.user.userId);
+    if(res.success) throw redirect(302, "/auth?t=signin");
   },
 };

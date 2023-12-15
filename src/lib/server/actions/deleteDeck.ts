@@ -3,7 +3,7 @@ import { dbHttp, dbPool } from "../db";
 import { deckTags, decks, flashcards } from "../db/schema";
 
 export const deleteDeck = async (deckId: number, userId: string) => {
-  await dbPool.transaction(async (tx) => {
+  const transaction = await dbPool.transaction(async (tx) => {
     // delete all flashcards in deck
     await tx.delete(flashcards).where(eq(flashcards.deckId, deckId));
     // delete all tags in deck
@@ -20,5 +20,7 @@ export const deleteDeck = async (deckId: number, userId: string) => {
     return { success: true };
   });
 
+  if (transaction.success) return { success: true };
+  
   return { success: false, message: "Something went wrong" };
 };
