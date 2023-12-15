@@ -14,6 +14,7 @@
     <button class="btn md:btn-lg variant-filled-secondary">Log-out</button>
   </form>
 </div>
+
 <div class="flex">
   <Avatar
     src={data.user?.avatar ?? undefined}
@@ -39,4 +40,11 @@
       </p>
     </div>
   </div>
+</div>
+
+<div class="py-4">
+  <form method="post" action="?/delete" use:enhance>
+    <button class="btn-sm variant-filled-error">Delete Account</button>
+    <p>This action cannot be undone!</p>
+  </form>
 </div>
