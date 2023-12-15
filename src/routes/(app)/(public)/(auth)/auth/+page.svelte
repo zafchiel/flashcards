@@ -23,7 +23,7 @@
 </svelte:head>
 
 <section class="flex flex-col justify-center items-center h-full">
-  <div class="variant-soft card p-4">
+  <div class="variant-soft card p-4 shadow-md">
     <h1 class="h1 font-bold card-header mb-4">
       {#if pageType === "signup"}
         Create new account
