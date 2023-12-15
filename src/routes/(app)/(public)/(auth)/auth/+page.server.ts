@@ -2,15 +2,11 @@ import { auth } from "$lib/server/lucia";
 import { DatabaseError } from "@neondatabase/serverless";
 import { fail, redirect } from "@sveltejs/kit";
 
-import { z } from "zod";
+import { formSchema } from "./schema.js";
 import { message, setError, superValidate } from "sveltekit-superforms/server";
 import { LuciaError } from "lucia";
 
-const formSchema = z.object({
-  username: z.string().min(4).max(31),
-  password: z.string().min(6).max(255),
-  repeatPassword: z.string().min(6).max(255).optional(),
-});
+
 
 export const load = async ({ locals, url }) => {
   const pageType = url.searchParams.get("t");
