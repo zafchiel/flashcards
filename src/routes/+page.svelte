@@ -6,16 +6,18 @@
   <title>Flashcards\HUH</title>
 </svelte:head>
 
-<main class="min-h-[100svh] flex items-center justify-center">
+<main
+  class="min-h-[100svh] flex items-center justify-center bg-gradient-to-tr from-surface-800 from-50% to-primary-600 to-98%"
+>
   <section
     class="p-4 m-2 md:p-10 flex flex-col items-center gap-5 card variant-soft-surface shadow-lg"
   >
     <div class="max-w-xl mb-5">
       <h1 class="h1 font-bold gradient-heading">Flashcards\HUH</h1>
       <p class="text-sm md:text-base">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos magni
-        distinctio ut nihil eius commodi modi at alias. Fugit saepe modi aperiam
-        nesciunt dicta repudiandae vero, magnam ea eaque animi.
+        Here you can learn and practice various subjects using interactive
+        flashcards. Start exploring our collection of flashcards and enhance
+        your learning experience today!
       </p>
       <div class="p-3 flex flex-wrap gap-3 items-center max-w-xs">
         <a href="/auth?t=signup" class="btn variant-filled-primary flex-1"
@@ -31,16 +33,6 @@
 </main>
 
 <style>
-  main {
-    background: rgb(21, 23, 31);
-    background: linear-gradient(
-      45deg,
-      rgba(21, 23, 31, 1) 0%,
-      rgba(61, 36, 37, 0.7) 81%,
-      rgba(212, 22, 60, 0.4) 100%
-    );
-  }
-
   section {
     perspective: 100vh;
   }
