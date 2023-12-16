@@ -10,11 +10,6 @@
   import { goto } from "$app/navigation";
   import LoaderIcon from "$lib/assets/loaderIcon.svelte";
   export let data;
-  // export let form;
-
-  // $: if (form?.status === "failed") {
-  //   toastStore.trigger(errorToast);
-  // }
 
   const modalStore = getModalStore();
   const toastStore = getToastStore();
@@ -71,10 +66,10 @@
   />
   <div class="flex flex-col justify-between pl-2 py-1">
     <div>
-      <p class="text-3xl break-words font-semibold">
+      <p class="text-3xl break-words leading-none font-semibold">
         {data.user?.username}
       </p>
-      <p class="text-sm opacity-60">username</p>
+      <p class="text-sm opacity-60 leading-none">username</p>
     </div>
 
     <div>
@@ -89,12 +84,6 @@
 </div>
 
 <div class="py-8">
-  <!-- <form
-    method="post"
-    action="?/delete"
-    use:enhance
-    class="flex gap-2 items-center"
-  > -->
   <button
     on:click={(e) => {
       e.preventDefault();
@@ -109,6 +98,4 @@
       </span>
     {/if}
   </button>
-  <!-- <p>- This action cannot be undone!</p> -->
-  <!-- </form> -->
 </div>
