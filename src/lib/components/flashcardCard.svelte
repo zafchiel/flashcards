@@ -1,7 +1,8 @@
 <script lang="ts">
   import { tooltip } from "$lib/actions/tooltip";
-  import { filteredFlashcards } from "$lib/stores/filteredFlashcards";
+  import { getFitleredFlashcardsStore } from "$lib/stores/filteredFlashcards";
 
+  const filteredFlashcards = getFitleredFlashcardsStore();
   export let currentFlashcardIndex: number;
   export let showAnswer: Boolean;
 

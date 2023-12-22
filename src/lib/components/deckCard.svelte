@@ -11,6 +11,7 @@
   import { errorToast, successDeleteToast } from "$lib/toasts";
   import { tooltip } from "$lib/actions/tooltip";
   import type { Deck, DeckTags } from "$lib/server/db/schema";
+  import { formatDate } from "$lib/utils/dateFormatter";
 
   type DecksWithTags<T> = Deck & { tags: T[] };
 
@@ -62,7 +63,7 @@
       {deck.title}
     </h2>
     <p class="text-sm opacity-60">
-      {deck.createdAt?.toLocaleString("en-GB")}
+      {formatDate(deck.createdAt)}
     </p>
     <DisplayTags tags={deck.tags} />
     {#if deck.description}

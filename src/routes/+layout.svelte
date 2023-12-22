@@ -8,8 +8,10 @@
   } from "@skeletonlabs/skeleton";
   import { onNavigate } from "$app/navigation";
   import SettingsDrawerContents from "$lib/components/settingsDrawerContents.svelte";
+  import { createFilteredFlashcardsStore } from "$lib/stores/filteredFlashcards";
   import "../app.postcss";
 
+  createFilteredFlashcardsStore();
   initializeStores();
 
   const drawerStore = getDrawerStore();

@@ -5,17 +5,17 @@
   import ArrowRight from "$lib/assets/arrowRight.svelte";
   import { fly } from "svelte/transition";
   import { SlideToggle } from "@skeletonlabs/skeleton";
-  // import { writable } from "svelte/store";
   import { onDestroy, onMount } from "svelte";
   import ShuffleIcon from "$lib/assets/shuffleIcon.svelte";
   import shuffleArray from "$lib/utils/shuffleArray";
   import { tooltip } from "$lib/actions/tooltip";
   import SettingsDrawer from "./settingsDrawer.svelte";
-  import { filteredFlashcards } from "$lib/stores/filteredFlashcards";
   import { getToastStore } from "@skeletonlabs/skeleton";
   import { allFlashcardsLearnedToast } from "$lib/toasts";
+  import { getFitleredFlashcardsStore } from "$lib/stores/filteredFlashcards";
 
   const toastStore = getToastStore();
+  const filteredFlashcards = getFitleredFlashcardsStore();
 
   export let isPublic: boolean;
   export let isOwner: boolean;
@@ -29,7 +29,6 @@
   let previousIndex = 0;
   let showAnswer = false;
 
-  // const filteredFlashcards = writable(flashcards);
 
   const unsub = filteredFlashcards.subscribe((values) => {
     if (values.length === 0) {
