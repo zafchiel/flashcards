@@ -14,7 +14,7 @@
 </svelte:head>
 
 <div class="flex justify-between items-center">
-  <h1 class="h1 p-4">Decks Page</h1>
+  <h1 class="h1 p-4">Explore Decks</h1>
   <SearchInput />
 </div>
 
