@@ -4,9 +4,6 @@
   import SearchInput from "$lib/components/searchInput.svelte";
 
   export let data: PageData;
-  // export let form;
-
-  // $: displayedDecks = form?.decks ? form.decks : data.decks;
 </script>
 
 <svelte:head>
