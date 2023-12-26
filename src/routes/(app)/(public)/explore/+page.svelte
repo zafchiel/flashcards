@@ -18,4 +18,8 @@
   <SearchInput />
 </div>
 
-<DisplayPublicDeckList decks={data.decks} />
+{#await data.streamed.decks}
+  <p>Loading...</p>
+{:then decks}
+  <DisplayPublicDeckList {decks} />
+{/await}

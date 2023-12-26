@@ -3,11 +3,11 @@ import { searchPublicDecks } from "$lib/server/actions/searchPublicDecks.js";
 
 export const load = async ({ setHeaders, url }) => {
   const searchParam = url.searchParams.get("q");
-  let decks;
+  let fetchDecks;
   if (searchParam) {
-    decks = await searchPublicDecks(searchParam);
+    fetchDecks = searchPublicDecks(searchParam);
   } else {
-    decks = await getAllPublicDecks();
+    fetchDecks = getAllPublicDecks();
   }
 
   // Browser cache for 60 seconds
@@ -15,5 +15,5 @@ export const load = async ({ setHeaders, url }) => {
   //   "cache-control": "public, max-age=60",
   // });
 
-  return { decks };
+  return { streamed: { decks: fetchDecks } };
 };
