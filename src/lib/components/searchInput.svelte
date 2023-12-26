@@ -4,6 +4,8 @@
   import LoaderIcon from "$lib/assets/loaderIcon.svelte";
 
   let isFormLoading = false;
+
+  $: console.log(isFormLoading);
 </script>
 
 <form
@@ -14,7 +16,7 @@
       isFormLoading = true;
     }, 300);
 
-    return ({ update }) => {
+    return async ({ update }) => {
       isFormLoading = false;
       update();
     };
