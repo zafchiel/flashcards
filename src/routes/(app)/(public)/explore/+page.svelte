@@ -19,7 +19,12 @@
 </div>
 
 {#await data.streamed.decks}
-  <p>Loading...</p>
+  <section class="flex gap-3 flex-wrap">
+    <div class="placeholder h-40 w-60" />
+    <div class="placeholder h-40 w-60" />
+    <div class="placeholder h-40 w-60" />
+    <div class="placeholder h-40 w-60" />
+  </section>
 {:then decks}
   <DisplayPublicDeckList {decks} />
 {/await}
