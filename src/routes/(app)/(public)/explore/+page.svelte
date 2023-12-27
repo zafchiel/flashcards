@@ -10,7 +10,7 @@
   <title>Explore | Flashcards\HUH</title>
 </svelte:head>
 
-<div class="flex justify-between items-center">
+<div class="flex flex-col md:flex-row justify-between mb-4">
   <h1 class="h1 p-4">Explore Decks</h1>
   <SearchInput />
 </div>
