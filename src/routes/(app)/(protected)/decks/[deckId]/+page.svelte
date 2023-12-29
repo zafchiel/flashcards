@@ -77,10 +77,9 @@
     >
       {data.deck.title}
     </h1>
-    <p class="text-sm">
-      <span class="opacity-60">Owner: </span>
-      <span class="font-semibold">{data.isOwner ? "You" : "Not You"}</span>
-    </p>
+      {#if !data.isOwner}
+        <p class="text-sm opacity-60">You are not owner of this deck, save to edit</p>
+      {/if}
     <div class="text-sm">
       <p>
         <span class="opacity-60">Created At:</span>
