@@ -9,7 +9,7 @@
         <SearchIcon />
       </div>
       <input type="search" name="q" placeholder="Search..." />
-      <button class="variant-filled-primary">
+      <button class="variant-filled-secondary">
         Submit
       </button>
     </div>
