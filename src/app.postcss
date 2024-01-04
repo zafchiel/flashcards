@@ -4,17 +4,17 @@
 @tailwind variants;
 
 @font-face {
-    font-family: 'Nohemi';
-    src: url('/fonts/Nohemi.ttf');
+  font-family: "Nohemi";
+  src: url("/fonts/Nohemi.ttf");
 }
 
-:root [data-theme='crimson'] {
-    --theme-font-family-base: 'Nohemi', sans-serif;
-    --theme-font-family-heading: 'Nohemi', sans-serif;
+:root [data-theme="crimson"] {
+  --theme-font-family-base: "Nohemi", system-ui, sans-serif;
+  --theme-font-family-heading: "Nohemi", system-ui, sans-serif;
 }
 
 .gradient-heading {
-    @apply bg-clip-text text-transparent box-decoration-clone;
-    @apply bg-gradient-to-tr;
-    @apply from-primary-500 from-40% via-tertiary-500  to-primary-700;
+  @apply bg-clip-text text-transparent box-decoration-clone;
+  @apply bg-gradient-to-tr;
+  @apply from-primary-500 from-40% via-tertiary-500  to-primary-700;
 }
