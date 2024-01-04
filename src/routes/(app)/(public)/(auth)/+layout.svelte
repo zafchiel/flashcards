@@ -9,7 +9,7 @@
     <div class="hidden md:block p-4 max-w-5xl">
       <enhanced:img
         src={imageSrc}
-        alt="Logo"
+        alt="Auth page image"
         class="rounded-lg shadow-lg"
       />
     </div>
