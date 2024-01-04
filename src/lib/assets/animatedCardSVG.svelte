@@ -15,12 +15,12 @@
         { rotateX: 180, animationDuration: 2 },
         { easing: "ease-in-out", delay: 1 },
       ],
-      ["#firstSide", { display: "none" }, { at: "-0.7" }],
-      [
-        "#secondSide",
-        { display: "block", rotateX: 180, animationDuration: 0.5 },
-        { at: 3 },
-      ],
+      // ["#firstSide", { display: "none" }, { at: "-0.7" }],
+      // [
+      //   "#secondSide",
+      //   { display: "block", rotateX: 180 },
+      //   { at: 3 }
+      // ],
     ]);
   });
 </script>
@@ -39,8 +39,8 @@
       <rect pathLength="1" rx="16" height="100%" width="100%" />
     </g>
   </svg>
-  <p id="firstSide" class="text-xl md:text-3xl">Learn Easily</p>
-  <p id="secondSide" class="text-xl md:text-3xl hidden">Remember More</p>
+  <p id="firstSide" class="text-xl md:text-3xl absolute">Learn Easily</p>
+  <p id="secondSide" class="text-xl md:text-3xl absolute">Remember More</p>
 </div>
 
 <style>
@@ -53,5 +53,18 @@
     stroke-linejoin: round;
     visibility: hidden;
     transform-style: preserve-3d;
+  }
+
+  #fancydiv {
+    transform-style: preserve-3d;
+  }
+
+  #firstSide, #secondSide {
+    -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  }
+
+  #secondSide {
+    transform: rotateX(180deg);
   }
 </style>
