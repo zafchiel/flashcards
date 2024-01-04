@@ -4,13 +4,10 @@
 
 
   <form method="GET">
-    <div class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
-      <div class="input-group-shim">
-        <SearchIcon />
-      </div>
+    <div class="input-group input-group-divider grid-cols-[1fr_auto]">
       <input type="search" name="q" placeholder="Search..." />
       <button class="variant-filled-secondary">
-        Submit
+        <SearchIcon />
       </button>
     </div>
   </form>
