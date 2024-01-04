@@ -15,12 +15,8 @@
         { rotateX: 180, animationDuration: 2 },
         { easing: "ease-in-out", delay: 1 },
       ],
-      // ["#firstSide", { display: "none" }, { at: "-0.7" }],
-      // [
-      //   "#secondSide",
-      //   { display: "block", rotateX: 180 },
-      //   { at: 3 }
-      // ],
+      ["#firstSide", { display: "none" }, { at: -0.5 }],
+
     ]);
   });
 </script>
