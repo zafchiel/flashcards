@@ -55,7 +55,7 @@
 
 <a
   href="/decks/{deck.id}"
-  class="h-full max-w-md card p-4 variant-ghost-primary flex gap-3 card-hover"
+  class="h-full max-w-md card p-4 variant-ghost-primary flex justify-between gap-3 card-hover"
   class:deleting-animation={isDeleting}
 >
   <div>
