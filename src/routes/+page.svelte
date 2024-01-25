@@ -1,5 +1,6 @@
 <script lang="ts">
   import CardSvg from "$lib/assets/animatedCardSVG.svelte";
+  import previewImage from "$lib/assets/preview.png?enhanced"
 </script>
 
 <svelte:head>
@@ -7,7 +8,7 @@
 </svelte:head>
 
 <main
-  class="min-h-[100svh] flex items-center justify-center bg-gradient-to-tr from-surface-800 from-50% to-primary-600 to-98%"
+  class="min-h-[100svh] p-8 flex flex-col gap-8 items-center justify-center bg-gradient-to-b from-surface-800 from-30% to-primary-600 to-98%"
 >
   <section
     class="p-4 m-2 md:p-10 flex flex-col items-center gap-5 card variant-soft-surface shadow-lg"
@@ -29,6 +30,9 @@
       </div>
     </div>
     <CardSvg />
+  </section>
+  <section class="max-w-[80vw] p-10">
+    <enhanced:img src={previewImage} alt="Preview" class="rounded-xl shadow-2xl" />
   </section>
 </main>
 
