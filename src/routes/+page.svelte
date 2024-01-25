@@ -8,7 +8,7 @@
 </svelte:head>
 
 <main
-  class="min-h-[100svh] p-8 flex flex-col gap-8 items-center justify-center bg-gradient-to-b from-surface-800 from-30% to-primary-600 to-98%"
+  class="min-h-[100svh] md:p-8 flex flex-col gap-8 items-center justify-center bg-gradient-to-b from-surface-800 from-30% to-primary-600 to-98%"
 >
   <section
     class="p-4 m-2 md:p-10 flex flex-col items-center gap-5 card variant-soft-surface shadow-lg"
@@ -31,8 +31,9 @@
     </div>
     <CardSvg />
   </section>
-  <section class="max-w-[80vw] p-10">
+  <section class="max-w-[80vw] md:p-10">
     <enhanced:img src={previewImage} alt="Preview" class="rounded-xl shadow-2xl" />
+    <h2 class="text-xl md:text-4xl font-bold p-4 mt-4">Smooth Experience</h2>
   </section>
 </main>
 
