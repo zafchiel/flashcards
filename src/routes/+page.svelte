@@ -16,10 +16,12 @@
 
       const animationString = `rotateX(${roationX}deg) rotateY(${rotationY}deg) scale(1.05)`;
       node.style.transform = animationString;
+      node.style.transition = "0.1s"
     };
 
     const mouseOutHanlder = () => {
-      node.style.transform = `rotateX(0deg) rotateY(0deg)`;
+      node.style.transform = "rotateX(0deg) rotateY(0deg)";
+      node.style.transition = "0.5s ease-in-out";
     }
 
     node.addEventListener("mousemove", mouseOverHandler);
@@ -63,7 +65,7 @@
     <CardSvg />
   </section>
   <section class="max-w-[80vw]">
-    <div id="peviewImgWrapper" use:previewImageAction class="p-4">
+    <div use:previewImageAction class="p-4">
       <enhanced:img
         src={previewImage}
         alt="Preview"
@@ -77,9 +79,5 @@
 <style>
   section {
     perspective: 100vh;
-  }
-
-  #peviewImgWrapper {
-    transition: transform 0.1s;
   }
 </style>
