@@ -1,6 +1,37 @@
 <script lang="ts">
   import CardSvg from "$lib/assets/animatedCardSVG.svelte";
-  import previewImage from "$lib/assets/preview.png?enhanced"
+  import previewImage from "$lib/assets/preview.png?enhanced";
+  import type { Action } from "svelte/action";
+
+  const previewImageAction: Action = (node) => {
+    const width = node.clientWidth;
+    const height = node.clientHeight;
+
+    const mouseOverHandler = (e: MouseEvent) => {
+      const xVal = e.clientX;
+      const yVal = e.clientY;
+
+      const roationX = -8 * ((yVal - height / 2) / height);
+      const rotationY = 8 * ((xVal - width / 2) / width);
+
+      const animationString = `rotateX(${roationX}deg) rotateY(${rotationY}deg) scale(1.05)`;
+      node.style.transform = animationString;
+    };
+
+    const mouseOutHanlder = () => {
+      node.style.transform = `rotateX(0deg) rotateY(0deg)`;
+    }
+
+    node.addEventListener("mousemove", mouseOverHandler);
+    node.addEventListener("mouseout", mouseOutHanlder);
+
+    return {
+      destroy() {
+        node.removeEventListener("mousemove", mouseOverHandler);
+        node.removeEventListener("mouseout", mouseOutHanlder);
+      },
+    };
+  };
 </script>
 
 <svelte:head>
@@ -31,8 +62,14 @@
     </div>
     <CardSvg />
   </section>
-  <section class="max-w-[80vw] md:p-10">
-    <enhanced:img src={previewImage} alt="Preview" class="rounded-xl shadow-2xl" />
+  <section class="max-w-[80vw]">
+    <div id="peviewImgWrapper" use:previewImageAction class="p-4">
+      <enhanced:img
+        src={previewImage}
+        alt="Preview"
+        class="rounded-xl shadow-2xl"
+      />
+    </div>
     <h2 class="text-xl md:text-4xl font-bold md:p-4 mt-4">Smooth Experience</h2>
   </section>
 </main>
@@ -40,5 +77,9 @@
 <style>
   section {
     perspective: 100vh;
+  }
+
+  #peviewImgWrapper {
+    transition: transform 0.1s;
   }
 </style>
