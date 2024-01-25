@@ -11,11 +11,12 @@
     id: "settingsDrawer",
     position: "right",
     bgDrawer: "variant-filled-surface",
+    shadow: "shadow-xl",
     bgBackdrop:
-      "bg-gradient-to-tr from-primary-500/50 via-purple-500/50 to-secondary-500/50",
-    width: "w-[280px] md:w-[480px]",
-    padding: "p-2",
-    rounded: "rounded-xl",
+      "bg-gradient-to-tr from-primary-500/50 to-surface-500/50",
+    width: "w-[80vw] md:w-[480px]",
+    padding: "",
+    rounded: "rounded-l-xl",
     meta: {
       isPublic,
     },

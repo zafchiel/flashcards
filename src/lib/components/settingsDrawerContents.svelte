@@ -50,7 +50,7 @@
       <p class="text-sm opacity-60">Saved automatically on close</p>
     </div>
     <button
-      class="btn variant-outline-warning"
+      class="btn btn-sm md:btn-md variant-outline-warning"
       on:click={() => {
         drawerStore.close();
       }}

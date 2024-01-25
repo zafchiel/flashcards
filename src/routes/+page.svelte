@@ -33,7 +33,7 @@
   </section>
   <section class="max-w-[80vw] md:p-10">
     <enhanced:img src={previewImage} alt="Preview" class="rounded-xl shadow-2xl" />
-    <h2 class="text-xl md:text-4xl font-bold p-4 mt-4">Smooth Experience</h2>
+    <h2 class="text-xl md:text-4xl font-bold md:p-4 mt-4">Smooth Experience</h2>
   </section>
 </main>
 
