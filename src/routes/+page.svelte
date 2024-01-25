@@ -65,11 +65,11 @@
     <CardSvg />
   </section>
   <section class="max-w-[80vw]">
-    <div use:previewImageAction class="p-4">
+    <div use:previewImageAction class="p-2 rounded-xl bg-surface-500/30 backdrop-blur-md shadow-md hover:shadow-xl">
       <enhanced:img
         src={previewImage}
         alt="Preview"
-        class="rounded-xl shadow-2xl"
+        class="rounded-md"
       />
     </div>
     <h2 class="text-xl md:text-4xl font-bold md:p-4 mt-4">Smooth Experience</h2>
