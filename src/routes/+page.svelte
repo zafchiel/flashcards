@@ -41,7 +41,7 @@
 </svelte:head>
 
 <main
-  class="min-h-[100svh] md:p-8 flex flex-col gap-8 items-center justify-center bg-gradient-to-b from-surface-800 from-30% to-primary-600 to-98%"
+  class="min-h-[100dvh] md:p-8 flex flex-col gap-8 items-center justify-center bg-gradient-to-b from-surface-800 from-30% to-primary-600 to-98%"
 >
   <section
     class="p-4 m-2 md:p-10 flex flex-col items-center gap-5 card variant-soft-surface shadow-lg"
