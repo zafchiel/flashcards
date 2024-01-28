@@ -59,7 +59,7 @@
   </div>
 
   <div class="p-1">
-    <p>Should this deck be visible to anybody?</p>
+    <p class="pb-1">Should this deck be visible to anybody?</p>
     <SlideToggle
       bind:checked={$drawerStore.meta.isPublic}
       name="switchPublic"
