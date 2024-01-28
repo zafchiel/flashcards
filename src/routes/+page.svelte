@@ -41,8 +41,9 @@
   <title>Flashcards\HUH</title>
 </svelte:head>
 
-<main
-  class="min-h-[100dvh] md:p-8 flex flex-col gap-8 items-center justify-center bg-gradient-to-b from-surface-800 from-30% to-primary-600 to-98%"
+<main>
+<div
+  class="min-h-[100dvh] rounded-b-xl md:p-8 flex flex-col gap-8 items-center justify-center bg-gradient-to-b from-surface-800 from-30% to-primary-600 to-98% shadow-md"
 >
   <section
     class="p-4 m-2 md:p-10 flex flex-col items-center gap-5 card variant-soft-surface shadow-lg"
@@ -74,17 +75,22 @@
       />
     </div>
   </section>
-  <section class="grid md:grid-cols-2 gap-4 max-w-[80vw] md:p-10">
-    <div class="flex flex-col gap-4 items-start">
-      <h2 class="text-xl md:text-4xl font-bold">Get ready for exam</h2>
-      <p>Flashcards help you memorise everything you need to know. Make your learning easier and shorter.</p>
-      <a href="/auth?t=signup" class="btn variant-filled-secondary"
-          >Get Started</a
-        >
-    </div>
-    <enhanced:img src={cardPreviewImage} alt="Cards preview" class="rounded-xl" />
-  </section>
+</div>
+<section class="grid md:grid-cols-2 gap-4 max-w-[80vw] mx-auto my-4 md:p-10">
+  <div class="flex flex-col gap-4 items-start">
+    <h2 class="text-xl md:text-4xl font-bold">Get ready for exam</h2>
+    <p>Flashcards help you memorise everything you need to know. Make your learning easier and shorter.</p>
+    <a href="/auth?t=signup" class="btn variant-filled-primary"
+        >Get Started</a
+      >
+  </div>
+  <enhanced:img src={cardPreviewImage} alt="Cards preview" class="rounded-xl" />
+</section>
 </main>
+<footer class="bg-primary-600 rounded-t-xl p-3 flex justify-between shadow-md">
+  <h3 class="text-lg md:text-xl font-semibold">Flashcards</h3>
+  <p><a href="https://github.com/zafchiel">@zafchiel</a>, {new Date().getFullYear()}</p>
+</footer>
 
 <style>
   section {
