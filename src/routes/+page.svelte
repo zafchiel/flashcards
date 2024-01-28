@@ -1,6 +1,7 @@
 <script lang="ts">
   import CardSvg from "$lib/assets/animatedCardSVG.svelte";
   import previewImage from "$lib/assets/preview.png?enhanced";
+  import cardPreviewImage from "$lib/assets/cardPreview.png?enhanced";
   import type { Action } from "svelte/action";
 
   const previewImageAction: Action = (node) => {
@@ -72,7 +73,16 @@
         class="rounded-md"
       />
     </div>
-    <h2 class="text-xl md:text-4xl font-bold md:p-4 mt-4">Smooth Experience</h2>
+  </section>
+  <section class="grid md:grid-cols-2 gap-4 max-w-[80vw] md:p-10">
+    <div class="flex flex-col gap-4 items-start">
+      <h2 class="text-xl md:text-4xl font-bold">Get ready for exam</h2>
+      <p>Flashcards help you memorise everything you need to know. Make your learning easier and shorter.</p>
+      <a href="/auth?t=signup" class="btn variant-filled-secondary"
+          >Get Started</a
+        >
+    </div>
+    <enhanced:img src={cardPreviewImage} alt="Cards preview" class="rounded-xl" />
   </section>
 </main>
 
