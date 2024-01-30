@@ -78,7 +78,7 @@
 </div>
 <section class="grid md:grid-cols-2 gap-4 max-w-[80vw] mx-auto my-4 md:p-10">
   <div class="flex flex-col gap-4 items-start">
-    <h2 class="text-xl md:text-4xl font-bold">Get ready for exam</h2>
+    <h2 class="text-xl font-bold">Get ready for exam</h2>
     <p>Flashcards help you memorise everything you need to know. Make your learning easier and shorter.</p>
     <a href="/auth?t=signup" class="btn variant-filled-primary"
         >Get Started</a
