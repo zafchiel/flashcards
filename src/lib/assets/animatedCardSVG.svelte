@@ -35,8 +35,8 @@
       <rect pathLength="1" rx="16" height="100%" width="100%" />
     </g>
   </svg>
-  <p id="firstSide" class="text-xl md:text-3xl absolute">Learn Easily</p>
-  <p id="secondSide" class="text-xl md:text-3xl absolute">Remember More</p>
+  <p id="firstSide" class="text-xl absolute">Learn Easily</p>
+  <p id="secondSide" class="text-xl absolute">Remember More</p>
 </div>
 
 <style>
