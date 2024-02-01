@@ -39,6 +39,7 @@
     "@lucia-auth/adapter-postgresql": "^2.0.2",
     "@lucia-auth/oauth": "^3.5.0",
     "@neondatabase/serverless": "^0.6.0",
+    "blurhash": "^2.0.5",
     "drizzle-orm": "^0.28.6",
     "lucia": "^2.7.3",
     "motion": "^10.16.4",

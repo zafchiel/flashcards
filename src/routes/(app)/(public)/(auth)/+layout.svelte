@@ -1,9 +1,29 @@
+<script lang="ts">
+  import { decode } from "blurhash";
+
+  let isImageLoaded = false;
+
+  const paintCanvas = (node: HTMLCanvasElement) => {
+    const pixels = decode("L72PZQMtp1V@RKp3V=ofj{j=axa{", 800, 500);
+
+    const ctx = node.getContext("2d");
+    if (!ctx) return;
+
+    const imageData = ctx.createImageData(800, 500);
+    imageData.data.set(pixels);
+    ctx.putImageData(imageData, 0, 0);
+  };
+</script>
+
 <main
   class="min-h-[100svh] flex flex-col justify-center items-center bg-gradient-to-br from-surface-800 from-50% to-secondary-700 to-98%"
 >
   <div class="p-4 w-full flex-grow flex justify-around items-center">
-    <div class="hidden md:block p-4 max-w-5xl">
+    <div class="hidden md:flex p-4 max-w-5xl flex-1">
+      <canvas use:paintCanvas class:hidden={isImageLoaded} class="w-full rounded-xl" />
       <enhanced:img
+        on:load={() => (isImageLoaded = true)}
+        class:hidden={!isImageLoaded}
         src="../../../../lib/assets/unsplash.jpg"
         alt="Auth page"
         class="rounded-lg shadow-lg"
