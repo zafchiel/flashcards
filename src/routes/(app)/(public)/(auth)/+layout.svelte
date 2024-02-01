@@ -4,13 +4,14 @@
   let isImageLoaded = false;
 
   const paintCanvas = (node: HTMLCanvasElement) => {
-    const pixels = decode("L72PZQMtp1V@RKp3V=ofj{j=axa{", 800, 500);
+    const pixels = decode("L72PZQMtp1V@RKp3V=ofj{j=axa{", 500, 500);
 
     const ctx = node.getContext("2d");
     if (!ctx) return;
 
-    const imageData = ctx.createImageData(800, 500);
-    imageData.data.set(pixels);
+    // const imageData = ctx.createImageData(3840, 2160);
+    // imageData.data.set(pixels);
+    const imageData = new ImageData(pixels, 500, 500);
     ctx.putImageData(imageData, 0, 0);
   };
 </script>
@@ -20,7 +21,7 @@
 >
   <div class="p-4 w-full flex-grow flex justify-around items-center">
     <div class="hidden md:flex p-4 max-w-5xl flex-1">
-      <canvas use:paintCanvas class:hidden={isImageLoaded} class="w-full rounded-xl" />
+      <canvas use:paintCanvas class:hidden={isImageLoaded} width="16" height="9" class="w-full rounded-xl" ></canvas>
       <enhanced:img
         on:load={() => (isImageLoaded = true)}
         class:hidden={!isImageLoaded}
