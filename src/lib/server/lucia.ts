@@ -10,6 +10,7 @@ import {
   GITHUB_CLIENT_SECRET,
   GOOGLE_CLIENT_ID,
   GOOGLE_CLIENT_SECRET,
+  DEPLOYMENT_URL,
 } from "$env/static/private";
 
 export const auth = lucia({
@@ -39,7 +40,7 @@ export const googleAuth = google(auth, {
   clientSecret: GOOGLE_CLIENT_SECRET,
   redirectUri: dev
     ? "http://localhost:5173/auth/google/callback"
-    : `${process.env.VERCEL_URL}/auth/google/callback`,
+    : DEPLOYMENT_URL + "/auth/google/callback",
 });
 
 export type Auth = typeof auth;
