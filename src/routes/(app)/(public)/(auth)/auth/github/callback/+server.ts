@@ -37,17 +37,17 @@ export const GET: RequestHandler = async ({ cookies, url, locals }) => {
     const user = await getUser();
     // create user session
     const session = await auth.createSession({
-        userId: user.userId,
-        attributes: {},
-    })
+      userId: user.userId,
+      attributes: {},
+    });
     locals.auth.setSession(session);
 
     return new Response(null, {
-        status: 302,
-        headers: {
-            location: "/profile"
-        }
-    })
+      status: 302,
+      headers: {
+        location: "/profile",
+      },
+    });
   } catch (error) {
     if (error instanceof OAuthRequestError) {
       return new Response(null, {
@@ -55,7 +55,7 @@ export const GET: RequestHandler = async ({ cookies, url, locals }) => {
       });
     }
     return new Response(null, {
-        status: 500,
-    })
+      status: 500,
+    });
   }
 };

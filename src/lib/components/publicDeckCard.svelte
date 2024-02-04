@@ -12,7 +12,7 @@
   href="/decks/{deck.id}"
   class="h-full max-w-md card p-4 variant-ghost-primary flex gap-3 card-hover"
 >
-  <div>
+  <div class="min-w-0 break-words">
     <h2 class="h2 font-semibold" style:--deck_id="deck-{deck.id}">
       {deck.title}
     </h2>
