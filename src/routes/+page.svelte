@@ -1,7 +1,5 @@
 <script lang="ts">
   import CardSvg from "$lib/assets/animatedCardSVG.svelte";
-  import previewImage from "$lib/assets/preview.png?enhanced";
-  import cardPreviewImage from "$lib/assets/cardPreview.png?enhanced";
   import type { Action } from "svelte/action";
 
   const previewImageAction: Action = (node) => {
@@ -70,9 +68,10 @@
   <section class="max-w-[80vw]">
     <div use:previewImageAction class="p-2 rounded-xl bg-surface-500/30 backdrop-blur-md shadow-md hover:shadow-xl">
       <enhanced:img
-        src={previewImage}
+        src="../lib/assets/preview.jpeg"
         alt="Preview"
         class="rounded-md"
+        sizes="min(1434px, 100vw)"
       />
     </div>
   </section>
@@ -85,7 +84,7 @@
         >Get Started</a
       >
   </div>
-  <enhanced:img src={cardPreviewImage} alt="Cards preview" class="rounded-xl" />
+  <enhanced:img src="../lib/assets/cardPreview.jpeg" alt="Cards preview" class="rounded-xl" />
 </section>
 </main>
 <footer class="bg-primary-600 rounded-t-xl p-3 flex justify-between shadow-md">
