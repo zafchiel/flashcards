@@ -55,10 +55,10 @@
         your learning experience today!
       </p>
       <div class="p-3 flex flex-wrap gap-3 items-center max-w-xs">
-        <a href="/auth?t=signup" class="btn variant-filled-primary flex-1"
+        <a href="/auth?t=signup" class="btn variant-filled-primary flex-1 font-semibold"
           >Get Started</a
         >
-        <a href="/auth?t=signin" class="btn variant-outline-secondary flex-1"
+        <a href="/auth?t=signin" class="btn variant-outline-secondary flex-1 font-semibold"
           >Sign-in</a
         >
       </div>
@@ -80,7 +80,7 @@
   <div class="flex flex-col gap-4 items-start">
     <h2 class="text-xl font-bold">Get ready for exam</h2>
     <p>Flashcards help you memorise everything you need to know. Make your learning easier and shorter.</p>
-    <a href="/auth?t=signup" class="btn variant-filled-primary"
+    <a href="/auth?t=signup" class="btn variant-filled-primary font-semibold"
         >Get Started</a
       >
   </div>

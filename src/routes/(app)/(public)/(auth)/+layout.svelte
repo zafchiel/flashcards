@@ -8,9 +8,7 @@
 
     const ctx = node.getContext("2d");
     if (!ctx) return;
-
-    // const imageData = ctx.createImageData(3840, 2160);
-    // imageData.data.set(pixels);
+    
     const imageData = new ImageData(pixels, 500, 500);
     ctx.putImageData(imageData, 0, 0);
   };
