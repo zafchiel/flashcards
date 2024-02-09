@@ -52,7 +52,7 @@
         if (response.success) {
           modalStore.close();
           toastStore.trigger(successDeleteToast);
-          goto("/profile/decks");
+          goto("/decks");
         } else toastStore.trigger(errorToast);
       }
     },
