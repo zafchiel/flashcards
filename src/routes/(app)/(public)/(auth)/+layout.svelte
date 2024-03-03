@@ -8,7 +8,7 @@
 
     const ctx = node.getContext("2d");
     if (!ctx) return;
-    
+
     const imageData = new ImageData(pixels, 500, 500);
     ctx.putImageData(imageData, 0, 0);
   };
@@ -19,11 +19,17 @@
 >
   <div class="p-4 w-full flex-grow flex justify-around items-center">
     <div class="hidden md:flex p-4 max-w-5xl flex-1">
-      <canvas use:paintCanvas class:hidden={isImageLoaded} width="16" height="9" class="w-full rounded-xl" ></canvas>
+      <canvas
+        use:paintCanvas
+        class:hidden={isImageLoaded}
+        width="16"
+        height="9"
+        class="w-full rounded-xl"
+      ></canvas>
       <enhanced:img
         on:load={() => (isImageLoaded = true)}
         class:hidden={!isImageLoaded}
-        src="../../../../lib/assets/unsplash.jpg"
+        src="../../../../lib/assets/unsplash.webp"
         alt="Auth page"
         class="rounded-lg shadow-lg"
       />
