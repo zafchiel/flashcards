@@ -42,12 +42,12 @@
   };
 </script>
 
-<h1 class="md:mb-10 mb-3">
-  <span class="text-3xl"> Edit:&nbsp;</span>
+<h1 class="md:mb-10 mb-3 text-3xl">
+  <span> Edit:&nbsp;</span>
   <a
     style:--deck_id="deck-{data.deckId}"
     href={`/decks/${data.deckId}`}
-    class="text-6xl deck_title_heading font-semibold text-primary-500"
+    class=" deck_title_heading font-semibold text-primary-500"
     >{$form.deckTitle}</a
   >
 </h1>
